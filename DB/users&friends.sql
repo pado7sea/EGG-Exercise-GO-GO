@@ -29,6 +29,28 @@ VALUES
 ("user3", "password3", "Bob Johnson", "1995-03-10"),
 ("user4", "password4", "Alice Brown", "1982-11-28");
 
+DROP TABLE board;
+
+CREATE TABLE IF NOT EXISTS `board` (
+	id INT AUTO_INCREMENT,
+    writer VARCHAR(20) NOT NULL,
+    title VARCHAR(50) NOT NULL,
+    content TEXT,
+    viewCnt INT DEFAULT 0,
+    regDate TIMESTAMP DEFAULT now(),
+	imgUrl VARCHAR(1000),
+    PRIMARY KEY(id)
+);
+
+-- 데이터 추가 예시
+INSERT INTO `board` (writer, title, content, viewCnt, regDate, imgUrl) VALUES
+('JohnDoe', '첫 번째 글', '이 글은 첫 번째 글입니다. 환영합니다!', 10, '2023-01-01 12:00:00', null),
+('AliceSmith', '두 번째 글', '두 번째 글 내용입니다. 어떠세요?', 15, '2023-02-05 15:30:00', NULL),
+('BobJohnson', '테스트 글', '테스트 글입니다. 데이터베이스 작동 확인 중...', 5, '2023-03-10 09:45:00', NULL),
+('아오', '이미지 테스트', '이미지 테스트임....', 0, '2023-01-01 12:00:00', 'https://image.shutterstock.com/image-photo/happy-young-woman-partying-3d-260nw-2144526611.jpg');
+-- 추가된 데이터 확인
+SELECT * FROM board;
+
 -- 추가된 데이터 확인
 SELECT * FROM users;
 
