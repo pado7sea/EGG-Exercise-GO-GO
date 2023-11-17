@@ -20,107 +20,122 @@
   
 <script setup>
 
-function onSignIn(googleUser) {
-	  const profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	}
+
 </script>
   
 <style scoped>
-.login-whole-container{
-  width: 100%;
-  display: flex;
-  margin-top: 10vh;
-  
+input:focus {
+    outline: 2px solid #FEE58D;
 }
 
-.login-img-container{
-  display: flex;
-  width: 50%;
-  justify-content: center;
-  margin-top: 3vh;
-  margin-left: 10vw;
+/* 색상 바꾸기 */
+input {
+    text-indent: 15px;
 }
 
-img{
-  width: 50%;
+.login-whole-container {
+    width: 100%;
+    display: flex;
+    margin-top: 5vh;
+
 }
 
-.login-input-container{
-  width: 50%;
-  display: flex;
-  text-align: center;
+.login-img-container {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    margin-top: 3vh;
+    margin-left: 10vw;
 }
 
-.description{
-  font-weight: thin;
+img {
+    width: 50%;
+    min-width: 300px;
 }
+
+.login-input-container {
+    width: 50%;
+    display: flex;
+    text-align: center;
+}
+
+.description {
+    font-weight: thin;
+}
+
 .inpt {
-  display: flex;
-  float: left;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12vh;
-
+    display: flex;
+    float: left;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12vh;
 }
 
 form {
-  background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-width: 300px;
-  text-align: center;
- 
-  
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 300px;
+    text-align: center;
+
+
 }
 
-.sign-up{
-  text-decoration: none; 
-  color: #ceac02;
-  font-weight: bold;
-  
+.sign-up {
+    text-decoration: none;
+    color: #ceac02;
+    font-weight: bold;
+
 }
 
 button {
-  min-width: 300px;
-  padding: 10px;
-  margin: 8px 0;
-  font-weight: lighter;
-  font-family: Poppins, 'Noto Sans KR', sans-serif;
-  border-radius: 20px;
-background: #FEE58D;
-border: transparent;
+    min-width: 300px;
+    padding: 10px;
+    margin: 8px 0;
+    font-weight: lighter;
+    font-family: Poppins, 'Noto Sans KR', sans-serif;
+    border-radius: 20px;
+    background: #FEE58D;
+    border: transparent;
 
 }
 
-a{
-  text-decoration: none;
-  color: rgb(58, 58, 58);
-  font-weight: bold;
+a {
+    text-decoration: none;
+    color: rgb(58, 58, 58);
+    font-weight: bold;
 
+}
+
+.info {
+    background-color: #FFFCF0;
+    background-color: #FFFCF0;
+    width: 100%;
+    border: none;
+    padding: 15px 0 15px;
+    margin: 8px 0;
+    border-radius: 30px;
+    box-shadow: 0px 3px 3px #d9dcda;
 }
 
 input {
-  background-color: #FFFCF0;
-  width: 100%;
-  border: none;
-  padding: 15px 0 15px;
-  margin: 8px 0;
-  border-radius: 30px;
-  box-shadow: 0px 3px 3px #d9dcda;
+    background-color: #FFFCF0;
+    width: 100%;
+    border: none;
+    padding: 15px 0 15px;
+    margin: 8px 0;
+    border-radius: 30px;
+    box-shadow: 0px 3px 3px #d9dcda;
 }
 
 input::placeholder {
-  padding: 5px;
-  text-align: center;
-  font-weight: lighter;
-  font-family: Poppins, 'Noto Sans KR', sans-serif;
+    text-indent: 10px;
+    padding: 5px;
+    font-weight: lighter;
+    font-family: Poppins, 'Noto Sans KR', sans-serif;
 }
 </style>
   
