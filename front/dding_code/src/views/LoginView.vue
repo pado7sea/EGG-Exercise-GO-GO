@@ -1,7 +1,7 @@
 <template>
     <div class="login-whole-container">
       <div class="login-img-container">
-        <img src="@/assets/chickinegg.png" alt="병아리">
+        <img src="@/assets/png-baby-chick-removebg-preview.png" alt="병아리">
       </div>
     <div class="login-input-container">
       <div class="inpt">
@@ -33,6 +33,8 @@ function onSignIn(googleUser) {
 .login-whole-container{
   width: 100%;
   display: flex;
+  margin-top: 10vh;
+  
 }
 
 .login-img-container{
@@ -40,7 +42,7 @@ function onSignIn(googleUser) {
   width: 50%;
   justify-content: center;
   margin-top: 3vh;
-  padding-left: 2vw;
+  margin-left: 10vw;
 }
 
 img{
