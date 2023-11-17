@@ -29,5 +29,13 @@ public class FriendServiceImpl implements FriendService{
 		return friendDao.selectOne(id);
 	}
 
+	@Override
+	public int deleteFriend(Friend friend) {
+		// TODO Auto-generated method stub
+		return friendDao.deleteFriend(friend);
+	}
+
+	
+
 	
 }

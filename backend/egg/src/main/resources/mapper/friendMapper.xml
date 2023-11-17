@@ -11,8 +11,6 @@
 		LEFT JOIN friends ON friends.user_id = users.id
 	</select>
 
-
-
 	<insert id="insertFriend" parameterType="Friend">
 		INSERT INTO
 		friends(user_id, friend_id)
@@ -27,5 +25,11 @@
 		JOIN users u ON f.user_id = u.id
 		WHERE f.user_id = #{userId};
 	</select>
+
+	<!-- FriendMapper.xml -->
+	<delete id="deleteFriend" parameterType="Friend">
+		DELETE FROM friends
+		WHERE user_id = #{user_id} AND friend_id = #{friend_id}
+	</delete>
 
 </mapper>

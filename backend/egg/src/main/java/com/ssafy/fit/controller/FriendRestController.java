@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,8 +53,25 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(friend, HttpStatus.OK);
 	}
 	
-	
-	
+	@DeleteMapping("/friends/{user_id}/{friend_id}")
+	public ResponseEntity<Void> deleteFriend(
+	        @PathVariable("user_id") String user_id,
+	        @PathVariable("friend_id") String friend_id) {
+
+	   
+		Friend friend = new Friend();
+		friend.setUser_id(user_id);
+		friend.setFriend_id(friend_id);
+	    // 삭제를 시도
+	    int isDeleted = friendService.deleteFriend(friend);
+
+	    if (isDeleted == 1) {
+	        return new ResponseEntity<>(HttpStatus.OK);
+	    } else {
+	        // 삭제 실패 시
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 또는 다른 적절한 상태 코드 사용
+	    }
+	}
 	
 	
 	

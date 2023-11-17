@@ -10,4 +10,6 @@ public interface FriendDao {
 	int insertFriend(Friend friend);
 	
 	List<Friend> selectOne(String id);
+	
+	int deleteFriend(Friend friend);
 }
