@@ -7,11 +7,14 @@ import FriendView from "@/views/FriendView.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignView from "@/views/SignView.vue"
 
+
 import BoardList from "@/components/board/BoardList.vue";
 import BoardCreate from "@/components/board/BoardCreate.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
 import BoardUpdate from "@/components/board/BoardUpdate.vue";
 
+import Indoor from "@/components/home/Indoor.vue";
+import Outdoor from "@/components/home/Outdoor.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +24,16 @@ const router = createRouter({
       name: "home",
       component: HomeView,
     },
-
+    {
+      path: "/indoor",
+      name: "indoor",
+      component: Indoor,
+    },
+    {
+      path: "/outdoor",
+      name: "outdoor",
+      component: Outdoor,
+    },
     {
       path: "/youtube",
       name: "youtube",
@@ -65,7 +77,7 @@ const router = createRouter({
       component: KakaoView,
     },
     {
-      path: "/login",
+      path:"/login",
       name: "login",
       component: LoginView,
     },
@@ -74,7 +86,7 @@ const router = createRouter({
       name: "sign",
       component: SignView,
     },
-
+    
   ],
 });
 

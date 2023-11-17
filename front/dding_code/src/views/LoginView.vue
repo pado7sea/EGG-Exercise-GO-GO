@@ -1,7 +1,7 @@
 <template>
     <div class="login-whole-container">
       <div class="login-img-container">
-        <img src="@/assets/after-egg.gif" alt="병아리">
+        <img src="@/assets/free-animated-icon-chick-12277910.gif" alt="병아리">
       </div>
     <div class="login-input-container">
       <div class="inpt">
@@ -41,7 +41,6 @@ input {
     width: 100%;
     display: flex;
     margin-top: 5vh;
-
 }
 
 .login-img-container {
@@ -73,7 +72,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 12vh;
+    margin-top: 7vh;
 }
 
 form {

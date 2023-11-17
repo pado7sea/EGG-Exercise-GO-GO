@@ -1,7 +1,7 @@
 <template>
     <div class="sign-whole-container">
         <div class="sign-img-container">
-            <img src="@/assets/before-egg.gif" alt="병아리">
+            <img src="@/assets/free-animated-icon-eggs-12316833.gif" alt="병아리">
         </div>
         <div class="sign-input-container">
             <div class="sign-inpt">
@@ -71,7 +71,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 12vh;
+    margin-top: 7vh;
     width: 50%;
 }
 
