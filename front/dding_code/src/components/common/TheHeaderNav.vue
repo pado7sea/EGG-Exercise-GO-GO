@@ -32,7 +32,7 @@
 }
 
 .nav-container {
-    margin: 0 10vh;
+    margin: 0 10vw;
     text-align: center;
     border: 2px solid gray;
     display: flex;
@@ -42,7 +42,7 @@
 
 .nav-top{
     margin-top: 2.5vh;
-    margin: 2.5vh 10vh;
+    margin: 2.5vh 10vw;
     display: flex;
     justify-content: flex-end;
 }
@@ -53,7 +53,6 @@
 }
 
 .nv {
-    padding-right: 20px;
     font-weight: 200;
     text-decoration: none;
     color: black;

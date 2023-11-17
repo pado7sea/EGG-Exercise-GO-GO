@@ -1,7 +1,23 @@
 <template>
-    <div>
-        <h4>게시글 목록</h4>
-        <hr>
+    <div class="board-container">
+        <div class="board-card" v-for="board in store.boardList" :key="board.id">
+            <div class="board-img">
+                <img :src="board.imgUrl">
+            </div>
+            <div class="board-description">
+                <div class="board-itb">
+                    <div>{{ board.id }}</div>
+                    <div>{{ board.title }}</div>
+                    <div>{{ board.writer }}</div>
+                </div>
+                <div class="board-view">
+                    <div>{{ board.viewCnt }}</div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
+<!-- 
         <table>
             <tr>
                 <th>번호</th>
@@ -19,10 +35,10 @@
                 <td>{{ board.viewCnt }}</td>
                 <td>{{ board.regDate }}</td>
             </tr>
-        </table>
+        </table> -->
 
         <BoardSearchInput />
-        
+
     </div>
 </template>
 
@@ -39,4 +55,15 @@ onMounted(() => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+*{
+    box-sizing: border-box;
+}
+
+.board-card{
+    display: grid;
+    background-color:#FBE28C;
+    margin-top: 10px;
+}
+
+</style>

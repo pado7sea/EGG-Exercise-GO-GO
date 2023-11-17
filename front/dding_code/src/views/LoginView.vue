@@ -1,7 +1,7 @@
 <template>
     <div class="login-whole-container">
       <div class="login-img-container">
-        <img src="@/assets/png-baby-chick-removebg-preview.png" alt="병아리">
+        <img src="@/assets/after-egg.gif" alt="병아리">
       </div>
     <div class="login-input-container">
       <div class="inpt">
@@ -24,6 +24,10 @@
 </script>
   
 <style scoped>
+* {
+    box-sizing: border-box;
+}
+
 input:focus {
     outline: 2px solid #FEE58D;
 }
@@ -108,17 +112,6 @@ a {
     color: rgb(58, 58, 58);
     font-weight: bold;
 
-}
-
-.info {
-    background-color: #FFFCF0;
-    background-color: #FFFCF0;
-    width: 100%;
-    border: none;
-    padding: 15px 0 15px;
-    margin: 8px 0;
-    border-radius: 30px;
-    box-shadow: 0px 3px 3px #d9dcda;
 }
 
 input {
