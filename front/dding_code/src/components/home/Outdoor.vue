@@ -4,7 +4,7 @@
             <div class="leftbox">
                 <div class="hibox">
                     <div class="hi">안녕하세요, 서윤님</div>
-                    <div class="hi">운동하기 좋은 날씨입니다.</div>
+                    <div class="hi">야외 운동하기 좋은 날씨입니다.</div>
                 </div>
                 <div class="temperbox">
                     <div>
@@ -16,7 +16,7 @@
             </div>
             <div class="rightbox">
                 <div class="title">
-                    <div class="안내문구">현재 위치와 가까운 운동하기 좋은 장소들을 알려드려요!</div>
+                    <div class="안내문구">현재 위치와 가까운 야외운동하기 좋은 장소들을 알려드려요!</div>
                 </div>
                 <div class="content">
                     <div class="whitebox">

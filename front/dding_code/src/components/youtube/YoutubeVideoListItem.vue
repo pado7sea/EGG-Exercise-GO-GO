@@ -1,12 +1,14 @@
 <template>
-  <li @click="clickVideo">
-    <img :src="video.snippet.thumbnails.default.url" >
+  <div @click="clickVideo">
+    <img :src="video.snippet.thumbnails.default.url" class="thumbnail">
+    <br>
     <span>{{video.snippet.title}}</span>
-  </li>
+  </div>
 </template>
 
 <script setup>
 import { useYoutubeStore } from '@/stores/youtube';
+
 const store = useYoutubeStore();
 
 const props = defineProps({
@@ -16,13 +18,14 @@ const props = defineProps({
   },
 });
 
-
-
 const clickVideo = function() {
-    store.clickVideo(props.video)
+  store.clickVideo(props.video);
 }
-
-
 </script>
 
-<style scoped></style>
+<style scoped>
+.thumbnail {
+  width: 100%;
+  cursor: pointer;
+}
+</style>

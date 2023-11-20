@@ -4,24 +4,25 @@
             <div class="leftbox">
                 <div class="hibox">
                     <div class="hi">안녕하세요, 서윤님</div>
-                    <div class="hi">운동하기 좋은 날씨입니다.</div>
+                    <div class="hi">실내 운동하기 좋은 날씨입니다.</div>
                 </div>
                 <div class="temperbox">
                     <div>
                         <div>현재기온</div>
-                        <div>15도</div>
+                        <div>-5도</div>
                     </div>
                 </div>
 
             </div>
             <div class="rightbox">
                 <div class="title">
-                    <div class="안내문구">현재 위치와 가까운 운동하기 좋은 장소들을 알려드려요!</div>
+                    <div class="안내문구">현재 위치와 가까운 실내운동하기 좋은 장소들을 알려드려요!</div>
                 </div>
                 <div class="content">
                     <div class="whitebox">
-                        <div class="address">주소</div>
-                        <div class="map"></div>
+                        <!-- <div class="address">주소</div> -->
+                        <!-- <div class="map"></div> -->
+                        <Carousel class="map"/>
                     </div>
                     <div class="contentmore">
                         <div class="whitecircle">
@@ -30,7 +31,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -41,10 +41,17 @@
     </div>
 </template>
 
-<script setup>
+<script>
+import Carousel from './Carousel.vue';
 
+export default {
+  components: {
+    Carousel,
+  }
+}
 
 </script>
+
 
 <style scoped>
 .container {
@@ -140,7 +147,7 @@
 }
 
 .안내문구 {
-    
+
     color: #000;
     font-family: Inter;
     font-size: 20px;
@@ -189,7 +196,7 @@
     border-radius: 20px;
     background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 
-    
+
 }
 
 .contentmore {
@@ -212,4 +219,6 @@
     align-items: center;
     margin: 3% 0;
 }
+
+
 </style>
