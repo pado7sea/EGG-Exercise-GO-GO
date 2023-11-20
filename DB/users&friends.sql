@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `friends` (
   FOREIGN KEY (`friend_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
-commit;
 
 INSERT INTO users(id, password, name, birthday)
 VALUES
@@ -60,6 +59,8 @@ VALUES ("user1", "user2");
 
 -- 'friends' 테이블 확인
 SELECT * FROM friends;
+
+commit;
 
 
 

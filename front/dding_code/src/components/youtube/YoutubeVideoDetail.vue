@@ -1,3 +1,5 @@
+<!-- YoutubeVideoDetail.vue -->
+
 <template>
   <div v-if="store.selectedVideo">
     <h4>영상상세보기</h4>
@@ -15,14 +17,16 @@
 
 <script setup>
 import { useYoutubeStore } from '@/stores/youtube';
-import {computed} from 'vue'
+import { computed } from 'vue';
+
 const store = useYoutubeStore();
 
-const videoURL = computed(()=>{
-    const videoId = store.selectedVideo.id.videoId
-    return `https://www.youtube.com/embed/${videoId}`
-})
-
+const videoURL = computed(() => {
+  const videoId = store.selectedVideo.id.videoId;
+  return `https://www.youtube.com/embed/${videoId}`;
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+/* 필요한 스타일 추가 */
+</style>

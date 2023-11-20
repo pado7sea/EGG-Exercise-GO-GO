@@ -7,7 +7,10 @@ import FriendView from "@/views/FriendView.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignView from "@/views/SignView.vue"
 
+
 import FriendDetail from "@/components/friend/friendDetail.vue";
+
+
 
 import BoardList from "@/components/board/BoardList.vue";
 import BoardCreate from "@/components/board/BoardCreate.vue";
@@ -16,6 +19,13 @@ import BoardUpdate from "@/components/board/BoardUpdate.vue";
 
 import Indoor from "@/components/home/Indoor.vue";
 import Outdoor from "@/components/home/Outdoor.vue";
+import Carousel from "@/components/home/Carousel.vue";
+import VideoSlide from "@/components/home/VideoSlide.vue";
+import MapSlide from "@/components/home/MapSlide.vue";
+
+import KakaoMap from "@/components/kakao/KakaoMap.vue";
+import Map from "@/components/kakao/Map.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +44,21 @@ const router = createRouter({
       path: "/outdoor",
       name: "outdoor",
       component: Outdoor,
+    },
+    {
+      path: "/carousel",
+      name: "carousel",
+      component: Carousel,
+    },
+    {
+      path: "/videoslide",
+      name: "videoslide",
+      component: VideoSlide,
+    },
+    {
+      path: "/mapslide",
+      name: "mapslide",
+      component: MapSlide,
     },
     {
       path: "/youtube",
@@ -83,6 +108,16 @@ const router = createRouter({
       path: "/kakao",
       name: "kakao",
       component: KakaoView,
+    },
+    {
+      path: "/kakaomap",
+      name: "kakaomap",
+      component: KakaoMap,
+    },
+    {
+      path: "/map",
+      name: "map",
+      component: Map,
     },
     {
       path:"/login",
