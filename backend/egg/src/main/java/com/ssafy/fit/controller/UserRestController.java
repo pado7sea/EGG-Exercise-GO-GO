@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +48,7 @@ public class UserRestController {
 	
 	
 	@PostMapping("login")
-	public ResponseEntity<?> login(User user, HttpSession session) {
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
 		System.out.println(123);
 		User tmp = userService.login(user);
 		//로그인 실패 (잘못했어)
@@ -67,6 +68,12 @@ public class UserRestController {
 		session.invalidate();
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@GetMapping("userapi/{id}")
+	public ResponseEntity<User> detail(@PathVariable String id){
+		User user = userService.selectOne(id);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	
 	

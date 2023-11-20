@@ -7,8 +7,6 @@
 	<!-- <select id="selectAll" resultType="User"> SELECT id, password, name, 
 		curriculum_code as curriculumCode FROM users </select> -->
 
-
-
 	<select id="selectAll" resultType="User">
 		SELECT *
 		FROM users
