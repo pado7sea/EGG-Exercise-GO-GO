@@ -50,5 +50,13 @@ public class User {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", password=" + password + ", name=" + name + ", birthday=" + birthday
+				+ ", egg_count=" + egg_count + "]";
+	}
+	
+	
+
 
 }
