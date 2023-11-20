@@ -47,9 +47,10 @@ public class UserRestController {
 	
 	
 	@PostMapping("login")
-	public ResponseEntity<?> login(User user, HttpSession session) {
+	public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
 		System.out.println(123);
 		User tmp = userService.login(user);
+		System.out.println(user);
 		//로그인 실패 (잘못했어)
 		if(tmp == null) {
 			System.out.println("no");
