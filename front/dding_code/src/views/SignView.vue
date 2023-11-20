@@ -6,26 +6,45 @@
         <div class="sign-input-container">
             <div class="sign-inpt">
                 <form>
-                    <input type="text" name="id" placeholder="아이디">
-                    <input type="password" placeholder="비밀번호">
-                    <input type="password" placeholder="비밀번호 확인">
+                    <input v-model="user.id" type="text" name="id" placeholder="아이디">
+                    <input v-model="user.password" type="password" placeholder="비밀번호">
+                    <!-- <input v-model="user.passwordCheck" type="password" placeholder="비밀번호 확인"> -->
+                    <input type="text" name="name" placeholder="이름">
                     <div class="field birth">
                         <div>
-                            <input type="number" placeholder="연도">
-                            <input type="number" placeholder="월">
-                            <input type="number" placeholder="일">
+                            <input v-model="year" name="year" type="number" placeholder="연도">
+                            <input v-model="month" name="month" type="number" placeholder="월">
+                            <input v-model="day" name="day" type="number" placeholder="일">
                         </div>
                     </div>
                 </form>
-                <button>회원가입 하기</button>
+                <button @click="signupUser">회원가입 하기</button>
             </div>
         </div>
     </div>
 </template>
   
 <script setup>
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user' 
+
+const store = useUserStore()
+const year = ref('')
+const month = ref('')
+const day = ref('')
+const user = ref({
+    id: '',
+    password: '',
+    passwordCheck: '',
+    name: '',
+    birthday: `${year.value}-${month.value}-${day.value}`
+})
 
 
+
+const signupUser = () => {
+    store.signupUser(user.value)
+}
 </script>
   
 <style scoped>

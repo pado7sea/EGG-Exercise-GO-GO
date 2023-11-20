@@ -6,10 +6,10 @@
     <div class="login-input-container">
       <div class="inpt">
         <form>
-          <input type="text" name="id" placeholder="아이디">
-          <input type="password" placeholder="비밀번호">
+          <input v-model="user.id" type="text" name="id" placeholder="아이디">
+          <input v-model="user.password" type="password" placeholder="비밀번호">
         </form>
-        <button>Login</button>
+        <button @click="loginUser">Login</button>
         <div class="description">
           아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>
         </div>
@@ -19,8 +19,22 @@
 </template>
   
 <script setup>
+import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 
+const router = useRouter()
+const store = useUserStore()
+const user = ref({
+    id: '',
+    password: ''
+})
+
+const loginUser = () => {
+    console.log('로그인 버튼 클릭됨');
+    store.loginUser(user.value);
+}
 </script>
   
 <style scoped>

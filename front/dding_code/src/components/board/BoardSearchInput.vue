@@ -11,7 +11,7 @@
         </div>
         <div class="search-div">
             <label>검색 내용 </label>
-            <input style="height: 32px;" class="search-standard-s" type="text" v-model="searchInfo.word" />
+            <input class="search-standard-s" type="text" v-model="searchInfo.word" />
         </div>
         <div class="search-div">
             <label>정렬 기준 </label>
@@ -30,10 +30,7 @@
             </select>
         </div>
         <div class="search-div"> 
-            <button @click="searchBoardList">검색</button>
-        </div>
-        <div>
-            <button click="goCreate">글 등록</button>
+            <button @click="searchBoardList" class="custom-btn-search btn-6-s"><span>검색</span></button>
         </div>
     </div>
 </template>
@@ -85,7 +82,102 @@ const searchBoardList = function () {
     border-radius: 10px;
 }
 
+.custom-btn-search {
+  width: 70px;
+  height: 28px;
+  padding: 10px 25px;
+  border: 2px solid #FEE58D;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  justify-content: center;
+}
 
+/* 6 */
+.btn-6-s {
+   background: #989898;
+  color: white;
+  line-height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 50px;
+}
+.btn-6-s span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+.btn-6-s:before,
+.btn-6:after {
+  position: absolute;
+  content: "";
+  height: 0%;
+  width: 2px;
+  background: white;
+  border-radius: 50px;
+}
+.btn-6-s:before {
+  right: 0;
+  top: 0;
+  transition: all 500ms ease;
+  border-radius: 50px;
+}
+.btn-6-s:after {
+  left: 0;
+  bottom: 0;
+  transition: all 500ms ease;
+  border-radius: 50px;
+}
+.btn-6-s:hover{
+  color: black;
+  background: transparent;
+  border-radius: 50px;
+}
+.btn-6-s:hover:before {
+  transition: all 500ms ease;
+  height: 100%;
+  border-radius: 50px;
+}
+.btn-6-s:hover:after {
+  transition: all 500ms ease;
+  height: 100%;
+  border-radius: 50px;
+}
+.btn-6-s span:before,
+.btn-6-s span:after {
+  position: absolute;
+  content: "";
+  background: #FEE58D;
+  border-radius: 50px;
+}
+.btn-6-s span:before {
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+  border-radius: 50px;
+}
+.btn-6-s span:after {
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+  border-radius: 50px;
+}
+.btn-6-s span:hover:before {
+  width: 100%;
+}
+.btn-6-s span:hover:after {
+  width: 100%;
+}
 
 </style>
   

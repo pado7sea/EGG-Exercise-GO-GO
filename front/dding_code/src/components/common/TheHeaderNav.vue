@@ -1,8 +1,16 @@
 <template>
     <div>
-        <div class="nav-top">
+        <div v-if="!store.LoginUser.id" class="nav-top-before-login">
             <router-link to="/login">로그인</router-link>/
             <router-link to="/sign">회원가입</router-link>
+        </div>
+        <div v-if="store.LoginUser.id" class="nav-top">
+            <div>
+                현재 알 개수: {{ store.LoginUser.egg_count }}개 
+            </div>
+            <div>
+                {{ store.LoginUser.name }} 님 반갑습니다! / <button @click="confirmLogout">로그아웃 </button>
+            </div>
         </div>
         <div class="title">
             EGG
@@ -18,6 +26,14 @@
 </template>
 
 <script setup>
+import { useUserStore } from '../../stores/user';
+const store = useUserStore()
+const confirmLogout = () => {
+  if (confirm('정말 로그아웃 하시겠습니까?')) {
+    store.logoutUser();
+    console.log("로그아웃 완료");
+  }
+}
 
 </script>
 
@@ -40,11 +56,17 @@
     padding: 10px;
 }
 
-.nav-top{
+.nav-top-before-login{
     margin-top: 2.5vh;
     margin: 2.5vh 10vw;
     display: flex;
     justify-content: flex-end;
+}
+.nav-top{
+    margin-top: 2.5vh;
+    margin: 2.5vh 10vw;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav1 {
@@ -73,4 +95,5 @@ a{
     text-decoration: none;
     color: black;
 }
+
 </style>
