@@ -11,4 +11,3 @@ app.use(router)
 
 app.mount('#app')
 
-window.Kakao.init("08a5e0056d53ba3ffb7e2245479824a6");
