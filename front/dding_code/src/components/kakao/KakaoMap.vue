@@ -30,11 +30,6 @@
 <script setup>
 import Map from './Map.vue';
 
-
-
-
-
-
 </script>
 
 <style scoped>
