@@ -10,7 +10,7 @@ import BoardList from "@/components/board/BoardList.vue";
 import BoardCreate from "@/components/board/BoardCreate.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
 import BoardUpdate from "@/components/board/BoardUpdate.vue";
-
+import FriendDetail from "@/components/friend/FriendDetail.vue"
 import Indoor from "@/components/home/Indoor.vue";
 import Outdoor from "@/components/home/Outdoor.vue";
 import Carousel from "@/components/home/Carousel.vue";
