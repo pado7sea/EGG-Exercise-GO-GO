@@ -6,12 +6,6 @@ import KakaoView from "@/views/KakaoView.vue";
 import FriendView from "@/views/FriendView.vue";
 import LoginView from "@/views/LoginView.vue";
 import SignView from "@/views/SignView.vue"
-
-
-import FriendDetail from "@/components/friend/friendDetail.vue";
-
-
-
 import BoardList from "@/components/board/BoardList.vue";
 import BoardCreate from "@/components/board/BoardCreate.vue";
 import BoardDetail from "@/components/board/BoardDetail.vue";
