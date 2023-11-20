@@ -27,6 +27,7 @@
       <span @click="gotoPage(currentPage + 1)" :class="{ 'disabled': currentPage === totalPage }">&gt;</span>
       <span @click="gotoPage(totalPage)" :class="{ 'disabled': currentPage === totalPage }">&gt;&gt;</span>
     </div>
+
   </div>
 </template>
 
@@ -37,6 +38,7 @@ let map = null;
 let infowindow = null;
 let ps = null;
 const searchKeyword = ref('');
+const searchResults = ref([]);
 let markers = [];
 const places = ref([]);
 const currentPage = ref(1);
@@ -84,9 +86,11 @@ const getCurrentLocation = () => {
 
 function placesSearchCB(data, status, pagination) {
   if (status === kakao.maps.services.Status.OK) {
+
     totalPlaces.value = pagination.totalCount; // 전체 장소 수 업데이트
     updatePagination(); // 페이지 번호 업데이트
     displayPlaces(data);
+
   }
 }
 
@@ -156,6 +160,7 @@ const searchPlaces = () => {
   ps.keywordSearch(searchKeyword.value, placesSearchCB, { useMapBounds: true });
 };
 
+
 // 페이지 번호를 클릭했을 때 실행되는 함수
 const gotoPage = (page) => {
   if (page < 1 || page > totalPage.value) {
@@ -187,6 +192,7 @@ const paginatedPlaces = computed(() => {
   return places.value.slice(startIndex, endIndex);
 });
 
+
 onMounted(async () => {
   if (window.kakao && window.kakao.maps) {
     initMap();
@@ -199,8 +205,8 @@ onMounted(async () => {
     };
   }
 });
-</script>
 
+</script>
 
 <style scoped>
 #map {
@@ -252,4 +258,5 @@ button {
   color: #ddd;
   cursor: not-allowed;
 }
+
 </style>
