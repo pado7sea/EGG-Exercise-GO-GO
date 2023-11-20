@@ -2,6 +2,8 @@ package com.ssafy.fit.model.dao;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ssafy.fit.model.dto.Board;
 import com.ssafy.fit.model.dto.SearchCondition;
 
@@ -27,10 +29,10 @@ public interface BoardDao {
 	public List<Board> search(SearchCondition condition);
 	
 	// 이미지 업로드
-    public void uploadImage(int id, String imgUrl);
+	String uploadImage(MultipartFile image);
+
 
     // 이미지 가져오기
     public String getImage(int id);
-
-
+    
 }
