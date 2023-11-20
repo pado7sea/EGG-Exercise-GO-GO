@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.fit.model.dto.Board;
 import com.ssafy.fit.model.dto.SearchCondition;
@@ -57,21 +59,51 @@ public class BoardRestController {
 	}
 
 	// 3. 등록
-	@PostMapping("/board")
-	public ResponseEntity<Board> write(@ModelAttribute Board board, @RequestParam("imgUrl") String imgUrl) {
-	    try {
-	        // 이미지 URL을 Board 객체에 설정
-	        board.setImgUrl(imgUrl);
+//		@PostMapping("/board")
+//		public ResponseEntity<Board> write(@ModelAttribute Board board, @RequestParam("imgUrl") String imgUrl) {
+//		    try {
+//		        // 이미지 URL을 Board 객체에 설정
+//		        board.setImgUrl(imgUrl);
+	//
+//		        // 나머지 게시글 등록 로직
+//		        boardService.writeBoard(board);
+	//
+//		        return new ResponseEntity<>(board, HttpStatus.CREATED);
+//		    } catch (Exception e) {
+//		        e.printStackTrace();
+//		        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		    }
+//		}
+		@PostMapping(value = "/board", consumes = {"multipart/form-data"})
+		public ResponseEntity<Board> write(@RequestPart("files") MultipartFile image,
+		                                   @RequestPart("title") String title,
+		                                   @RequestPart("writer") String writer,
+		                                   @RequestPart("content") String content) {
 
-	        // 나머지 게시글 등록 로직
-	        boardService.writeBoard(board);
+		    try {
+		        // 이미지를 서버에 업로드하고 파일 경로를 얻어옴
+		        String imageUrl = boardService.uploadImage(image);
 
-	        return new ResponseEntity<>(board, HttpStatus.CREATED);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
-	}
+		        // Board 객체 생성 및 설정
+		        Board board = new Board();
+		        board.setTitle(title);
+		        board.setWriter(writer);
+		        board.setContent(content);
+		        board.setImgUrl(imageUrl);
+
+		        // 나머지 게시글 등록 로직
+		        boardService.writeBoard(board);
+		        
+		        return new ResponseEntity<>(board, HttpStatus.CREATED);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        
+		        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		    }
+		}
+
+
+		
 	
 
 	// 4. 삭제
