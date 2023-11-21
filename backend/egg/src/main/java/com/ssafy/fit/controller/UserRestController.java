@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.fit.model.dto.SearchCondition;
 import com.ssafy.fit.model.dto.User;
 import com.ssafy.fit.model.service.UserService;
+
+import io.swagger.annotations.ApiOperation;
 
 
 
@@ -31,9 +34,13 @@ public class UserRestController {
 	
 	//전체유저가져와
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> userList() {
-		List<User> user = userService.getUserList();
-		return new ResponseEntity<List<User>>(user, HttpStatus.CREATED);
+	@ApiOperation(value = "유저 조회", notes = "검색조건도 넣으면 같이 가져온다.")
+	public ResponseEntity<?> user (SearchCondition condition) {
+		List<User> user = userService.search(condition);
+		if(user == null || user.size() == 0){
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<User>>(user, HttpStatus.OK);
 	}
 	
 	//회원가입을 해보자 form 태그 형식으로 넘어왔다.
@@ -76,7 +83,6 @@ public class UserRestController {
 		User user = userService.selectOne(id);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-	
 	
 	
 	

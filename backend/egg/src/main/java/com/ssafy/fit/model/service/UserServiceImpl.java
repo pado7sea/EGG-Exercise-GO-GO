@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.fit.model.dao.UserDao;
+import com.ssafy.fit.model.dto.SearchCondition;
 import com.ssafy.fit.model.dto.User;
 
 @Service
@@ -16,10 +17,16 @@ public class UserServiceImpl implements UserService {
 	
 	
 	@Override
-	public List<User> getUserList() {
+	public List<User> selectAll() {
+		// TODO Auto-generated method stub
 		return userDao.selectAll();
 	}
-
+	
+	@Override
+	public List<User> search(SearchCondition condition) {
+		// TODO Auto-generated method stub
+		return userDao.search(condition);
+	}
 	
 	//최영진 / 박소현 아주 훌륭 그자체
 	@Override
@@ -44,5 +51,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.selectOne(id);
 	}
+
 
 }
