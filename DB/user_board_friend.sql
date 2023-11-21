@@ -28,8 +28,6 @@ VALUES
 ("user3", "password3", "Bob Johnson", "1995-03-10"),
 ("user4", "password4", "Alice Brown", "1982-11-28");
 
-DROP TABLE board;
-
 CREATE TABLE IF NOT EXISTS `board` (
 	id INT AUTO_INCREMENT,
     writer VARCHAR(20) NOT NULL,

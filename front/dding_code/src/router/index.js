@@ -21,7 +21,8 @@ import MapSlide from "@/components/home/MapSlide.vue";
 
 import KakaoMap from "@/components/kakao/KakaoMap.vue";
 import Map from "@/components/kakao/Map.vue";
-
+import Path from "@/components/kakao/Path.vue";
+import StreetView from "@/components/kakao/StreetView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -110,10 +111,21 @@ const router = createRouter({
       name: "kakaomap",
       component: KakaoMap,
     },
+    
     {
       path: "/map",
       name: "map",
       component: Map,
+    },
+    {
+      path: "/path",
+      name: "path",
+      component: Path,
+    },
+    {
+      path: "/streetview",
+      name: "streetview",
+      component: StreetView,
     },
     {
       path:"/",
