@@ -1,44 +1,56 @@
 <template>
-    <div class="friend-container">
-        <div class="friend-user">
-            <div>
-                <img src="@/assets/user-chick.png" style="width: 136px; height: 116px; padding-top: 20px;">
-            </div>
-            <div class="friend-user-description">
-                <span class= "user-info">{{ store.LoginUser.name }} </span>님의 
+    <div>
+        <div class="friend-container">
+            <div class="friend-user">
                 <div>
-                    현재 알 개수는 <span class="user-info"> {{ store.LoginUser.egg_count }}</span>개 입니다.
+                    <img src="@/assets/user-chick.png" style="width: 136px; height: 116px; padding-top: 20px;">
+                </div>
+                <div class="friend-user-description">
+                    <span class="user-info">{{ store.LoginUser.name }} </span>님의
+                    <div>
+                        현재 알 개수는 <span class="user-info"> {{ store.LoginUser.egg_count }}</span>개 입니다.
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="friend-list-header">
-            
             <div style="padding-left: 20px;">친구</div>
-            <div class="friend-list-header-d">
-                <div style="width: 71px; height: 67px;"></div>
-                <div>아이디</div>
-                <div>이름</div>
-                <div>현재 계란 개수</div>
+            <hr>
+            <div class="friend-list-header">
+                <div class="friend-list-header-d">
+                    <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
+                    <div class="friend-list-header-d-d">아이디</div>
+                    <div class="friend-list-header-d-d">이름</div>
+                    <div class="friend-list-header-d-d">현재 계란 개수</div>
+                </div>
+                <div class="friend-list-container">
+                    <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
+                        <div>
+                            <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
+                        </div>
+                        <div>
+                            {{ friendId }}
+                        </div>
+                        <!-- 추출된 friendId 출력 -->
+                        <div>
+                            <!-- 친구의 정보를 가져와서 표시 -->
+                            {{ friendInfo[index].name }}
+                        </div>
+                        <div>
+                            {{ friendInfo[index].egg_count }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="friend-list-container">
-            <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
-                <div>
-                    <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
-                </div>
-                <div>
-                    {{ friendId }}
-                </div>
-                <!-- 추출된 friendId 출력 -->
-                <div>
-                    <!-- 친구의 정보를 가져와서 표시 -->
-                    {{ friendInfo[index].name }}
-                </div>
-                <div>
-                    {{ friendInfo[index].egg_count }}
-                </div>
+        <!-- <div class="none-friend-user" v-if="!store.LoginUser.id">
+            <div class="none-login-img" style="display: flex;">
+                <img src="@/assets/present-egg.gif" style="width: 136px; height: 116px; padding-top: 20px;">
+                <img src="@/assets/before-egg.gif" style="width: 136px; height: 116px; padding-top: 20px;">
+                <img src="@/assets/after-egg.gif" style="width: 136px; height: 116px; padding-top: 20px;">
             </div>
-        </div>
+            <div class="none-friend-user-description">
+                쉿 계란 부화중
+            </div>
+        </div> -->
     </div>
 </template>
   
@@ -116,11 +128,11 @@ onMounted(async () => {
 
 }
 
-.user-info{
+.user-info {
     font-size: x-large;
     font-weight: 200;
     text-align: center;
-    
+
 }
 
 .friend-user-description {
@@ -133,13 +145,23 @@ onMounted(async () => {
     height: 67px;
 }
 
-.friend-list-header{
+.friend-list-header {
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    margin-top: 3vh;
 }
+
+.friend-list-header-d{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    /* margin-left: 10px; */
+}
+
+
 
 .friend-detail {
     display: flex;
     justify-content: space-around;
 }
+
 </style>
