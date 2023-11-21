@@ -6,7 +6,7 @@
 
 	<!-- 전체글 조회 -->
 	<select id="selectAll" resultType="Board">
-		SELECT id, content, writer, title, viewCnt, regDate, imgUrl 
+		SELECT *
 		FROM board;
 	</select>
 

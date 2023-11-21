@@ -1,5 +1,7 @@
 package com.ssafy.fit.model.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(value="게시판 바구니", description = "게시글 정보")
@@ -12,11 +14,12 @@ public class Board {
 	private int viewCnt;
 //	private byte[] imgData;
 	private String imgUrl;
+	private MultipartFile imageFile;
 
 	public Board() {
 	}
 
-	public Board(int id, String title, String writer, String content, String regDate, int viewCnt, String imgUrl) {
+	public Board(int id, String title, String writer, String content, String regDate, int viewCnt, String imgUrl, MultipartFile imageFile) {
 		this.id = id;
 		this.title = title;
 		this.writer = writer;
@@ -24,6 +27,7 @@ public class Board {
 		this.regDate = regDate;
 		this.viewCnt = viewCnt;
 		this.imgUrl=imgUrl;
+		this.imageFile=imageFile;
 	}
 
 	public int getId() {
@@ -90,10 +94,17 @@ public class Board {
 		this.imgUrl = imgUrl;
 	}
 
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [id=" + id + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regDate="
 				+ regDate + ", viewCnt=" + viewCnt + "]";
 	}
-
 }

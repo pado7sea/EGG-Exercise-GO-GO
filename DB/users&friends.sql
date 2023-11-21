@@ -58,6 +58,8 @@ VALUES ("user1", "user2");
 -- 'friends' 테이블 확인
 SELECT * FROM friends;
 
+commit;
+
 
 
 
