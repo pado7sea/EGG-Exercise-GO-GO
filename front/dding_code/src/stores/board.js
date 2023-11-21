@@ -11,6 +11,8 @@ export const useBoardStore = defineStore('board', () => {
     axios.get(REST_BOARD_API)
       .then((response) => {
       boardList.value = response.data
+      console.log(boardList.value[0].id)
+      console.log(boardList.value[0].img)
       })
   }
 
@@ -24,14 +26,15 @@ export const useBoardStore = defineStore('board', () => {
   }
 
   //게시글 등록
-  const createBoard = function (board) {
+  const createBoard = function (formData, board) {
     axios({
       url: REST_BOARD_API,
       method: 'POST',
       //아래꺼 없어도 알아서 보내더라 axios 쵝오~ 
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "multipart/form-data"
       },
+      params: formData,
       data: board
     })
       .then(() => {

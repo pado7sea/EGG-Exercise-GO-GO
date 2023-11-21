@@ -54,6 +54,10 @@ export default {
 
 
 <style scoped>
+div{
+    font-family: Poppins, 'Noto Sans KR', sans-serif;
+}
+   
 .container {
     width: 100%;
     display: flex;
@@ -92,7 +96,6 @@ export default {
 
 .hi {
     color: #000;
-    font-family: Inter;
     font-size: 25px;
     font-style: normal;
     font-weight: 400;
@@ -104,7 +107,6 @@ export default {
     height: 49px;
     flex-shrink: 0;
     color: #000;
-    font-family: Inter;
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
@@ -149,7 +151,6 @@ export default {
 .안내문구 {
 
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -177,7 +178,6 @@ export default {
     height: 33px;
     flex-shrink: 0;
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
