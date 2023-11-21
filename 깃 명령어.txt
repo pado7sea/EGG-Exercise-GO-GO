@@ -1,0 +1,27 @@
+<깃 연결>
+git clone 주소
+
+<깃 사용자 설정>
+git config --global user.name "이름"
+git config --global user.email "이메일@주소"
+
+<깃 작업 추가>
+git add .
+git commit -m "커밋 내용"
+git push origin
+
+<프론트 파일 깃에서 처음 받을 때 설치/추가해야 할 것들>
+node_modules 설치
+	npm i
+
+.env.local (환경변수파일) - 서윤
+VITE_YOUTUBE_API_KEY=AIzaSyCVmoDPZZggp05gUjNjKTpLKMwTYIwFEHc
+VITE_KAKAO_API_KEY=08a5e0056d53ba3ffb7e2245479824a6
+VITE_TMDB_API_KEY=ba1ac29709a6113d2a09cc1a6cb1039c
+VITE_WEATHER_API_KEY=dBb2TUoJiFD1ULsdFQh7rXNiLUxMRBXVkRGX1l3Vy68Al0GFlUOs8GWV4t0av9mLxaPMxmU9BLyAk+TjrCpqbg==
+
+.env.local (환경변수파일) - 혜진
+VITE_YOUTUBE_API_KEY=AIzaSyAo5_uAf5_1Wzbc_v-4okW0R34c2DgTVrs
+VITE_KAKAO_API_KEY=c12f4a79b0304d5e9c9c0982fee8e19a
+VITE_TMDB_API_KEY=ba1ac29709a6113d2a09cc1a6cb1039c
+VITE_WEATHER_API_KEY=dBb2TUoJiFD1ULsdFQh7rXNiLUxMRBXVkRGX1l3Vy68Al0GFlUOs8GWV4t0av9mLxaPMxmU9BLyAk+TjrCpqbg==
