@@ -70,7 +70,7 @@ const router = createRouter({
           path: "",
           name: "frienDetail",
           component: FriendDetail,
-        }
+        },
       ]
     },
     {
