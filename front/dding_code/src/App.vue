@@ -1,12 +1,12 @@
 <template>
     <div>
-        <THeHeaderNav />
+        <TheHeaderNav />
         <RouterView />
     </div>
 </template>
 
 <script setup>
-import THeHeaderNav from "@/components/common/THeHeaderNav.vue";
+import TheHeaderNav from "@/components/common/TheHeaderNav.vue";
 </script>
 
 <style  scoped>

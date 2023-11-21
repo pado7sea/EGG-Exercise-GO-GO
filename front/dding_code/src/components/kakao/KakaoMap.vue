@@ -116,11 +116,6 @@ import Map from './Map.vue';
   margin-bottom: 5%;
 }
 
-/* .장소카테고리 {
-  
-  margin-left: 5%;
-  margin-right: 5%;
-} */
 
 .장소카테고리세부 {
   background-color: #F8BD2A;
@@ -139,12 +134,7 @@ import Map from './Map.vue';
 .map {
   width: 800px;
   height: 400px;
-  background-color: aquamarine;
+
 }
 
-
-#map {
-  width: 500px;
-  height: 400px;
-}
 </style>
