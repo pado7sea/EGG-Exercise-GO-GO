@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS `friends` (
   FOREIGN KEY (`friend_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
-commit;
 
 INSERT INTO users(id, password, name, birthday)
 VALUES
@@ -28,8 +27,6 @@ VALUES
 ("user2", "password2", "Jane Smith", "1985-08-22"),
 ("user3", "password3", "Bob Johnson", "1995-03-10"),
 ("user4", "password4", "Alice Brown", "1982-11-28");
-
-DROP TABLE board;
 
 CREATE TABLE IF NOT EXISTS `board` (
 	id INT AUTO_INCREMENT,
