@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="!store.LoginUser.id" class="nav-top-before-login">
-            <router-link to="/login">로그인</router-link>/
+            <router-link to="/">로그인</router-link>/
             <router-link to="/sign">회원가입</router-link>
         </div>
         <div v-if="store.LoginUser.id" class="nav-top">
@@ -16,7 +16,7 @@
             EGG
         </div>
         <header class="nav-container">
-            <RouterLink to="/" class="nv">Home</RouterLink>
+            <RouterLink to="/home" class="nv">Home</RouterLink>
             <RouterLink to="/board" class="nv">BoardList</RouterLink>
             <RouterLink to="/friend" class="nv">Friend</RouterLink>
             <RouterLink to="/youtube" class="nv">Youtube</RouterLink>

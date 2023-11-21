@@ -16,7 +16,7 @@
                 <textarea id="content" cols="30" rows="10" v-model="board.content"></textarea>
             </div>
             <div>
-                <input type="file" @change="imageUpload" ref="boardImage">이미지 등록
+                <input type="file" @change="imageUpload" ref="boardImage" id="photo" accept="image/*">이미지 등록
                 <img :src="imageUploaded" alt="사용자가 업로드한 이미지">
             </div>
             <div>
@@ -30,33 +30,40 @@
 <script setup>
 import { ref } from "vue";
 import axios from 'axios';
-// import { useBoardStore } from "@/stores/board";
+import { useBoardStore } from "@/stores/board";
+import router from "@/router";
 
-// const store = useBoardStore()
+const store = useBoardStore()
 const board = ref({
     title: '',
     writer: '',
-    content: ''
+    content: '',
 })
 
-const boardImage = ref(null)
-const imageUploaded = ref(null)
-
+const file = ref({})
+const imageUploaded = ref({})
 
 const imageUpload = function () {
-    const image = boardImage.value.files[0];
-    console.log(image.value)
-    imageUploaded.value = URL.createObjectURL(image)
+    const photo = document.getElementById("photo")
+    file.value = photo.files[0];
+    const image = file.value
+    console.log(file.value)
+    imageUploaded.value=URL.createObjectURL(image)
 }
+// const getFile = function() {
+//     const image = file.value;
+//     console.log(image.value)
+//     imageUploaded.value = URL.createObjectURL(image)
+// }
+
 const createBoard = async () => {
     // store.createBoard(board.value)
     try {
         const formData = new FormData()
-        formData.append('files', boardImage.value.files[0])
+        formData.append('file', file.value)
         formData.append('title', board.value.title)
         formData.append('writer', board.value.writer)
         formData.append('content', board.value.content)
-
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data' // 컨텐츠 타입 지정해줘야함
@@ -64,12 +71,14 @@ const createBoard = async () => {
         }
 
         const response = await axios.post('http://localhost:8080/api/board', formData, config)
-        alert('생성 완료');
+        alert('생성 완료')
         console.log(response.data)
+        router.push({name: 'boardList'})
     } catch (error) {
         console.error(error);
     }
 }
+
 
 </script>
 

@@ -2,6 +2,7 @@ package com.ssafy.fit.model.dao;
 
 import java.util.List;
 
+import com.ssafy.fit.model.dto.SearchCondition;
 import com.ssafy.fit.model.dto.User;
 
 public interface UserDao {
@@ -11,5 +12,7 @@ public interface UserDao {
 	int insertUser(User user);
 	
 	User selectOne(String id);
+	
+	List<User> search(SearchCondition condition);
 	
 }

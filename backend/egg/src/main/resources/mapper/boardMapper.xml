@@ -19,8 +19,8 @@
 
 	<!-- 게시글 등록(서8 박정훈) -->
 	<insert id="insertBoard" parameterType="Board" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO board (id, title, writer, content, imgUrl)
-		VALUES (#{id}, #{title}, #{writer}, #{content}, #{imgUrl})
+		INSERT INTO board (id, title, writer, content, img, orgImg)
+		VALUES (#{id}, #{title}, #{writer}, #{content}, #{img}, #{orgImg})
 	</insert>
 	
 	<!-- 게시글 삭제 -->
@@ -47,7 +47,7 @@
 	
 	<!-- 검색기능  -->
 	<select id="search" resultType="Board" parameterType="SearchCondition">
-		SELECT id, content, writer, title, viewCnt, regDate, imgUrl
+		SELECT id, content, writer, title, viewCnt, regDate
 		FROM board
 		<!-- 검색 조건 (동적쿼리)-->
 		<if test="key != 'none'">

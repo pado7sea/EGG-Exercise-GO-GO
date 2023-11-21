@@ -7,7 +7,7 @@
         <div>{{ store.board.regDate }}</div>
         <div>{{ store.board.viewCnt }}</div>
         <div>{{ store.board.content }}</div>
-        <img :src= "store.board.imgUrl">
+        <img :src="`http://localhost:8080/upload/${store.board.img}`">
         <button @click="deleteBoard">삭제</button>
         <button @click="updateBoard">수정</button>
     </div>

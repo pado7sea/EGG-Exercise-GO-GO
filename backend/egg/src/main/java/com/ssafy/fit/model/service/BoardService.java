@@ -26,11 +26,5 @@ public interface BoardService {
 
 		// 검색 버튼을 눌렀을 때 처리할 메서드
 		List<Board> search(SearchCondition condition);
-		
-		// 이미지 업로드
-		String uploadImage(MultipartFile image);
-
-	    // 이미지 가져오기
-	    public String getImage(int id);
 
 }
