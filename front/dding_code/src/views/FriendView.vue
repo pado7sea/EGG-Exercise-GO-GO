@@ -12,12 +12,13 @@
             </div>
         </div>
         <div class="friend-list-header">
+            
             <div style="padding-left: 20px;">친구</div>
             <div class="friend-list-header-d">
-                <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
-                <div class="friend-list-header-d-d">아이디</div>
-                <div class="friend-list-header-d-d">이름</div>
-                <div class="friend-list-header-d-d">현재 계란 개수</div>
+                <div style="width: 71px; height: 67px;"></div>
+                <div>아이디</div>
+                <div>이름</div>
+                <div>현재 계란 개수</div>
             </div>
         </div>
         <div class="friend-list-container">
@@ -124,7 +125,7 @@ onMounted(async () => {
 
 .friend-user-description {
     float: left;
-    padding-top: 2vh;
+    padding-top: 6vh;
 }
 
 .friend-icon {
@@ -133,24 +134,12 @@ onMounted(async () => {
 }
 
 .friend-list-header{
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-template-rows: repeat(4, 1fr);
-}
-
-.friend-list-header-d{
-    display: flex;
-    justify-content: space-around;
-}
-
-.friend-list-header-d-d{
-    display: flex;
 }
 
 .friend-detail {
     display: flex;
     justify-content: space-around;
-    padding-top: 10px;
 }
 </style>
-  

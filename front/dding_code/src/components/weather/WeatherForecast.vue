@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4>날씨정보</h4>
+    <h4>오늘의 날씨</h4>
     <div>기온 : {{ tmp }}℃</div>
     <div>하늘상태 : {{ sky }}</div>
     <div>강수형태 : {{ pty }}</div>
@@ -17,7 +17,6 @@ const pty = ref(null);
 const pop = ref(0);
 onMounted(() => {
   const API_URL = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`;
-
   const today = new Date();
   let year = today.getFullYear();
   let month = today.getMonth() + 1;
@@ -27,18 +26,49 @@ onMounted(() => {
   const todayStr = `${year}${month}${day}`;
   console.log(todayStr);
   //발표시간을 전부 넣어둬
-  const times = ['0200', '0500', ]//8개넣어 
+  const times = ['0200', '0500', '0800', '1100', '1400', '1700', '2000', '2300']//8개넣어 
+
+  function findClosestTime(times) {
+  const currentTime = new Date();
+  const currentHours = currentTime.getHours();
+  const currentMinutes = currentTime.getMinutes();
+
+  const currentTotalMinutes = currentHours * 60 + currentMinutes;
+
+  let closestTime = '';
+  let minDifference = Infinity;
+
+  for (const time of times) {
+    const hours = parseInt(time.slice(0, 2));
+    const minutes = parseInt(time.slice(2));
+
+    const totalMinutes = hours * 60 + minutes;
+
+    const timeDifference = Math.abs(totalMinutes - currentTotalMinutes);
+
+    if (timeDifference < minDifference) {
+      minDifference = timeDifference;
+      closestTime = time;
+    }
+  }
+
+  return closestTime;
+}
+
+console.log(findClosestTime(times))
+ 
   axios
     .get(API_URL, {
       params: {
         ServiceKey: import.meta.env.VITE_WEATHER_API_KEY,
         dataType: "JSON",
         base_date: todayStr, //20231105 형태
-        base_time: "0200",   //이것은 총 8회 발표 
+        base_time: findClosestTime(times),   //이것은 총 8회 발표 
         numOfRows: 15,
-        nx: 61, //역삼위치
-        ny: 125,
+        nx: 66, // 온천2동
+        ny: 101,
       },
+      
     })
     .then((response) => {
       return response.data.response.body.items.item;
