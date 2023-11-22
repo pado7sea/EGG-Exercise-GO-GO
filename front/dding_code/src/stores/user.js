@@ -93,6 +93,5 @@ export const useUserStore = defineStore('user', () => {
     return hashedPassword;
   };
 
-
   return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword };
-});
+}, { persist: true });
