@@ -12,22 +12,23 @@ public class Board {
 	private String content;
 	private String regDate;
 	private int viewCnt;
-//	private byte[] imgData;
-	private String imgUrl;
-	private MultipartFile imageFile;
+	private String img;
+	private String orgImg;
 
 	public Board() {
 	}
 
-	public Board(int id, String title, String writer, String content, String regDate, int viewCnt, String imgUrl, MultipartFile imageFile) {
+	public Board(int id, String title, String writer, String content, String regDate, int viewCnt, String img,
+			String orgImg) {
+		super();
 		this.id = id;
 		this.title = title;
 		this.writer = writer;
 		this.content = content;
 		this.regDate = regDate;
 		this.viewCnt = viewCnt;
-		this.imgUrl=imgUrl;
-		this.imageFile=imageFile;
+		this.img = img;
+		this.orgImg = orgImg;
 	}
 
 	public int getId() {
@@ -78,33 +79,27 @@ public class Board {
 		this.viewCnt = viewCnt;
 	}
 
-//	public byte[] getImgData() {
-//		return imgData;
-//	}
-//
-//	public void setImgData(byte[] imgData) {
-//		this.imgData = imgData;
-//	}
-
-	public String getImgUrl() {
-		return imgUrl;
+	public String getImg() {
+		return img;
 	}
 
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
+	public void setImg(String img) {
+		this.img = img;
 	}
 
-	public MultipartFile getImageFile() {
-		return imageFile;
+	public String getOrgImg() {
+		return orgImg;
 	}
 
-	public void setImageFile(MultipartFile imageFile) {
-		this.imageFile = imageFile;
+	public void setOrgImg(String orgImg) {
+		this.orgImg = orgImg;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [id=" + id + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regDate="
-				+ regDate + ", viewCnt=" + viewCnt + "]";
+				+ regDate + ", viewCnt=" + viewCnt + ", img=" + img + ", orgImg=" + orgImg + "]";
 	}
+
+	
 }

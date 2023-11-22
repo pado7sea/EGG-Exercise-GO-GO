@@ -1,11 +1,11 @@
 package com.ssafy.fit.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +36,9 @@ public class BoardRestController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ResourceLoader resLoader;
 
 	// 1. 목록(검색조건 있을 수도 있고 없을 수도 있다.)
 	@GetMapping("/board")
@@ -59,52 +61,27 @@ public class BoardRestController {
 	}
 
 	// 3. 등록
-//		@PostMapping("/board")
-//		public ResponseEntity<Board> write(@ModelAttribute Board board, @RequestParam("imgUrl") String imgUrl) {
-//		    try {
-//		        // 이미지 URL을 Board 객체에 설정
-//		        board.setImgUrl(imgUrl);
-	//
-//		        // 나머지 게시글 등록 로직
-//		        boardService.writeBoard(board);
-	//
-//		        return new ResponseEntity<>(board, HttpStatus.CREATED);
-//		    } catch (Exception e) {
-//		        e.printStackTrace();
-//		        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//		    }
-//		}
-		@PostMapping(value = "/board", consumes = {"multipart/form-data"})
-		public ResponseEntity<Board> write(@RequestPart("files") MultipartFile image,
-		                                   @RequestPart("title") String title,
-		                                   @RequestPart("writer") String writer,
-		                                   @RequestPart("content") String content) {
-
+		@PostMapping("/board")
+		public ResponseEntity<Board> write(@ModelAttribute Board board, @RequestParam(required=false) MultipartFile file) {
 		    try {
-		        // 이미지를 서버에 업로드하고 파일 경로를 얻어옴
-		        String imageUrl = boardService.uploadImage(image);
-
-		        // Board 객체 생성 및 설정
-		        Board board = new Board();
-		        board.setTitle(title);
-		        board.setWriter(writer);
-		        board.setContent(content);
-		        board.setImgUrl(imageUrl);
-
+		       System.out.println(board);
+		       System.out.println(file.getOriginalFilename());
+		       
+		       if(file != null && file.getSize() > 0) {
+		    	   Resource res = resLoader.getResource("classpath:/static/upload");
+		    	   board.setImg(System.currentTimeMillis()+"_"+file.getOriginalFilename());;
+		    	   board.setOrgImg(file.getOriginalFilename());
+		    	   file.transferTo(new File(res.getFile().getCanonicalFile()+"/"+board.getImg()));
+		       }
 		        // 나머지 게시글 등록 로직
 		        boardService.writeBoard(board);
-		        
-		        return new ResponseEntity<>(board, HttpStatus.CREATED);
+	
+		        return new ResponseEntity<Board>(board, HttpStatus.CREATED);
 		    } catch (Exception e) {
 		        e.printStackTrace();
-		        
 		        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		    }
 		}
-
-
-		
-	
 
 	// 4. 삭제
 	@DeleteMapping("/board/{id}")

@@ -63,25 +63,6 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.search(condition);
 	}
 
-	@Override
-    public String uploadImage(MultipartFile image) {
-        // 이미지를 서버에 업로드하고 파일 경로를 반환하는 로직 구현
-        // 예제에서는 단순히 파일 경로를 문자열로 반환하도록 했습니다.
-        // 실제로는 업로드된 이미지를 저장하고 저장된 경로를 반환하도록 구현해야 합니다.
-        String imagePath = "C:/board_images";
-        String imageName = "generated_image_name.jpg"; // 이미지 파일명 생성 로직 필요
-        return imagePath + imageName;
-    }
-
-	@Override
-	public String getImage(int id) {
-		// TODO Auto-generated method stub
-		return boardDao.getImage(id);
-	}
-
-	
-	
-
 	
 	
 }

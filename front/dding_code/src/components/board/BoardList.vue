@@ -11,7 +11,7 @@
         <div class="board-grid-container">
             <div class="board-card" v-for="board in store.boardList" :key="board.id">
                 <div class="board-img">
-                    <RouterLink :to="`/board/${board.id}`"><img :src="board.imgUrl"></RouterLink>
+                    <RouterLink :to="`/board/${board.id}`"><img :src="`http://localhost:8080/upload/${board.img}`"></RouterLink>
                 </div>
                 <div class="board-description">
                     <div class="board-itw">
@@ -30,27 +30,6 @@
                 <div>
                 </div>
             </div>
-            <!-- 
-        <table>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>쓰니</th>
-                <th>조회수</th>
-                <th>등록</th>
-            </tr>
-            <tr v-for="board in store.boardList" :key="board.id">
-                <td>{{ board.id }}</td>
-                <td>
-                    <RouterLink :to="`/board/${board.id}`">{{ board.title }}</RouterLink>
-                </td>
-                <td>{{ board.writer }}</td>
-                <td>{{ board.viewCnt }}</td>
-                <td>{{ board.regDate }}</td>
-            </tr>
-        </table> -->
-
-
         </div>
     </div>
 </template>
@@ -64,7 +43,10 @@ const store = useBoardStore()
 
 onMounted(() => {
     store.getBoardList()
+    console.log(store.boardList.value)
 })
+
+console.log(store.board.img)
 
 </script>
 

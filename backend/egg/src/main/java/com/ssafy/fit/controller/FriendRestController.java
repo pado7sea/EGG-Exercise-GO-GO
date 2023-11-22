@@ -35,7 +35,7 @@ public class FriendRestController {
 		return new ResponseEntity<List<Friend>>(friend, HttpStatus.CREATED);
 	}
 	
-	//회원가입을 해보자 form 태그 형식으로 넘어왔다.
+	//친추
 	@PostMapping("insert")
 	public ResponseEntity<Integer> insert(@RequestBody Friend friend) {
 		int result = friendService.insertFriend(friend);
@@ -57,8 +57,6 @@ public class FriendRestController {
 	public ResponseEntity<Void> deleteFriend(
 	        @PathVariable("user_id") String user_id,
 	        @PathVariable("friend_id") String friend_id) {
-
-	   
 		Friend friend = new Friend();
 		friend.setUser_id(user_id);
 		friend.setFriend_id(friend_id);
