@@ -1,65 +1,55 @@
 <template>
     <div class="container">
         <div class="backbox">
-            <div class="leftbox">
-                <div class="hibox">
-                    <div class="hi">안녕하세요, 서윤님</div>
-                    <div class="hi">야외 운동하기 좋은 날씨입니다.</div>
-                </div>
-                <div class="temperbox">
-                    <div>
-                        <div>현재기온</div>
-                        <div>15도</div>
-                    </div>
-                </div>
-
-            </div>
             <div class="rightbox">
                 <div class="title">
                     <div class="안내문구">현재 위치와 가까운 야외운동하기 좋은 장소들을 알려드려요!</div>
                 </div>
                 <div class="content">
                     <div class="whitebox">
-                        <div class="address">주소</div>
-                        <div class="map"></div>
+                        <!-- <div class="address">주소</div> -->
+                        <!-- <div class="map"></div> -->
+                        <OutdoorCarousel class="map"/>
                     </div>
                     <div class="contentmore">
                         <div class="whitecircle">
-                            <div class="more">더 많은 장소 알아보기</div>
+                            <div class="more">
+                                <a href="/kakao" style="text-decoration: none; color: black;">더 많은 장소 알아보기</a></div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
-
-
-
-
     </div>
 </template>
 
-<script setup>
+<script>
+import OutdoorCarousel from './OutdoorCarousel.vue';
 
+export default {
+  components: {
+    OutdoorCarousel
+}
+}
 
 </script>
 
+
 <style scoped>
+div{
+    font-family: Poppins, 'Noto Sans KR', sans-serif;
+}
+   
 .container {
-    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 7vh;
+    margin-right: 5vw;
 }
 
 .backbox {
-    width: 1167px;
-    height: 599px;
     flex-shrink: 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
 
 }
@@ -67,14 +57,11 @@
 .leftbox {
     display: flex;
     flex-direction: column;
-
     margin-left: 5%;
     margin-bottom: 5%;
 }
 
 .hibox {
-    width: 299px;
-    height: 63px;
     flex-shrink: 0;
 
     display: flex;
@@ -85,7 +72,6 @@
 
 .hi {
     color: #000;
-    font-family: Inter;
     font-size: 25px;
     font-style: normal;
     font-weight: 400;
@@ -97,7 +83,6 @@
     height: 49px;
     flex-shrink: 0;
     color: #000;
-    font-family: Inter;
     font-size: 30px;
     font-style: normal;
     font-weight: 400;
@@ -140,9 +125,8 @@
 }
 
 .안내문구 {
-    
+
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -170,7 +154,6 @@
     height: 33px;
     flex-shrink: 0;
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -187,9 +170,8 @@
     height: 358px;
     flex-shrink: 0;
     border-radius: 20px;
-    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+    background: url(<path-to-image>), #fefefe 50% / cover no-repeat;
 
-    
 }
 
 .contentmore {
@@ -206,10 +188,12 @@
     border-radius: 20px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 3% 0;
+    text-decoration: none;
 }
+
+
 </style>

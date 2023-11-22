@@ -11,8 +11,7 @@ export const useBoardStore = defineStore('board', () => {
     axios.get(REST_BOARD_API)
       .then((response) => {
       boardList.value = response.data
-      console.log(boardList.value[0].id)
-      console.log(boardList.value[0].img)
+      console.log(boardList.value)
       })
   }
 

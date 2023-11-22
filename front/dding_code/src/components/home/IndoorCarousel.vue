@@ -1,8 +1,10 @@
 <!-- Carousel.vue -->
 <template>
   <div class="carousel-wrapper">
-    <button @click="prevSlide" class="prev">이전</button>
-    <button @click="nextSlide" class="next">다음</button>
+    <div class="button-class">
+      <button @click="prevSlide" class="prev" id="slide-button"><img src="@/assets/previous.png" style="width: 29px; height: 29px;"></button>
+      <button @click="nextSlide" class="next" id="slide-button"><img src="@/assets/next.png" style="width: 29px; height: 29px;"></button>
+    </div>
     <div ref="carouselRef" class="carousel">
       <div v-for="(item, i) in carouselItems" :key="i" class="carousel-item">
         <VideoSlide v-if="item.type === 'video'" :videoSource="item.content" />
@@ -53,14 +55,13 @@ export default {
 }
 
 .carousel-wrapper {
-  width: 500px;
-  height: 300px;
   overflow: hidden;
 }
 
 .carousel-wrapper>.carousel {
   display: flex;
   transition: transform 0.2s;
+  background-color: #FFF;
 }
 
 .carousel-wrapper>.carousel>.carousel-item {
@@ -68,11 +69,13 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 }
 
 .carousel-wrapper>.carousel>.carousel-item>video {
   width: 100%;
   height: auto;
+  
 }
 
 .carousel-wrapper>.carousel>.carousel-item>.text-content {
@@ -83,5 +86,17 @@ export default {
   align-items: center;
   font-size: 20px;
   font-weight: bold;
+  
+}
+
+#slide-button{
+  background-color:transparent;
+  border: 0px;
+}
+
+.button-class{
+  display: flex;
+  padding-top: 5px;
+  justify-content: space-between;
 }
 </style>

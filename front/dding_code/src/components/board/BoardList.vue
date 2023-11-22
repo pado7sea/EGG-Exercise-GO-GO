@@ -43,7 +43,6 @@ const store = useBoardStore()
 
 onMounted(() => {
     store.getBoardList()
-    console.log(store.boardList.value)
 })
 
 console.log(store.board.img)
