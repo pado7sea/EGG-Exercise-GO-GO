@@ -9,12 +9,12 @@
                     <input v-model="user.id" type="text" name="id" placeholder="아이디">
                     <input v-model="user.password" type="password" placeholder="비밀번호">
                     <!-- <input v-model="user.passwordCheck" type="password" placeholder="비밀번호 확인"> -->
-                    <input type="text" name="name" placeholder="이름">
+                    <input type="text" name="text" placeholder="이름">
                     <div class="field birth">
                         <div>
-                            <input v-model="year" name="year" type="number" placeholder="연도">
-                            <input v-model="month" name="month" type="number" placeholder="월">
-                            <input v-model="day" name="day" type="number" placeholder="일">
+                            <input v-model="year" name="year" type="text" placeholder="연도">
+                            <input v-model="month" name="month" type="text" placeholder="월">
+                            <input v-model="day" name="day" type="text" placeholder="일">
                         </div>
                     </div>
                 </form>

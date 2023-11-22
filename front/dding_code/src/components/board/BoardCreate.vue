@@ -4,15 +4,15 @@
         <fieldset>
             <legend>등록</legend>
             <div>
-                <label for="title">제목 : </label>
+                <label for="title">제목</label>
                 <input type="text" id="title" v-model="board.title">
             </div>
             <div>
-                <label for="writer">쓰니 : </label>
+                <label for="writer">글쓴이</label>
                 <input type="text" id="writer" v-model="board.writer">
             </div>
             <div>
-                <label for="content">내용 : </label>
+                <label for="content">내용</label>
                 <textarea id="content" cols="30" rows="10" v-model="board.content"></textarea>
             </div>
             <div>
