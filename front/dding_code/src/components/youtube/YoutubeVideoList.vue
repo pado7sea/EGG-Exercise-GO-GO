@@ -1,9 +1,9 @@
 <!-- YoutubeVideoList.vue -->
 <template>
     <div>
-        <ul>
+        <div class="youtube-list">
             <YoutubeVideoListItem v-for="(video, index) in store.videos.slice(0, 3)" :key="index" :video="video" />
-        </ul>
+        </div>
     </div>
 </template>
 
@@ -15,4 +15,9 @@ const store = useYoutubeStore()
 </script>
 
 <style scoped>
+.youtube-list{
+    display: grid;
+    margin: 10px 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
 </style>

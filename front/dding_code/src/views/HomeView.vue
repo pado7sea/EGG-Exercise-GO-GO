@@ -3,15 +3,7 @@
         <div>
             <WeatherForecast/>
         </div>
-        <div>
-            <div>
-                <router-link to="/Indoor">로그인 후 실내운동</router-link>|
-            </div>
-            <div>
 
-            </div>
-            <router-link to="/outdoor">로그인 후 야외운동</router-link>
-        </div>
 
         <!-- <LoginView/> -->
         
@@ -30,6 +22,7 @@ import LoginView from './LoginView.vue';
 
 div{
     font-family: Poppins, 'Noto Sans KR', sans-serif;
+    margin-bottom: 20px;
 }
     
 </style>

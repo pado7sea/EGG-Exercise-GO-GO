@@ -12,27 +12,30 @@
           실외운동하기 좋은 날씨입니다!
         </div>
       </div>
-      <div class="egg-weather">
-        <div class="egg-weather-img">
-          <img src="@/assets/weatheregg.png" alt="날씨 알려주는 게란">
-          <div class="egg-weather-text">
-            <div class="egg-weather-tmp">
-              <div v-if="sky_real == 1 && pty_real == 0"><img src="@/assets/sun.png"></div>
-              <div style="font-size: xx-large;">{{ tmp }}℃</div>
+      <div class="egg-weather-container" id="wrap"> <!--얘가 wrap-->
+        <div class="egg-weather" id="card"> <!--얘가 card-->
+          <div class="egg-weather-img-front" id="front"> <!-- 얘가 앞 이미지 -->
+            <img src="@/assets/weatheregg.png" alt="날씨 알려주는 게란" style="position: relative;">
+            <div class="egg-weather-text" style="font-size: xxx-large;">{{ tmp }}℃</div>
+          </div>
+          <div class="egg-weather-img-back" id="back">
+            <img src="@/assets/eggweather.png" alt="상세 정보 알려주는 계란">
+            <div class="egg-weather-text">
+              <div>하늘상태 : {{ sky }}</div>
+              <div v-if="sky === '1'"><img src="@/assets.cloudy.png"></div>
+              <div>{{ptyDescription}}</div>
+              <div>강수확률 : {{ pop }}%</div>
             </div>
-            <div>하늘상태 : {{ sky }}</div>
-            <div>강수형태 : {{ pty }}</div>
-            <div>강수확률 : {{ pop }}%</div>
           </div>
         </div>
       </div>
-
     </div>
+
     <div v-if="tmp < 10 || pty != 0 || tmp > 30" class="right-bx">
       <Indoor />
     </div>
     <div v-else-if="tmp >= 10 && pty == 0 && tmp <= 30" class="right-bx">
-      <Outdoor/>
+      <Outdoor />
     </div>
   </div>
 </template>
@@ -156,42 +159,34 @@ onMounted(() => {
 
 
 
-const weatherDescription = computed(() => {
-  if (tmp.value !== null && pty.value !== null) {
-    // TMP 조건
-    let tmpDescription = '';
+const tmpDescription = computed(() => {
     if (tmp.value < 10) {
-      tmpDescription = '춥습니다!';
+      return '춥습니다!';
     } else if (tmp.value < 20) {
-      tmpDescription = '적당한 날씨입니다.';
+      return '적당한 날씨입니다.';
     } else {
-      tmpDescription = '덥습니다!';
+      return '덥습니다!';
     }
+  })
 
-    // PTY 조건
-    let ptyDescription = '';
-    switch (pty.value) {
-      case '1':
-        ptyDescription = '비가 오고 있습니다.';
-        break;
-      case '2':
-        ptyDescription = '비와 눈이 섞여 오고 있습니다.';
-        break;
-      case '3':
-        ptyDescription = '눈이 오고 있습니다.';
-        break;
-      case '4':
-        ptyDescription = '소나기가 오고 있습니다.';
-        break;
-      default:
-        ptyDescription = '강수가 없습니다.';
-    }
-
-    return `기온 : ${tmp.value}℃ ${tmpDescription} 강수 형태 : ${ptyDescription}`;
+  const ptyDescription = computed(() => {
+  switch (pty.value) {
+    case '1':
+      return '비가 오고 있습니다.';
+    case '2':
+      return '비와 눈이 섞여 오고 있습니다.';
+    case '3':
+      return '눈이 오고 있습니다.';
+    case '4':
+      return '소나기가 오고 있습니다.';
+    default:
+      return '강수가 없습니다.';
   }
-
-  return '';
 });
+
+
+ 
+
 </script>
 
 <style scoped>
@@ -211,18 +206,53 @@ const weatherDescription = computed(() => {
   font-weight: 100;
 }
 
-.right-bx{
-}
-
-.egg-weather-img {
+.egg-weather-front {
   position: relative;
   margin-top: 3vh;
   margin-left: 2vw;
 }
 
-.egg-weather-text {
-  position: absolute;
-  top: 33%;
-  left: 12%;
+.egg-weather-back {
+  position: relative;
+  margin-top: 3vh;
+  margin-left: 2vw;
 }
+
+.egg-weather-text{
+  position: absolute; 
+  top: 20vh; 
+  left: 10vw;
+  margin-top: 2vh;
+}
+
+#wrap{
+  perspective: 500px;
+  cursor: pointer;
+  position: relative;
+}
+
+#card{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: .5s;
+  transform-style: preserve-3d;
+}
+
+
+#front, #back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+#back{
+  transform: rotateY(180deg);
+}
+
+#wrap:hover #card{
+  transform: rotateY(180deg);
+}
+
 </style>
