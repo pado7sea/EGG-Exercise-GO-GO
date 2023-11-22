@@ -1,28 +1,38 @@
 <template>
-    <div>
+    <div class="container">
         <h4>게시글 작성</h4>
         <fieldset>
             <legend>등록</legend>
-            <div>
-                <label for="title">제목</label>
-                <input type="text" id="title" v-model="board.title">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label" for="title">제목</label>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" type="text" id="title" v-model="board.title">
+                </div>
             </div>
-            <div>
-                <label for="writer">닉네임</label>
-                <input type="text" id="writer" v-model="board.writer">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label" for="writer">닉네임</label>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" type="text" id="writer" v-model="board.writer">
+                </div>
             </div>
-            <div>
-                <label for="content">내용</label>
-                <textarea id="content" cols="30" rows="10" v-model="board.content"></textarea>
+            <div class="mb-3">
+                <!-- <label class="form-label" for="content">내용</label> -->
+                <textarea class="form-control" id="content" cols="30" rows="10" v-model="board.content" placeholder="내용을 입력해주세요."></textarea>
             </div>
-            <div>
-                <input type="file" @change="imageUpload" ref="boardImage" id="photo" accept="image/*">이미지 등록
+            <div class="form-group">
+                <input class="form-control" type="file" @change="imageUpload" ref="boardImage" id="photo"
+                    accept="image/*">이미지 등록
                 <img :src="imageUploaded" alt="사용자가 업로드한 이미지">
             </div>
-            <div>
+            <div class="form-group">
                 <button @click="createBoard" class="button button--winona button--border-thin button--round-s"
                     data-text="Create New"><span>글 등록</span></button>
             </div>
+            <!-- <b-button variant="outline-primary">Button</b-button> -->
         </fieldset>
     </div>
 </template>
@@ -49,7 +59,7 @@ const imageUpload = function () {
     file.value = photo.files[0];
     const image = file.value
     console.log(file.value)
-    imageUploaded.value=URL.createObjectURL(image)
+    imageUploaded.value = URL.createObjectURL(image)
 }
 // const getFile = function() {
 //     const image = file.value;
@@ -76,7 +86,7 @@ const createBoard = async () => {
         // useUserStore.updateUserEggCount(1);
         alert('생성 완료')
         console.log(response.data)
-        router.push({name: 'boardList'})
+        router.push({ name: 'boardList' })
     } catch (error) {
         console.error(error);
     }
@@ -86,6 +96,7 @@ const createBoard = async () => {
 </script>
 
 <style scoped>
+
 *,
 *:after,
 *:before {

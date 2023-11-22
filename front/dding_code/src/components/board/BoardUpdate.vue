@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h4>게시글 수정</h4>
         <fieldset>
             <legend>등록</legend>
@@ -31,4 +31,10 @@ const updateBoard = function () {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.container{
+    
+}
+
+
+</style>
