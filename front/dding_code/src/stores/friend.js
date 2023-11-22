@@ -32,5 +32,25 @@ export const useFriendStore = defineStore("friend", () => {
     }
   };
 
-  return { friendList, getFriendList, getfrienduser, getFuser };
+  // 친구 추가 
+
+  const addFriend = function (friend) {
+    axios.post(`${REST_FRIEND_API}/insert`, friend.value)
+    .then(() => {
+      router.push({name: 'friend'})
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
+  // 친구 삭제 
+   const deleteFriend = function() {
+    axios.delete(`${REST_FRIEND_API}/${user_id}/${friend_id}`)
+    .then(() => {
+      router.push({name: 'friend'})
+    })
+   }
+
+  return { friendList, getFriendList, getfrienduser, getFuser, deleteFriend, addFriend };
 });

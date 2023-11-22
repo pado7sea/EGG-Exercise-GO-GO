@@ -1,100 +1,78 @@
 <template>
     <div class="friend-container">
-        <div class="friend-user">
-            <div>
-                <img src="@/assets/user-chick.png" style="width: 136px; height: 116px; padding-top: 20px;">
-            </div>
-            <div class="friend-user-description">
-                <span class= "user-info">{{ store.LoginUser.name }} </span>님의 
-                <div>
-                    현재 알 개수는 <span class="user-info"> {{ store.LoginUser.egg_count }}</span>개 입니다.
+        <Mypage />
+        <div style="padding-left: 20px;">친구</div>
+        <div>
+            <FriendSearchInput />
+        </div>
+        <div>
+            <FriendDetail />
+        </div>
+        <hr>
+        <div class="user-grid-container">
+            <div class="user-card" v-for="user in store.userList" :key="user.id">
+                <div v-if="store.LoginUser.id">
+                    <div class="user-img">
+                        <img src="@/assets/병아리.png">
+                    </div>
+                    <div class="user-description">
+                        <div class="user-itw">
+                            <div class="user-id">
+                                {{ user.id }}
+                            </div>
+                            <div class="user-tw" style="padding-top: 3px; padding-bottom: 3px;">
+                                <div style="font-weight: bold;">{{ user.name }}
+                                </div>
+                            </div>
+                            <div>
+                                <button @click="addFriend(user.id)">친구추가</button>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="friend-list-header">
-            <div style="padding-left: 20px;">친구</div>
-            <div class="friend-list-header-d">
-                <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
-                <div class="friend-list-header-d-d">아이디</div>
-                <div class="friend-list-header-d-d">이름</div>
-                <div class="friend-list-header-d-d">현재 계란 개수</div>
-            </div>
-        </div>
-        <div class="friend-list-container">
-            <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
-                <div>
-                    <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
-                </div>
-                <div>
-                    {{ friendId }}
-                </div>
-                <!-- 추출된 friendId 출력 -->
-                <div>
-                    <!-- 친구의 정보를 가져와서 표시 -->
-                    {{ friendInfo[index].name }}
-                </div>
-                <div>
-                    {{ friendInfo[index].egg_count }}
-                </div>
-            </div>
-        </div>
+        <RouterView />
     </div>
 </template>
   
 <script setup>
 // import friendDetail from '../components/friend/friendDetail.vue';
+import Mypage from '@/components/friend/Mypage.vue';
 import { useUserStore } from '@/stores/user';
-import { useFriendStore } from '@/stores/friend';
-import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted, computed } from 'vue'
+
+import { onMounted, ref } from 'vue';
 import axios from 'axios'
+import FriendSearchInput from '@/components/friend/FriendSearchInput.vue';
+import FriendDetail from '../components/friend/friendDetail.vue';
+import { useFriendStore } from '../stores/friend';
 
 const store = useUserStore()
 const Fstore = useFriendStore()
-const route = useRoute()
-const router = useRouter()
+const friend = ref({
+    friend_id: '',
+    user_id: store.LoginUser.id
+})
 
-// 추출된 friend_id 목록을 계산하는 computed property
-const extractedFriendIds = computed(() => {
-    console.log(Fstore.friendList)
-    return Fstore.friendList.map(friend => friend.friend_id);
-});
-
-
-// //   // 각 친구의 이름을 가져오는 함수
-//   const getFriendName = (friendId) => {
-
-//     // const friend = Fstore.friendList.find(friend => friend.friend_id === friendId);
-//     console.log(Fstore.getfrienduser(friendId) )
-//     console.log(Fstore.getFuser)
-
-//     return Fstore.getFuser ? Fstore.getFuser.name : '이름 없음';
-//   };
-
-//   onMounted(() => {
-//     store.getUser(route.params.id)
-//     Fstore.getFriendList(store.LoginUser.id)
-//   });
-
-// 각 친구의 이름을 가져오는 함수
-const getFriendInfo = async (friendId) => {
+const addFriend = async (userId) => {
     try {
-        await Fstore.getfrienduser(friendId);
-        console.log(Fstore.getFuser);
-        return Fstore.getFuser;
+        friend.value.friend_id = userId; // Set friend_id to userId
+        const response = await axios.post('http://localhost:8080/friendapi/insert', friend.value);
+        alert('친구 추가 완료');
+        console.log(response.data);
     } catch (error) {
-        console.error('친구 정보 가져오기 실패', error);
-        return '이름 없음';
+        console.log(error);
     }
 }
+onMounted(() => {
+    store.getUserList()
+})
 
-const friendInfo = ref({})
 
-onMounted(async () => {
-    store.getUser(route.params.id)
-    await Fstore.getFriendList(store.LoginUser.id);
-    friendInfo.value = await Promise.all(extractedFriendIds.value.map(getFriendInfo));
-});
+
 
 </script>
   
@@ -106,51 +84,13 @@ onMounted(async () => {
     margin: 5vh 30vw;
 }
 
-.friend-user {
-    display: flex;
-    justify-content: space-around;
-    justify-items: center;
-    padding-left: 3vw;
-    padding-right: 3vw;
-
-}
-
-.user-info{
-    font-size: x-large;
-    font-weight: 200;
-    text-align: center;
-    
-}
-
 .friend-user-description {
     float: left;
-    padding-top: 2vh;
+    padding-top: 6vh;
 }
 
 .friend-icon {
     width: 71px;
     height: 67px;
 }
-
-.friend-list-header{
-    display: flex;
-    flex-direction: column;
-    grid-template-rows: repeat(4, 1fr);
-}
-
-.friend-list-header-d{
-    display: flex;
-    justify-content: space-around;
-}
-
-.friend-list-header-d-d{
-    display: flex;
-}
-
-.friend-detail {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 10px;
-}
 </style>
-  
