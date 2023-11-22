@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', () => {
       });
 
       // 회원가입 성공 처리
-      router.push({ name: 'home' });
+      router.push({ name: 'login' });
     } catch (error) {
       console.error('회원가입 중 오류 발생', error);
     }
