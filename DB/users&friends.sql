@@ -4,7 +4,7 @@ USE `egg`;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(40) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `name` varchar(40) NOT NULL,
   `birthday` varchar(40) NOT NULL,
   `egg_count` int,
