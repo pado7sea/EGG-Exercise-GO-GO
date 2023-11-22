@@ -55,6 +55,13 @@
 			<artifactId>springfox-boot-starter</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+<<<<<<< HEAD
+		<!-- JWT -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+=======
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 
 		<dependency>
@@ -65,6 +72,7 @@
 
 			<version>1.4</version>
 
+>>>>>>> 8c67857942f2c1e476858cacbe6f098bc9ed3321
 		</dependency>
 	</dependencies>
 
