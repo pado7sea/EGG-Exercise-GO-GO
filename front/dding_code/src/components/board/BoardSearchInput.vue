@@ -4,7 +4,7 @@
             <label class="search-standard">검색 기준 </label>
             <select v-model="searchInfo.key" name="standard" class="search-standard-s">
                 <option value='none'>없음</option>
-                <option value="writer">글쓰니</option>
+                <option value="writer">닉네임</option>
                 <option value="title">제목</option>
                 <option value="content">내용</option>
             </select>
@@ -17,7 +17,7 @@
             <label>정렬 기준 </label>
             <select v-model="searchInfo.orderBy" class="search-standard-s">
                 <option value='none'>없음</option>
-                <option value="writer">글쓰니</option>
+                <option value="writer">닉네임</option>
                 <option value="title">제목</option>
                 <option value="view_cnt">조회수</option>
             </select>

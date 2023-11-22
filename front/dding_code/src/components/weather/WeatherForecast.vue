@@ -28,10 +28,10 @@
       </div>
 
     </div>
-    <div v-if="tmp < 10 || pty != 0 || tmp > 30">
+    <div v-if="tmp < 10 || pty != 0 || tmp > 30" class="right-bx">
       <Indoor />
     </div>
-    <div v-else-if="tmp >= 10 && pty == 0 && tmp <= 30">
+    <div v-else-if="tmp >= 10 && pty == 0 && tmp <= 30" class="right-bx">
       <Outdoor/>
     </div>
   </div>
@@ -196,19 +196,22 @@ const weatherDescription = computed(() => {
 
 <style scoped>
 .home-container {
-  margin: 0 10vw;
+  margin-top: 10vh;
+  display: flex;
+  justify-content: space-around;
 }
 
 .weather-container {
-  margin-top: 20vh;
   margin-left: 5vw;
 }
 
 .weather-container-top {
-  margin-top: 10vh;
   margin-left: 5vw;
   font-size: x-large;
   font-weight: 100;
+}
+
+.right-bx{
 }
 
 .egg-weather-img {

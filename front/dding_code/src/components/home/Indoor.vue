@@ -9,32 +9,29 @@
                     <div class="whitebox">
                         <!-- <div class="address">주소</div> -->
                         <!-- <div class="map"></div> -->
-                        <Carousel class="map"/>
+                        <IndoorCarousel class="map"/>
                     </div>
                     <div class="contentmore">
                         <div class="whitecircle">
-                            <div class="more">더 많은 장소 알아보기</div>
+                            <div class="more">
+                                <a href="/kakao" style="text-decoration: none; color: black;">더 많은 장소 알아보기</a></div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
 </template>
 
 <script>
-import Carousel from './Carousel.vue';
+
+import IndoorCarousel from './IndoorCarousel.vue';
 
 export default {
   components: {
-    Carousel,
-  }
+    
+    IndoorCarousel
+}
 }
 
 </script>
@@ -46,18 +43,15 @@ div{
 }
    
 .container {
-    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 7vh;
+    margin-right: 5vw;
 }
 
 .backbox {
-    width: 1167px;
-    height: 599px;
     flex-shrink: 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
 
 }
@@ -65,14 +59,11 @@ div{
 .leftbox {
     display: flex;
     flex-direction: column;
-
     margin-left: 5%;
     margin-bottom: 5%;
 }
 
 .hibox {
-    width: 299px;
-    height: 63px;
     flex-shrink: 0;
 
     display: flex;
@@ -181,8 +172,7 @@ div{
     height: 358px;
     flex-shrink: 0;
     border-radius: 20px;
-    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
-
+    background: url(<path-to-image>), #fefefe 50% / cover no-repeat;
 
 }
 
@@ -200,11 +190,11 @@ div{
     border-radius: 20px;
     background: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
-
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 3% 0;
+    text-decoration: none;
 }
 
 
