@@ -9,6 +9,10 @@
           <input v-model="user.id" type="text" name="id" placeholder="아이디">
           <input v-model="user.password" type="password" placeholder="비밀번호">
         </form>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="rememeber-me">
+            <label for="remember-me" class="form-check-label">자동로그인</label>
+        </div>
         <button @click="loginUser">Login</button>
         <div class="description">
           아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>

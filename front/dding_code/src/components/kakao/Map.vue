@@ -3,51 +3,81 @@
   <div>
     <div id="map"></div>
     <div>
-      <SearchInput @search="searchPlaces" v-model="searchKeyword" />
-      <SearchResults :places="paginatedPlaces" @selectPlace="selectPlace" />
-      <Path :customKey="generateCustomKey(index)" :origin="currentLocation" :destinations="placeCoordinates" @updateRoutes="updateRoutes" />
-      <RouteInfo v-if="mapRoutes && mapRoutes.length > 0" :routes="mapRoutes" />
-      <Pagination :currentPage="currentPage" :totalPage="totalPage" @gotoPage="gotoPage" />
+      <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요">
+      <button @click="searchPlaces">검색</button>
     </div>
+
+    <!-- 검색 결과 목록과 경로 정보 표시 -->
+    <div>
+      <!-- 검색 결과 목록 -->
+      <div id="placesList">
+        <div v-for="(place, index) in paginatedPlaces" :key="index" class="place-item" @click="selectPlace(place)">
+          <span class="markerbg marker_{{ (currentPage - 1) * pageSize + index + 1 }}"></span>
+          <div class="info">
+            <h5>{{ place.place_name }}</h5>
+            <span>{{ place.address_name }}</span>
+            <span class="tel">{{ place.phone }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Path 컴포넌트 추가 -->
+      <!-- :origin과 :destinations를 currentLocation과 placeCoordinates로 전달 -->
+      <Path :customKey="generateCustomKey(index)" :origin="currentLocation" :destinations="placeCoordinates"
+        @updateRoutes="updateRoutes" />
+
+      <!-- 경로 정보 표시 -->
+      <div v-if="mapRoutes && mapRoutes.length > 0">
+        <h2>경로 정보</h2>
+        <ul>
+          <li v-for="(route, index) in mapRoutes" :key="index">
+            <strong>목적지 {{ index + 1 }}:</strong>
+            <p>거리: {{ route.summary.distance }} 미터</p>
+            <p>소요 시간: {{ route.summary.duration }} 초</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <!-- 페이지 번호를 표시할 엘리먼트 -->
+    <div v-if="pagination.length > 0" id="pagination" class="pagination">
+      <span @click="gotoPage(1)" :class="{ 'disabled': currentPage === 1 }">&lt;&lt;</span>
+      <span @click="gotoPage(currentPage - 1)" :class="{ 'disabled': currentPage === 1 }">&lt;</span>
+      <span v-for="page in pagination" :key="page" @click="gotoPage(page)" :class="{ 'active': page === currentPage }">{{
+        page }}</span>
+      <span @click="gotoPage(currentPage + 1)" :class="{ 'disabled': currentPage === totalPage }">&gt;</span>
+      <span @click="gotoPage(totalPage)" :class="{ 'disabled': currentPage === totalPage }">&gt;&gt;</span>
+    </div>
+
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import SearchInput from './SearchInput.vue';
-import SearchResults from './SearchResults.vue';
 import Path from './Path.vue';
-import RouteInfo from './RouteInfo.vue';
-import Pagination from './Pagination.vue';
-
-const searchKeyword = ref('');
-const currentPage = ref(1);
-const totalPage = ref(0);
-const paginatedPlaces = ref([]);
-const mapRoutes = ref([]);
-const currentLocation = ref({ /* current location data */ });
-const placeCoordinates = ref([]); 
-
 
 let map = null;
 let infowindow = null;
 let ps = null;
-
-
+const searchKeyword = ref('');
+const searchResults = ref([]);
 let markers = [];
 let currentLocationMarker = null;
 const places = ref([]);
 
-
+const currentPage = ref(1);
 const pageSize = 3; // 페이지당 표시할 결과 수
 const totalPlaces = ref(0);
 const pagination = ref([]);
-// const totalPage = computed(() => Math.ceil(totalPlaces.value / pageSize)); // 전체 페이지 수 계산
-// const paginatedPlaces = computed(() => {
-//   const startIndex = (currentPage.value - 1) * pageSize;
-//   const endIndex = startIndex + pageSize;
-//   return places.value.slice(startIndex, endIndex);
-// });
+const totalPage = computed(() => Math.ceil(totalPlaces.value / pageSize)); // 전체 페이지 수 계산
+const paginatedPlaces = computed(() => {
+  const startIndex = (currentPage.value - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  return places.value.slice(startIndex, endIndex);
+});
 
 const generateCustomKey = (index) => `destination_${index + 1}_${Date.now()}`;
 const combinedList = computed(() => {
@@ -72,12 +102,12 @@ const combinedList = computed(() => {
   return list;
 });
 
-// //Path.vue로 보내는 데이터들
-// const currentLocation = ref(null); // 현재 위치 좌표
-// const placeCoordinates = ref([]); // 장소 리스트 좌표
+//Path.vue로 보내는 데이터들
+const currentLocation = ref(null); // 현재 위치 좌표
+const placeCoordinates = ref([]); // 장소 리스트 좌표
 
 // Path.vue로부터 받은 경로 데이터
-// let mapRoutes = [];
+let mapRoutes = [];
 
 const initMap = () => {
   const container = document.getElementById('map');
