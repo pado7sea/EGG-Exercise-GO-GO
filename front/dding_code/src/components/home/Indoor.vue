@@ -1,19 +1,6 @@
 <template>
     <div class="container">
         <div class="backbox">
-            <div class="leftbox">
-                <div class="hibox">
-                    <div class="hi">안녕하세요, 서윤님</div>
-                    <div class="hi">실내 운동하기 좋은 날씨입니다.</div>
-                </div>
-                <div class="temperbox">
-                    <div>
-                        <div>현재기온</div>
-                        <div>-5도</div>
-                    </div>
-                </div>
-
-            </div>
             <div class="rightbox">
                 <div class="title">
                     <div class="안내문구">현재 위치와 가까운 실내운동하기 좋은 장소들을 알려드려요!</div>

@@ -1,16 +1,38 @@
 <template>
-  <div>
-    <h4>오늘의 날씨</h4>
-    <div>기온 : {{ tmp }}℃</div>
-    <div>하늘상태 : {{ sky }}</div>
-    <div>강수형태 : {{ pty }}</div>
-    <div>강수확률 : {{ pop }}%</div>
+  <div class="home-container">
+    <div class="weather-container">
+      <div class="weather-container-top">
+        <div>
+          안녕하세요, <span class="user-name" style="font-size: xx-large;">{{ store.LoginUser.name }}</span> 님 !
+        </div>
+        <div v-if="tmp < 10 || pty != 0 || tmp > 30">
+          실내운동하기 좋은 날씨입니다!
+        </div>
+        <div v-else-if="tmp >= 10 && pty == 0 && tmp <= 30">
+          실외운동하기 좋은 날씨입니다!
+        </div>
+      </div>
+      <div class="egg-weather">
+        <div class="egg-weather-img">
+          <img src="@/assets/weatheregg.png" alt="날씨 알려주는 게란">
+          <div class="egg-weather-text">
+            <div class="egg-weather-tmp">
+              <div v-if="sky_real == 1 && pty_real == 0"><img src="@/assets/sun.png"></div>
+              <div style="font-size: xx-large;">{{ tmp }}℃</div>
+            </div>
+            <div>하늘상태 : {{ sky }}</div>
+            <div>강수형태 : {{ pty }}</div>
+            <div>강수확률 : {{ pop }}%</div>
+          </div>
+        </div>
+      </div>
 
+    </div>
     <div v-if="tmp < 10 || pty != 0 || tmp > 30">
-      실내운동하기 좋은 날씨입니다!
+      <Indoor />
     </div>
     <div v-else-if="tmp >= 10 && pty == 0 && tmp <= 30">
-      실외운동하기 좋은 날씨입니다!
+      <Outdoor/>
     </div>
   </div>
 </template>
@@ -18,11 +40,19 @@
 <script setup>
 import { onMounted, ref, computed } from "vue";
 import axios from "axios";
+import { useUserStore } from "../../stores/user";
+import Indoor from '@/components/home/Indoor.vue'
+import Outdoor from '@/components/home/Outdoor.vue'
+const store = useUserStore()
 const tmp_real = ref(0);
 const tmp = ref(null);
 const sky = ref(null);
 const pty = ref(null);
 const pop = ref(0);
+
+const sky_real = ref(0);
+const pty_real = ref(0);
+
 onMounted(() => {
   const API_URL = `http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst`;
   const today = new Date();
@@ -82,7 +112,7 @@ onMounted(() => {
       return response.data.response.body.items.item;
     })
     .then((response) => {
-       
+
       //TMP : 1시간 기온 ℃
       //UUU : 풍속(동서) m/s
       //VVV : 풍속(남북) m/s
@@ -101,7 +131,7 @@ onMounted(() => {
         if (item.category === "TMP") {
           tmp.value = item.fcstValue;
           tmp.real = tmp.value + 0
-          console.log(tmp.real)
+
         } else if (item.category === "SKY") {
           switch (item.fcstValue) {
             case "1":
@@ -123,6 +153,8 @@ onMounted(() => {
     });
 
 });
+
+
 
 const weatherDescription = computed(() => {
   if (tmp.value !== null && pty.value !== null) {
@@ -162,4 +194,32 @@ const weatherDescription = computed(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.home-container {
+  margin: 0 10vw;
+}
+
+.weather-container {
+  margin-top: 20vh;
+  margin-left: 5vw;
+}
+
+.weather-container-top {
+  margin-top: 10vh;
+  margin-left: 5vw;
+  font-size: x-large;
+  font-weight: 100;
+}
+
+.egg-weather-img {
+  position: relative;
+  margin-top: 3vh;
+  margin-left: 2vw;
+}
+
+.egg-weather-text {
+  position: absolute;
+  top: 33%;
+  left: 12%;
+}
+</style>
