@@ -317,7 +317,7 @@ const updateRoutes = (routes) => {
   displayMapPolyline(routes);
 
   // 경로 정보를 전역 변수에 할당
-  mapRoutes = routes.value.routes;
+  mapRoutes.value = routes.value.routes;
 };
 
 // 기존에 표시된 Polyline을 제거하는 함수
