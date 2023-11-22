@@ -1,25 +1,26 @@
 <template>
     <div class="login-whole-container">
-      <div class="login-img-container">
-        <img src="@/assets/free-animated-icon-chick-12277910.gif" alt="병아리">
-      </div>
-    <div class="login-input-container">
-      <div class="inpt">
-        <form>
-          <input v-model="user.id" type="text" name="id" placeholder="아이디">
-          <input v-model="user.password" type="password" placeholder="비밀번호">
-        </form>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" name="rememeber-me">
-            <label for="remember-me" class="form-check-label">자동로그인</label>
+
+        <div class="login-img-container">
+            <img src="@/assets/free-animated-icon-chick-12277910.gif" alt="병아리">
         </div>
-        <button @click="loginUser">Login</button>
-        <div class="description">
-          아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>
+        <div class="login-input-container">
+            <div class="inpt">
+                <form @submit.prevent>
+                    <input v-model.trim="user.id" type="text" name="id" placeholder="아이디">
+                    <div class="password-input">
+                        <input v-model.trim="user.password" :type="showPassword ? 'text' : 'password'" placeholder="비밀번호">
+                        <span class="show-password" @click="togglePasswordVisibility">{{ showPassword ? '숨기기' : '보이기' }}</span>
+                    </div>
+                </form>
+                <button @click="loginUser">Login</button>
+                <div class="description">
+                    아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>
+                </div>
+            </div>
+
         </div>
-      </div>
     </div>
-  </div>
 </template>
   
 <script setup>
@@ -34,6 +35,11 @@ const user = ref({
     id: '',
     password: ''
 })
+
+const showPassword = ref(false)
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value
+}
 
 const loginUser = () => {
     console.log('로그인 버튼 클릭됨');
@@ -91,6 +97,18 @@ img {
     justify-content: center;
     align-items: center;
     margin-top: 7vh;
+}
+
+.password-input {
+  position: relative;
+}
+
+.show-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 form {

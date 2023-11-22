@@ -28,7 +28,7 @@ export default {
     return {
       carouselItems: [
         { type: 'video', content: 'https://www.youtube.com/embed/kETh8T3it4k?si=p6ltz1G2TO4QL4lJ' },
-        { type: 'map', content: Map },
+        { type: 'map', content: MapSlide },
         // Add more carousel items as needed
       ],
       index: 0,

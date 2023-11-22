@@ -73,7 +73,7 @@ const createBoard = async () => {
 
         const response = await axios.post('http://localhost:8080/api/board', formData, config)
         // 인증하면 달걀 개수 하나 추가염
-        useUserStore.updateUserEggCount(1);
+        // useUserStore.updateUserEggCount(1);
         alert('생성 완료')
         console.log(response.data)
         router.push({name: 'boardList'})

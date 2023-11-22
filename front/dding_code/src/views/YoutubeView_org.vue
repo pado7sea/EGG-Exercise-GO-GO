@@ -23,6 +23,8 @@
         </div>
         <div class="rightbox">
           <YoutubeVideoDetail />
+
+
         </div>
       </div>
     </div>
@@ -41,7 +43,7 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 10vh;
 }
 
 .backbox {
@@ -98,6 +100,7 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
 .content {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin: 5%;
 }
 
@@ -140,4 +143,17 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
   margin-right: 5%;
 }
 
+.rightbox {
+  width: 693px;
+  height: 599px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #FFFCF0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 5%;
+  margin-bottom: 5%;
+}
 </style>
