@@ -89,5 +89,9 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { signupUser, loginUser, logoutUser, LoginUser, getUser, getUserList, searchUserList, userList}
+  const updateUserEggCount = (count) => {
+    LoginUser.egg_count += count;
+  }
+
+  return { signupUser, loginUser, logoutUser, LoginUser, getUser, getUserList, searchUserList, userList, updateUserEggCount }
 })
