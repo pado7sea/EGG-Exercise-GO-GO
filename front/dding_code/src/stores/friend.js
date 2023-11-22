@@ -53,4 +53,4 @@ export const useFriendStore = defineStore("friend", () => {
    }
 
   return { friendList, getFriendList, getfrienduser, getFuser, deleteFriend, addFriend };
-});
+}, { persist: true });

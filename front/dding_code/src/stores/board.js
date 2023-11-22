@@ -10,8 +10,8 @@ export const useBoardStore = defineStore('board', () => {
   const getBoardList = function () {
     axios.get(REST_BOARD_API)
       .then((response) => {
-      boardList.value = response.data
-      console.log(boardList.value)
+        boardList.value = response.data
+        console.log(boardList.value)
       })
   }
 
@@ -20,8 +20,8 @@ export const useBoardStore = defineStore('board', () => {
   const getBoard = function (id) {
     axios.get(`${REST_BOARD_API}/${id}`)
       .then((response) => {
-      board.value = response.data
-    })
+        board.value = response.data
+      })
   }
 
   //게시글 등록
@@ -39,18 +39,18 @@ export const useBoardStore = defineStore('board', () => {
       .then(() => {
         //response 응답으로 들어온 게시글의 id를 이용해서
         //상세보기로 바로 점프도 가넝이야~~
-        router.push({ name: 'boardList'})
+        router.push({ name: 'boardList' })
       })
       .catch((err) => {
-      console.log(err)
-    })
+        console.log(err)
+      })
   }
 
   const updateBoard = function () {
     axios.put(REST_BOARD_API, board.value)
       .then(() => {
-      router.push({name: 'boardList'})
-    })
+        router.push({ name: 'boardList' })
+      })
   }
 
   const searchBoardList = function (searchCondition) {
@@ -59,9 +59,9 @@ export const useBoardStore = defineStore('board', () => {
     })
       .then((res) => {
         boardList.value = res.data
-    })
+      })
   }
 
 
-  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard,searchBoardList }
-})
+  return { boardList, getBoardList, board, getBoard, createBoard, updateBoard, searchBoardList }
+}, { persist: true })
