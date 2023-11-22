@@ -26,12 +26,15 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 import { useUserStore } from '../../stores/user';
 const store = useUserStore()
+const router = useRouter()
 const confirmLogout = () => {
   if (confirm('정말 로그아웃 하시겠습니까?')) {
     store.logoutUser();
     console.log("로그아웃 완료");
+    router.go(0)
   }
 }
 

@@ -36,24 +36,24 @@ export const useUserStore = defineStore('user', () => {
     // 비밀번호 해싱
     const hashedPassword = await hashPassword(user.password);
 
-      const response = await axios.post(`${REST_USER_API}/login`, {
-        ...user,
-        password: hashedPassword,
-      }).then((res)=>{
-        sessionStorage.setItem('access-token', res.data["access-token"]);
-        const token = res.data['access-token'].split('.');
-        let id = token[1];
-        id = atob(id);
-        id = JSON.parse(id);
-        console.log(id['id']);
-        loggedInUserId.value = res.data.user['id'];
-        LoginUser.value.id =  res.data.user['id'];
-        LoginUser.value.name =  res.data.user['name'];
-        router.push({ name: 'home' });
-      }).catch((error)=>{
-        console.log('잘못된 로그인 정보입니다.');
-      });
-    }
+    const response = await axios.post(`${REST_USER_API}/login`, {
+      ...user,
+      password: hashedPassword,
+    }).then((res) => {
+      sessionStorage.setItem('access-token', res.data["access-token"]);
+      const token = res.data['access-token'].split('.');
+      let id = token[1];
+      id = atob(id);
+      id = JSON.parse(id);
+      console.log(id['id']);
+      loggedInUserId.value = res.data.user['id'];
+      LoginUser.value.id = res.data.user['id'];
+      LoginUser.value.name = res.data.user['name'];
+      router.push({ name: 'home' });
+    }).catch((error) => {
+      console.log('잘못된 로그인 정보입니다.');
+    });
+  }
   const getUser = async function () {
     if (!loggedInUserId.value) {
       console.error('로그인한 사용자의 ID가 없습니다.');
@@ -94,4 +94,4 @@ export const useUserStore = defineStore('user', () => {
   };
 
   return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword };
-});
+}, { persist: true });
