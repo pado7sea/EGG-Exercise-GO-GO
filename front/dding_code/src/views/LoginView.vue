@@ -6,13 +6,14 @@
         </div>
         <div class="login-input-container">
             <div class="inpt">
-                <form @submit.prevent>
                     <input v-model.trim="user.id" type="text" name="id" placeholder="아이디">
                     <div class="password-input">
                         <input v-model.trim="user.password" :type="showPassword ? 'text' : 'password'" placeholder="비밀번호">
-                        <span class="show-password" @click="togglePasswordVisibility">{{ showPassword ? '숨기기' : '보이기' }}</span>
+                        <span class="show-password" @click="togglePasswordVisibility">
+                            <div v-if="showPassword" class="close-eye"></div>
+                            <div v-else class="open-eye"></div>
+                        </span>
                     </div>
-                </form>
                 <button @click="loginUser">Login</button>
                 <div class="description">
                     아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>
@@ -100,15 +101,17 @@ img {
 }
 
 .password-input {
-  position: relative;
+    position: relative;
+    width: 100%;
 }
 
 .show-password {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
 }
 
 form {
@@ -119,8 +122,6 @@ form {
     flex-direction: column;
     min-width: 300px;
     text-align: center;
-
-
 }
 
 .sign-up {
@@ -165,5 +166,27 @@ input::placeholder {
     font-weight: lighter;
     font-family: Poppins, 'Noto Sans KR', sans-serif;
 }
+
+.close-eye{
+    background: url("@/assets/감은눈.png");
+    background-size: cover;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+}
+.open-eye{
+    background: url("@/assets/뜬눈.png");
+    background-size: cover;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+}
+
 </style>
   
