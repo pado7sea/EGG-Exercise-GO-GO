@@ -25,7 +25,7 @@
 </template>
   
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useUserStore } from '@/stores/user' 
 
 const store = useUserStore()
@@ -37,14 +37,16 @@ const user = ref({
     password: '',
     passwordCheck: '',
     name: '',
-    birthday: `${year.value}-${month.value}-${day.value}`
+    birthday: ''
 })
 
 
 
 const signupUser = () => {
+    user.value.birthday = `${year.value}-${month.value}-${day.value}`
     store.signupUser(user.value)
 }
+
 </script>
   
 <style scoped>

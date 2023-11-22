@@ -17,6 +17,7 @@
   <script>
   import MapSlide from './MapSlide.vue';
   import VideoSlide from './VideoSlide.vue';
+  import Map from '@/components/kakao/Map.vue';
   
   export default {
     components: {
@@ -27,7 +28,7 @@
       return {
         carouselItems: [
           { type: 'video', content: 'https://www.youtube.com/embed/kETh8T3it4k?si=p6ltz1G2TO4QL4lJ' },
-          { type: 'map', content: 'https://your-map-api-url' },
+          { type: 'map', content: Map },
           // Add more carousel items as needed
         ],
         index: 0,

@@ -8,7 +8,7 @@
                 <input type="text" id="title" v-model="board.title">
             </div>
             <div>
-                <label for="writer">글쓴이</label>
+                <label for="writer">닉네임</label>
                 <input type="text" id="writer" v-model="board.writer">
             </div>
             <div>
@@ -32,6 +32,7 @@ import { ref } from "vue";
 import axios from 'axios';
 import { useBoardStore } from "@/stores/board";
 import router from "@/router";
+import { useUserStore } from "../../stores/user";
 
 const store = useBoardStore()
 const board = ref({
@@ -71,6 +72,8 @@ const createBoard = async () => {
         }
 
         const response = await axios.post('http://localhost:8080/api/board', formData, config)
+        // 인증하면 달걀 개수 하나 추가염
+        useUserStore.updateUserEggCount(1);
         alert('생성 완료')
         console.log(response.data)
         router.push({name: 'boardList'})
