@@ -1,5 +1,6 @@
 <template>
     <div class="login-whole-container">
+
         <div class="login-img-container">
             <img src="@/assets/free-animated-icon-chick-12277910.gif" alt="병아리">
         </div>
@@ -17,6 +18,7 @@
                     아직 회원이 아니신가요? <a href="/sign">회원가입하기</a>
                 </div>
             </div>
+
         </div>
     </div>
 </template>

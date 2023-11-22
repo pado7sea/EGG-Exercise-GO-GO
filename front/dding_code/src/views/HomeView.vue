@@ -1,8 +1,18 @@
 <template>
     <div>
-        <WeatherForecast/>
-        <router-link to="/Indoor">로그인 후 실내운동</router-link>|
-        <router-link to="/outdoor">로그인 후 야외운동</router-link>
+        <div>
+            <WeatherForecast/>
+        </div>
+        <div>
+            <div>
+                <router-link to="/Indoor">로그인 후 실내운동</router-link>|
+            </div>
+            <div>
+
+            </div>
+            <router-link to="/outdoor">로그인 후 야외운동</router-link>
+        </div>
+
         <!-- <LoginView/> -->
         
     </div>

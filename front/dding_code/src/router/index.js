@@ -15,7 +15,8 @@ import FriendDetail from "@/components/friend/FriendDetail.vue";
 
 import Indoor from "@/components/home/Indoor.vue";
 import Outdoor from "@/components/home/Outdoor.vue";
-import Carousel from "@/components/home/Carousel.vue";
+import IndoorCarousel from "@/components/home/IndoorCarousel.vue";
+import OutdoorCarousel from "@/components/home/OutdoorCarousel.vue";
 import VideoSlide from "@/components/home/VideoSlide.vue";
 import MapSlide from "@/components/home/MapSlide.vue";
 
@@ -43,9 +44,14 @@ const router = createRouter({
       component: Outdoor,
     },
     {
-      path: "/carousel",
-      name: "carousel",
-      component: Carousel,
+      path: "/indoorcarousel",
+      name: "IndoorCarousel",
+      component: IndoorCarousel,
+    },
+    {
+      path: "/outdoorcarousel",
+      name: "outdoorCarousel",
+      component: OutdoorCarousel,
     },
     {
       path: "/videoslide",
