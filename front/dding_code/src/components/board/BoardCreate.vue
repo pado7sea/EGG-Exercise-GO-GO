@@ -1,39 +1,70 @@
 <template>
-    <div class="container">
-        <h4>게시글 작성</h4>
-        <fieldset>
-            <legend>등록</legend>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label class="col-form-label" for="title">제목</label>
-                </div>
-                <div class="col-auto">
-                    <input class="form-control" type="text" id="title" v-model="board.title">
+    <div class="board-create-container">
+        <div class="board-create-backbox">
+            <div class="bc-title">
+                <div class="bc-whitecircle">
+                    <div class="게시글작성">
+                        게시글 작성
+                    </div>
                 </div>
             </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label class="col-form-label" for="writer">닉네임</label>
-                </div>
-                <div class="col-auto">
-                    <input class="form-control" type="text" id="writer" v-model="board.writer">
-                </div>
+            <div class="bc-content">
+                <fieldset>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-md-auto">
+                                        <label class="col-form-label" for="title"
+                                            style="padding-left: 17px; margin-right: 8px;">제목</label>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <input class="form-control" type="text" id="title" v-model="board.title">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-md-auto">
+                                        <label class="col-form-label" for="writer" style="padding-left: 10px;">닉네임</label>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <input class="form-control" type="text" id="writer" v-model="board.writer">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="content" cols="30" rows="10" v-model="board.content"
+                                        placeholder="내용을 입력해주세요."></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input class="form-control" type="file" @change="imageUpload" ref="boardImage"
+                                        id="photo" accept="image/*">
+                                    <img v-if="imageUploaded && imageUploaded.length > 0" :src="imageUploaded"
+                                        alt="사용자가 업로드한 이미지">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="wrap">
+                                    <button @click="createBoard" class="button"><span>등록</span></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
             </div>
-            <div class="mb-3">
-                <!-- <label class="form-label" for="content">내용</label> -->
-                <textarea class="form-control" id="content" cols="30" rows="10" v-model="board.content" placeholder="내용을 입력해주세요."></textarea>
-            </div>
-            <div class="form-group">
-                <input class="form-control" type="file" @change="imageUpload" ref="boardImage" id="photo"
-                    accept="image/*">이미지 등록
-                <img :src="imageUploaded" alt="사용자가 업로드한 이미지">
-            </div>
-            <div class="form-group">
-                <button @click="createBoard" class="button button--winona button--border-thin button--round-s"
-                    data-text="Create New"><span>글 등록</span></button>
-            </div>
-            <!-- <b-button variant="outline-primary">Button</b-button> -->
-        </fieldset>
+        </div>
     </div>
 </template>
 
@@ -42,7 +73,7 @@ import { ref } from "vue";
 import axios from 'axios';
 import { useBoardStore } from "@/stores/board";
 import router from "@/router";
-import { useUserStore } from "../../stores/user";
+import { useUserStore } from "@/stores/user";
 
 const store = useBoardStore()
 const board = ref({
@@ -96,109 +127,120 @@ const createBoard = async () => {
 </script>
 
 <style scoped>
+.board-create-container {
+    margin: 0 10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
-*,
-*:after,
-*:before {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.board-create-backbox {
+    width: 100%;
+    background: #b1c7fc;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #E3EBFC;
+    /* 표 배경색 지정 */
+    border: 1px solid #b1c7fc;
+    /* 표 테두리 스타일 지정 */
+    border-radius: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 3px solid #b1c7fc;
+    /* 셀 사이의 경계선 스타일 지정 */
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+    /* 행에 마우스를 올렸을 때 배경색 지정 */
+
+}
+
+.bc-title {
+    /* margin: 0 10vw; */
+    /* flex-shrink: 0; */
+    background: #6572FC;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 1vh 1vw;
+    align-items: center;
+    margin: 2vh 2vw;
+}
+
+.bc-whitecircle {
+    /* background: #464F63;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 20px; */
+    display: flex;
+    justify-content: center;
+    padding: 0 10px 0 10px;
+    align-items: center;
+
+}
+
+.게시글작성 {
+    color: aliceblue;
+    /* font-family: Inter; */
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-shadow: 1px 1px 3px #fcc87e;
+}
+
+.bc-content {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    margin: 2vh 2vw;
+    /* background-color: rgba(255, 255, 255, 0.3);  */
+}
+
+/* 버튼 */
+.wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2vh 2vw;
 }
 
 .button {
-    float: left;
-    min-width: 150px;
-    max-width: 250px;
-    display: block;
-    margin: 1em;
-    padding: 1em 2em;
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: aliceblue;
     border: none;
-    background: none;
-    color: inherit;
-    vertical-align: middle;
-    position: relative;
-    z-index: 1;
-    -webkit-backface-visibility: hidden;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.button:focus {
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
     outline: none;
+    cursor: pointer;
 }
 
-.button>span {
-    vertical-align: middle;
-}
-
-.button--round-s {
-    border-radius: 5px;
-}
-
-.button--border-thin {
-    border: 1px solid;
-}
-
-.button--winona {
-    overflow: hidden;
-    padding: 0;
-    -webkit-transition: border-color 0.3s, background-color 0.3s;
-    transition: border-color 0.3s, background-color 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.button--winona::after {
-    content: attr(data-text);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    color: #3f51b5;
-    -webkit-transform: translate3d(0, 25%, 0);
-    transform: translate3d(0, 25%, 0);
-}
-
-.button--winona>span {
-    display: block;
-}
-
-.button--winona.button--inverted {
-    color: #7986cb;
-}
-
-.button--winona.button--inverted:after {
-    color: #fff;
-}
-
-.button--winona::after,
-.button--winona>span {
-    padding: 1em 2em;
-    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-    transition: transform 0.3s, opacity 0.3s;
-    -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.button--winona:hover {
-    border-color: #3f51b5;
-    background-color: rgba(63, 81, 181, 0.1);
-}
-
-.button--winona.button--inverted:hover {
-    border-color: #21333C;
-    background-color: #21333C;
-}
-
-.button--winona:hover::after {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.button--winona:hover>span {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -25%, 0);
-    transform: translate3d(0, -25%, 0);
+.button:hover {
+    color: aliceblue;
+    background-color: #6572FC;
+    box-shadow: 0px 15px 20px #464f63;
+    transform: translateY(-4px);
 }
 </style>

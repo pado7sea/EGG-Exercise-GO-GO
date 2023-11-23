@@ -1,15 +1,23 @@
 <template>
-    <div>
-        <h4>게시글 상세</h4>
-        <hr>
-        <div>{{ store.board.title }}</div>
-        <div>{{ store.board.writer }}</div>
-        <div>{{ store.board.regDate }}</div>
-        <div>{{ store.board.viewCnt }}</div>
-        <div>{{ store.board.content }}</div>
-        <img :src="`http://localhost:8080/upload/${store.board.img}`">
-        <button @click="deleteBoard">삭제</button>
-        <button @click="updateBoard">수정</button>
+    <div class="post-detail-container">
+        <div class="post-detail-backbox">
+        <div class="post-header">
+            <h4>{{ store.board.title }}</h4>
+            <div class="post-meta">
+                <span>{{ store.board.writer }}</span>
+                <span>{{ store.board.regDate }}</span>
+                <span>{{ store.board.viewCnt }} views</span>
+            </div>
+        </div>
+        <div class="post-content">
+            <div>{{ store.board.content }}</div>
+            <img :src="`http://localhost:8080/upload/${store.board.img}`">
+        </div>
+        <div class="post-actions">
+            <button @click="deleteBoard" class="action-button delete">삭제</button>
+            <button @click="updateBoard" class="action-button update">수정</button>
+        </div>
+        </div>
     </div>
 </template>
 
@@ -40,4 +48,94 @@ const updateBoard = function () {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.post-detail-container {
+    margin: 0 10vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.post-detail-backbox {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 2vh 2vw;
+    padding: 2vh 2vw;
+}
+
+.post-header {
+    margin-bottom: 20px;
+}
+
+.post-header h4 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.post-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.post-content {
+    margin-bottom: 20px;
+}
+
+.post-content img {
+    width: 100%;
+    max-height: 500px; /* Adjust the max-height as needed */
+    object-fit: contain;
+    padding: 2vh 2vw;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-button {
+    width: 80px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: aliceblue;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    cursor: pointer;
+}
+
+.action-button.delete {
+    background-color: #fc847e;
+}
+
+.action-button.update {
+    background-color: #7ea4fc;
+}
+
+.action-button.delete:hover {
+    color: aliceblue;
+    background-color: #fd5656;
+    box-shadow: 0px 5px 10px #635746;
+    transform: translateY(-4px);
+}
+
+.action-button:hover {
+    color: aliceblue;
+    background-color: #6572FC;
+    box-shadow: 0px 5px 10px #464f63;
+    transform: translateY(-4px);
+}
+</style>
