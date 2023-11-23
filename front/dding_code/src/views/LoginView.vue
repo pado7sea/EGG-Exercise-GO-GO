@@ -71,22 +71,36 @@ input {
 
 .login-img-container {
     display: flex;
-    width: 50%;
+    width: 30%;
     justify-content: center;
     margin-top: 3vh;
-    margin-left: 10vw;
+    margin-left: 13vw;
     border-radius: 50%;
+    overflow: hidden;
+  animation: zoomAnimation 1.2s infinite alternate; /* 3초 간격으로 반복되는 애니메이션 */
+}
+
+@keyframes zoomAnimation {
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(1.1);
+  }
 }
 
 img {
     min-width: 300px;
     border-radius: 50%;
+    transform: scale(1.0);
+    transition: transform 0.3s;
 }
 
 .login-input-container {
-    width: 50%;
+    /* width: 50%; */
     display: flex;
     text-align: center;
+    margin-right: 13vw;
 }
 
 .description {

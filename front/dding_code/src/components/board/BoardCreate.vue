@@ -31,7 +31,7 @@
                                         <label class="col-form-label" for="writer" style="padding-left: 10px;">닉네임</label>
                                     </div>
                                     <div class="col-md-auto">
-                                        <input class="form-control" type="text" id="writer" v-model="board.writer">
+                                        <div class="form-control" style="color: gray;">{{ userStore.LoginUser.name }}</div>
                                     </div>
                                 </div>
                             </td>
@@ -76,9 +76,10 @@ import router from "@/router";
 import { useUserStore } from "@/stores/user";
 
 const store = useBoardStore()
+const userStore = useUserStore()
 const board = ref({
     title: '',
-    writer: '',
+    writer: userStore.LoginUser.name,
     content: '',
 })
 
@@ -193,7 +194,6 @@ tr:hover {
 
 .게시글작성 {
     color: aliceblue;
-    /* font-family: Inter; */
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -221,7 +221,6 @@ tr:hover {
 .button {
     width: 140px;
     height: 45px;
-    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 2.5px;

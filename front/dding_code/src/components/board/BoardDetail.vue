@@ -101,7 +101,6 @@ const updateBoard = function () {
 .action-button {
     width: 80px;
     height: 45px;
-    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 2.5px;

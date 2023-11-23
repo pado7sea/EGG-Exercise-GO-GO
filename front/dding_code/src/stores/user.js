@@ -6,7 +6,7 @@ import { useRoute, useRouter } from 'vue-router'
 const REST_USER_API = `http://localhost:8080/userapi`
 
 export const useUserStore = defineStore('user', () => {
-  const LoginUser = ref({ id: '', password: '', name: '' });
+  const LoginUser = ref({ id: '', password: '', name: '', egg_count: 0});
   const loggedInUserId = ref(null); // 로그인한 사용자의 ID
 
   const router = useRouter();
@@ -49,6 +49,7 @@ export const useUserStore = defineStore('user', () => {
         loggedInUserId.value = res.data.user['id'];
         LoginUser.value.id =  res.data.user['id'];
         LoginUser.value.name =  res.data.user['name'];
+        LoginUser.value.egg_count = res.data.user['egg_count'];
         router.push({ name: 'home' });
       }).catch((error)=>{
         console.log('잘못된 로그인 정보입니다.');

@@ -1,7 +1,7 @@
 <template>
     <div class="sign-whole-container">
         <div class="sign-img-container">
-            <img src="@/assets/free-animated-icon-eggs-12316833.gif" alt="병아리">
+            <img src="@/assets/free-animated-icon-eggs-12316833.gif" alt="병아리" style="border-radius: 80%;">
         </div>
         <div class="sign-input-container">
             <div class="sign-inpt">
@@ -31,7 +31,7 @@
                 <div class="validation-message" v-if="(!user.value || !user.value.id || !user.value.name) && !isPasswordMatch">
                     *아이디, 비밀번호, 이름을 입력하세요.
                 </div>
-                <button :disabled="!isSignupEnabled" @click="signupUser">회원가입 하기</button>
+                <button :disabled="!isSignupEnabled" @click="signupUser" class="signup-button">회원가입 하기</button>
             </div>
         </div>
     </div>
@@ -140,6 +140,7 @@ input {
     justify-content: center;
     margin-top: 3vh;
     margin-left: 10vw;
+    border-radius: 50%;
 }
 
 img {
@@ -201,8 +202,8 @@ form {
     /*간격 벌려줄때 공식처럼 사용핟나 */
 }
 
-button {
-    min-width: 300px;
+.signup-button {
+    width: 100%;
     padding: 10px;
     margin: 8px 0;
     font-weight: lighter;

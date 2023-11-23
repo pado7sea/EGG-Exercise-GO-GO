@@ -99,7 +99,6 @@ import Map from './Map.vue';
 
 .카테고리안내문구 {
   color: #000;
-  font-family: Inter;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
