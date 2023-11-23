@@ -1,13 +1,12 @@
 <!-- Path.vue -->
 <template>
     <div>
-        <!-- 버튼 클릭 시 방향 요청 및 업데이트 -->
         <button @click="sendDirectionsRequest">Send Directions Request</button>
         <button @click="sendUpdatedRoutes">Send Updated Routes</button>
-        <div v-if="responseData">
+        <!-- <div v-if="responseData">
             <p>Response Data: {{ responseData }}</p>
             <div id="map"></div>
-        </div>
+        </div> -->
     </div>
 </template>
   
@@ -22,20 +21,20 @@ const emit = defineEmits();
 
 
 // Path.vue 내의 데이터
+const mapRoutes = ref(null);
 const responseData = ref(null);
 
 // API 요청 함수
 const sendDirectionsRequest = async () => {
     console.log('Origin:', props.origin);
     console.log('Destinations:', props.destinations);
-    const destinations = Array.isArray(props.destinations) ? props.destinations : [];
-
+    
     const data = {
         origin: {
             x: props.origin.La,
             y: props.origin.Ma
         },
-        destinations: destinations.map(destination => ({
+        destinations: props.destinations.map((destination, index) => ({
             ...destination,
             key: props.customKey,
         })),

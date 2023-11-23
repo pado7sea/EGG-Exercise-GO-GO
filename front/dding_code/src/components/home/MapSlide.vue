@@ -2,8 +2,7 @@
 <template>
   <div class="map-slide">
     <div>지도 콘텐츠</div>
-    <!-- 지도를 표시할 컨테이너 -->
-    <div id="map"></div>
+    <div ref="map" class="map"></div>
   </div>
 </template>
 
@@ -48,7 +47,6 @@ const initMap = () => {
   });
 };
 </script>
-
 
 <style scoped>
 .map-slide {
