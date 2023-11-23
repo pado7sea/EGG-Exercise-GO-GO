@@ -2,13 +2,19 @@
 <template>
   <div class="carousel-wrapper">
     <div class="button-class">
-      <button @click="prevSlide" class="prev" id="slide-button"><img src="@/assets/previous.png" style="width: 29px; height: 29px;"></button>
-      <button @click="nextSlide" class="next" id="slide-button"><img src="@/assets/next.png" style="width: 29px; height: 29px;"></button>
+      <button @click="prevSlide" class="prev" id="slide-button"><img src="@/assets/previous.png"
+          style="width: 29px; height: 29px;"></button>
+      <button @click="nextSlide" class="next" id="slide-button"><img src="@/assets/next.png"
+          style="width: 29px; height: 29px;"></button>
     </div>
     <div ref="carouselRef" class="carousel">
       <div v-for="(item, i) in carouselItems" :key="i" class="carousel-item">
-        <VideoSlide v-if="item.type === 'video'" :videoSource="item.content" />
-        <MapSlide v-if="item.type === 'map'" :mapSource="item.content" />
+        <div v-if="item.type === 'video'" class="slide-content">
+          <VideoSlide :videoSource="item.content" />
+        </div>
+        <div v-if="item.type === 'map'" class="slide-content">
+          <MapSlide :mapSource="item.content" />
+        </div>
       </div>
     </div>
   </div>
@@ -27,7 +33,7 @@ export default {
   data() {
     return {
       carouselItems: [
-        { type: 'video', content: 'https://www.youtube.com/embed/kETh8T3it4k?si=p6ltz1G2TO4QL4lJ' },
+        { type: 'video', content: VideoSlide },
         { type: 'map', content: MapSlide },
         // Add more carousel items as needed
       ],
@@ -69,14 +75,19 @@ export default {
   flex-shrink: 0;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  background-color: #fff;
+  /* flex-direction: column; */
+  /* background-color: #fff; */
+  margin-right: 0px;
+}
+
+.carousel-wrapper>.carousel>.carousel-item>div {
+  flex: 1;
 }
 
 .carousel-wrapper>.carousel>.carousel-item>video {
   width: 100%;
   height: auto;
-  
+
 }
 
 .carousel-wrapper>.carousel>.carousel-item>.text-content {
@@ -87,17 +98,19 @@ export default {
   align-items: center;
   font-size: 20px;
   font-weight: bold;
-  
+
 }
 
-#slide-button{
-  background-color:transparent;
+#slide-button {
+  background-color: transparent;
   border: 0px;
 }
 
-.button-class{
+.button-class {
   display: flex;
   padding-top: 5px;
   justify-content: space-between;
 }
+
+
 </style>
