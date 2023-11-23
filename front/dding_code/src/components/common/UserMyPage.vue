@@ -70,8 +70,8 @@ const logoutInBox = () => {
     display: flex;
     justify-content: space-around;
     justify-items: center;
-    padding-left: 3vw;
-    padding-right: 3vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
 
 }
 

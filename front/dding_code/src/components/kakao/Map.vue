@@ -2,10 +2,12 @@
 <template>
   <div>
     <div id="map"></div>
-    <div>
-      <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요">
-      <button @click="searchPlaces">검색</button>
-    </div>
+    <!-- <div class="map-search-container">
+      <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요" type="text" class="search-input">
+      <button @click="searchPlaces" class="map-search-button">
+        <img src="@/assets/돋보기.png" alt="Search Icon" style="width: 19px; height: 19ox;" />
+      </button>
+    </div> -->
 
     <!-- 검색 결과 목록과 경로 정보 표시 -->
     <div>
@@ -417,6 +419,7 @@ const searchPlacesByCategory = async (category) => {
 #map {
   width: 700px;
   height: 400px;
+  margin:  0 2vw;
 }
 
 input {
@@ -462,5 +465,37 @@ button {
 .pagination span.disabled {
   color: #ddd;
   cursor: not-allowed;
+}
+
+.map-search-container{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 2vw 2vh;
+}
+
+.search-input{
+  padding: 5px;
+  border: 1px sold #ccc;
+  border-radius: 20px;
+  flex: 1;
+}
+
+.search-input::placeholder{
+  padding: 7px;
+}
+
+.map-search-button{
+  padding: 10px 15px;
+  background-color: #FCF2E3;
+
+}
+.map-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  flex: 1;
+  text-align: center; /* 가운데 정렬을 위해 추가 */
 }
 </style>

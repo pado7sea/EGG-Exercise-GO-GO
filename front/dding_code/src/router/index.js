@@ -24,7 +24,8 @@ import OutdoorCarousel from "@/components/home/OutdoorCarousel.vue";
 import VideoSlide from "@/components/home/VideoSlide.vue";
 import MapSlide from "@/components/home/MapSlide.vue";
 
-import KakaoMap from "@/components/kakao/KakaoMap.vue";
+import OutdoorKakaoMap from "@/components/kakao/OutdoorKakaoMap.vue";
+import IndoorKakaoMap from "@/components/kakao/IndoorKakaoMap.vue"
 import Map from "@/components/kakao/Map.vue";
 import Path from "@/components/kakao/Path.vue";
 import StreetView from "@/components/kakao/StreetView.vue";
@@ -128,9 +129,14 @@ const router = createRouter({
       component: KakaoView,
     },
     {
-      path: "/kakaomap",
-      name: "kakaomap",
-      component: KakaoMap,
+      path: "/okakaomap",
+      name: "OutdoorKakaomap",
+      component: OutdoorKakaoMap,
+    },
+    {
+      path: "/ikakaomap",
+      name: "IndoorKakaomap",
+      component: IndoorKakaoMap,
     },
     
     {

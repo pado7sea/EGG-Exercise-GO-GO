@@ -23,6 +23,7 @@ import LoginView from './LoginView.vue';
 div{
     font-family: Poppins, 'Noto Sans KR', sans-serif;
     margin-bottom: 20px;
+    
 }
     
 </style>

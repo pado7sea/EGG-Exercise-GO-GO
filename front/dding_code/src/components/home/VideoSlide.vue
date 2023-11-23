@@ -13,9 +13,9 @@
             <button @click="searchWithHashtag('#맨몸운동')" class="you-hash-button">맨몸운동</button>
         </div>
 
-        <div v-if="hasSearchResults">
+        <div v-if="hasSearchResults" style="margin: 0 3vw;">
             <!-- 첫 번째 영상만 표시 -->
-            <iframe width="560" height="315" :src="firstVideoUrl" frameborder="0" allowfullscreen></iframe>
+            <iframe style="display: flex; justify-content: center; " width="560" height="405" :src="firstVideoUrl" frameborder="0" allowfullscreen></iframe>
         </div>
         <div>hasSearchResults: {{ hasSearchResults }}</div>
         <div>firstVideoUrl: {{ firstVideoUrl }}</div>
@@ -69,7 +69,7 @@ onBeforeMount(() => {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
@@ -92,7 +92,7 @@ onBeforeMount(() => {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 2vh 2vw;
+    margin: 0 3vw;
 }
 
 .youtube-input {
@@ -124,15 +124,16 @@ onBeforeMount(() => {
 .you-hash-button {
     background-color: #F8BD2A;
     width: 60px;
-    height: 60px;
+    height: 30px;
     border-radius: 5em;
     border-style: none;
     color: #151515;
-    font-weight: bold;
+    /* font-weight: bold; */
     box-shadow: inset 4px 4px 4px 0px #FFF5D3;
     margin-left: 5%;
     margin-right: 5%;
-
+    margin-bottom: 5px;
+    font-size: 13px;
 }
 
 .you-search-button img {

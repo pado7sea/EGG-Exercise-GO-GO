@@ -58,7 +58,7 @@ import YoutubeVideoDetail from '../components/IndoorYoutube/YoutubeVideoDetail.v
 .ym-title {
   /* margin: 0 10vw; */
   /* flex-shrink: 0; */
-  background: #FEE58D;
+  background: #FFE6C4;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
   display: flex;

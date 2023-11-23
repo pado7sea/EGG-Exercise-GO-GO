@@ -3,7 +3,7 @@
         <div class="backbox">
             <div class="rightbox">
                 <div class="title">
-                    <div class="안내문구">현재 위치와 가까운 실내운동하기 좋은 장소들을 알려드려요!</div>
+                    <div class="안내문구">실내운동에 좋은 곳과 참고할 </div>
                 </div>
                 <div class="content">
                     <div class="whitebox">
@@ -59,7 +59,7 @@ div{
 
 .leftbox {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     margin-left: 5%;
     margin-bottom: 5%;
 }

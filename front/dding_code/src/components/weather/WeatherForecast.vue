@@ -191,10 +191,12 @@ const tmpDescription = computed(() => {
 
 <style scoped>
 .home-container {
-  margin: 10vh 10vw;
+  margin: 2vh 10vw;
+  padding-bottom: 5vh;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   background-color: #b1c7fc;
+  border-radius: 30px;
 }
 
 .weather-container {
@@ -202,7 +204,8 @@ const tmpDescription = computed(() => {
 }
 
 .weather-container-top {
-  margin-left: 5vw;
+  margin-top: 7vh;
+  margin-left: 1.5vw;
   font-size: x-large;
   font-weight: 100;
 }
@@ -230,6 +233,7 @@ const tmpDescription = computed(() => {
   perspective: 1000px;
   cursor: pointer;
   position: relative;
+  margin-top: 5vh;
 }
 
 #card{
@@ -254,6 +258,11 @@ const tmpDescription = computed(() => {
 
 #wrap:hover #card{
   transform: rotateY(180deg);
+}
+
+.right-bx{
+  margin-left: 7vw;
+  margin-top: 3vh;
 }
 
 </style>

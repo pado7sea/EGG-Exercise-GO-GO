@@ -14,12 +14,12 @@
       </button>
     </div>
     <div class="you-hashtag-buttons">
-      <button @click="searchWithHashtag('#홈트')" class="you-hash-button">홈트</button>
-      <button @click="searchWithHashtag('#실내운동')" class="you-hash-button">실내운동</button>
-      <button @click="searchWithHashtag('#맨몸운동')" class="you-hash-button">맨몸운동</button>
-      <button @click="searchWithHashtag('#요가 및 명상')" class="you-hash-button">요가 및 명상</button>
-      <button @click="searchWithHashtag('#홈짐')" class="you-hash-button">홈짐</button>
-      <button @click="searchWithHashtag('#실내사이클링')" class="you-hash-button">실내사이클링</button>
+      <button @click="searchWithHashtag('#러닝')" class="you-hash-button">러닝</button>
+      <button @click="searchWithHashtag('#하이킹 코스')" class="you-hash-button">하이킹 코스</button>
+      <button @click="searchWithHashtag('#조깅 경로')" class="you-hash-button">조깅 경로</button>
+      <button @click="searchWithHashtag('#요가 및 명상')" class="you-hash-button">서핑</button>
+      <button @click="searchWithHashtag('#홈짐')" class="you-hash-button">마라톤</button>
+      <button @click="searchWithHashtag('#패들보딩')" class="you-hash-button">패들보딩</button>
     </div>
   </div>
 </template>

@@ -27,7 +27,7 @@
     data() {
       return {
         carouselItems: [
-          { type: 'video', content: 'https://www.youtube.com/embed/kETh8T3it4k?si=p6ltz1G2TO4QL4lJ' },
+          { type: 'video', content: 'https://youtu.be/4P-fUsQ3T-c?si=re3mUnRmpwdPjhFm' },
           { type: 'map', content: Map },
           // Add more carousel items as needed
         ],

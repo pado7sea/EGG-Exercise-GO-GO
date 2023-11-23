@@ -110,6 +110,7 @@ export default {
   display: flex;
   padding-top: 5px;
   justify-content: space-between;
+  position: relative;
 }
 
 

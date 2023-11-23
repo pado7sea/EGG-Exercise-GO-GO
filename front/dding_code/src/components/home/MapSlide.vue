@@ -2,14 +2,18 @@
 <template>
   <div class="map-slide">
     <div class="map">
-      <div>지도 콘텐츠</div>
+      <div style="margin-top: 20px;"></div>
       <div id="map"></div>
-      <div>
+      <div class="map-slide-btn" >
         <!-- 검색어 초기값 설정 -->
-        <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요">
-        <button @click="searchPlaces">버튼을 눌러서 알을 얻어보세요!</button>
+        <input style=" border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05); text-align: center;" @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요">
+        <button id="map-btn" style=" border-radius: 20px;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);" @click="searchPlaces">위치 검색하기</button>
       </div>
-      <div><a href="/kakao" style="text-decoration: none; color: black;">더 많은 장소 알아보기</a></div>
+      <div><a href="/kakao" style="text-decoration: none; color: black; position: absolute; right: 40%; top: 130%; z-index: 666;">더 많은 장소 알아보기</a></div>
     </div>
   </div>
 </template>
@@ -186,6 +190,7 @@ const removeMarkers = () => {
 .map-slide {
   width: 100%;
   height: 250px;
+  position: relative;
 }
 
 #map {
@@ -196,5 +201,21 @@ const removeMarkers = () => {
 .map {
   width: 100%;
   height: 100%;
+}
+
+.map-slide-btn{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5vh;
+  
+}
+
+#map-btn{
+  transition: 0.3s;
+}
+
+#map-btn:hover{
+  transform: scale(1.12);
+    background-color: #FFFCF0;
 }
 </style>

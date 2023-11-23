@@ -1,6 +1,6 @@
 <template>
     <div class="friend-detail-container">
-        <div class="friend-list" style="margin-left: 4vw; background-color: rgba(255, 255, 255, 0.9); width: 10%; text-align: center; border-radius: 30px;">
+        <div class="friend-list" style="margin-left: 2vw; background-color: rgba(255, 255, 255, 0.9); width: 10%; text-align: center; border-radius: 30px;">
             친구목록
         </div>
         <div class="friend-list-container">
@@ -11,6 +11,7 @@
                         <th>아이디</th>
                         <th>닉네임</th>
                         <th>모은 계란 개수</th>
+                        <th>최근 운동일</th>
                     </tr>
                 </thead>
                 <tbody id="user-table">
@@ -19,6 +20,7 @@
                         <td>{{ friendId }}</td>
                         <td v-if="friendInfo[index]">{{ friendInfo[index].name }}</td>
                         <td v-if="friendInfo[index]">{{ friendInfo[index].egg_count }}</td>
+                        <td>{{ getRecentPostDate(friendInfo[index]) }}</td>
                         <td>
                             <button @click="deleteFriend(friendId)" class="f-deletebtn">친구 삭제</button>
                         </td>
@@ -32,12 +34,14 @@
 <script setup>
 import { useUserStore } from '@/stores/user';
 import { useFriendStore } from '@/stores/friend';
+import {useBoardStore} from '@/stores/board';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, onMounted, computed, reactive } from 'vue';
 import axios from 'axios';
 
 const store = useUserStore();
 const Fstore = useFriendStore();
+const Bstore = useBoardStore();
 const route = useRoute();
 const router = useRouter();
 
@@ -75,7 +79,20 @@ const getFriendInfo = async (friendId) => {
     }
 };
 
+const getRecentPostDate = (friend) => {
+  if (friend && friend.name) {
+    const friendBoards = Bstore.boardList.filter((board) => board.writer === friend.name);
+    const sortedBoards = friendBoards.sort((a, b) => new Date(b.regDate) - new Date(a.regDate));
 
+    if (sortedBoards.length > 0) {
+      return sortedBoards[0].regDate;
+    } else {
+      return "작성한 게시물이 없습니다.";
+    }
+  } else {
+    return "이름 없음";
+  }
+};
 
 const friendInfo = ref({})
 
