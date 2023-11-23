@@ -1,57 +1,35 @@
 <!-- Map.vue -->
 <template>
   <div>
+    <!-- 지도를 표시할 컨테이너 -->
     <div id="map"></div>
-    <div>
-      <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요">
-      <button @click="searchPlaces">검색</button>
-    </div>
 
-    <!-- 검색 결과 목록과 경로 정보 표시 -->
-    <div>
-      <!-- 검색 결과 목록 -->
-      <div id="placesList">
-        <div v-for="(place, index) in paginatedPlaces" :key="index" class="place-item" @click="selectPlace(place)">
-          <span class="markerbg marker_{{ (currentPage - 1) * pageSize + index + 1 }}"></span>
-          <div class="info">
-            <h5>{{ place.place_name }}</h5>
-            <span>{{ place.address_name }}</span>
-            <span class="tel">{{ place.phone }}</span>
-          </div>
-        </div>
-      </div>
+    <!-- 기타 UI 요소들 추가 가능 -->
 
-      <!-- Path 컴포넌트 추가 -->
-      <!-- :origin과 :destinations를 currentLocation과 placeCoordinates로 전달 -->
-      <Path :customKey="generateCustomKey(index)" :origin="currentLocation" :destinations="placeCoordinates"
-        @updateRoutes="updateRoutes" />
+    <input v-model="searchKeyword" placeholder="장소 검색">
+    <button @click="searchPlaces">검색</button>
 
-      <!-- 경로 정보 표시 -->
-      <div v-if="mapRoutes && mapRoutes.length > 0">
-        <h2>경로 정보</h2>
-        <ul>
-          <li v-for="(route, index) in mapRoutes" :key="index">
-            <strong>목적지 {{ index + 1 }}:</strong>
-            <p>거리: {{ route.summary.distance }} 미터</p>
-            <p>소요 시간: {{ route.summary.duration }} 초</p>
-          </li>
-        </ul>
+    <!-- 검색 결과 목록 -->
+    <div id="placesList">
+      <div v-for="(place, index) in paginatedPlaces" :key="index" class="place-item" @click="selectPlace(place)">
+        {{ place.place_name }}
       </div>
     </div>
 
-
-
-
-    <!-- 페이지 번호를 표시할 엘리먼트 -->
-    <div v-if="pagination.length > 0" id="pagination" class="pagination">
-      <span @click="gotoPage(1)" :class="{ 'disabled': currentPage === 1 }">&lt;&lt;</span>
-      <span @click="gotoPage(currentPage - 1)" :class="{ 'disabled': currentPage === 1 }">&lt;</span>
-      <span v-for="page in pagination" :key="page" @click="gotoPage(page)" :class="{ 'active': page === currentPage }">{{
-        page }}</span>
-      <span @click="gotoPage(currentPage + 1)" :class="{ 'disabled': currentPage === totalPage }">&gt;</span>
-      <span @click="gotoPage(totalPage)" :class="{ 'disabled': currentPage === totalPage }">&gt;&gt;</span>
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <span v-for="page in pagination" :key="page" @click="gotoPage(page)"
+            :class="{ active: page === currentPage, disabled: page === '...' }">
+        {{ page }}
+      </span>
     </div>
-
+    <Path
+      v-if="mapRoutes"
+      :origin="pathProps.origin"
+      :destinations="pathProps.destinations"
+      :customKey="pathProps.customKey"
+      @updateRoutes="updateRoutesInMap"
+    />
   </div>
 </template>
 
@@ -102,12 +80,33 @@ const combinedList = computed(() => {
   return list;
 });
 
-//Path.vue로 보내는 데이터들
-const currentLocation = ref(null); // 현재 위치 좌표
-const placeCoordinates = ref([]); // 장소 리스트 좌표
+// Map.vue 내의 데이터
+const mapRoutes = ref(null); // 경로 데이터를 저장할 ref
 
-// Path.vue로부터 받은 경로 데이터
-let mapRoutes = [];
+// Path.vue에서 업데이트된 경로를 받아와 처리하는 함수
+const updateRoutesInMap = (routes) => {
+  console.log('Received updated routes in Map.vue:', routes);
+  mapRoutes.value = routes; // 받아온 데이터를 mapRoutes에 저장
+};
+
+// Map.vue에서 Path.vue로 데이터를 전달하기 위해 props로 전달할 데이터
+const pathProps = {
+  origin: ref(null), // 현재 위치
+  destinations: ref([]), // 검색된 장소들의 좌표
+  customKey: ref(null), // 커스텀 키
+};
+
+// Map.vue에서 Path.vue로 데이터를 전달하기 위해 props로 전달할 데이터
+const mapProps = {
+  origin: pathProps.origin,
+  destinations: pathProps.destinations,
+  customKey: pathProps.customKey,
+};
+
+// //Path.vue로 보내는 데이터들
+// const currentLocation = ref(null); // 현재 위치 좌표
+// const placeCoordinates = ref([]); // 장소 리스트 좌표
+
 
 const initMap = () => {
   const container = document.getElementById('map');
@@ -139,8 +138,8 @@ const getCurrentLocation = () => {
         const lng = position.coords.longitude;
         const newCurrentLocation = new kakao.maps.LatLng(lat, lng);
 
-        currentLocation.value = newCurrentLocation;
-        console.log("현재 위치 좌표 ", currentLocation.value);
+        pathProps.origin.value = newCurrentLocation;
+        console.log("현재 위치 좌표 ", pathProps.origin.value);
 
         // 지도의 중심을 현재 위치로 이동
         map.setCenter(newCurrentLocation);
@@ -158,18 +157,20 @@ const getCurrentLocation = () => {
   }
 };
 
+const index = 0;
 const getPlaceCoordinates = (placesData) => {
   if (placesData) {
-    placeCoordinates.value = placesData.map(place => ({
-      x: place.x,
-      y: place.y
-    }));
-    console.log("placeCoordinates.value", placeCoordinates.value);
+    pathProps.destinations.value = placesData.map((place, idx) => ({
+            x: place.x,
+            y: place.y,
+            key: `${index + idx + 1}` // 각 목적지에 고유한 키 부여
+        }));
+    console.log("pathProps.destinations.value", pathProps.destinations.value);
 
     // 데이터가 갱신되면 Path.vue로 routes를 업데이트
     updateRoutes();
   } else {
-    console.error("placesData is undefined");
+    console.log("placesData is undefined");
   }
 };
 
@@ -317,7 +318,7 @@ const updateRoutes = (routes) => {
   displayMapPolyline(routes);
 
   // 경로 정보를 전역 변수에 할당
-  mapRoutes.value = routes.value.routes;
+  mapRoutes.value = routes && routes.routes ? routes.routes : [];
 };
 
 // 기존에 표시된 Polyline을 제거하는 함수
