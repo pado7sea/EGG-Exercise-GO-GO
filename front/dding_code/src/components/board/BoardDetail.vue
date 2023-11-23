@@ -13,7 +13,7 @@
             <div>{{ store.board.content }}</div>
             <img :src="`http://localhost:8080/upload/${store.board.img}`">
         </div>
-        <div class="post-actions">
+        <div class="post-actions" v-if="store.board && store.board.writer === loggedUserName">
             <button @click="deleteBoard" class="action-button delete">삭제</button>
             <button @click="updateBoard" class="action-button update">수정</button>
         </div>
@@ -34,19 +34,21 @@ const route = useRoute();
 const router = useRouter();
 
 
+const loggedUserName = uStore.LoginUser.name;
 
 onMounted(() => {
     store.getBoard(route.params.id)
 })
 const deleteBoard = function () {
     // 현재 로그인한 사용자 닉넴 
-    const loggedUserName = uStore.LoginUser.name;
     // 게시글 작성자 닉넴 
 const boardWriterName = store.board.writer;
     // 같으면 삭제 ㄱㄱ
     if(loggedUserName === boardWriterName){
         axios.delete(`http://localhost:8080/api/board/${route.params.id}`)
-            .then(() => {
+        .then(() => {
+            alert('정말 삭제하시겠습니까?');
+                uStore.LoginUser.egg_count -= 1;;
                 router.push({ name: 'boardList' })
             })
     } else{

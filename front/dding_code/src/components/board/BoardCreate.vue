@@ -10,7 +10,7 @@
             </div>
             <div class="bc-content">
                 <fieldset>
-                    <table>
+                    <table class="create-table">
                         <tr>
                             <td>
                                 <div class="row g-3 align-items-center">
@@ -144,7 +144,7 @@ const createBoard = async () => {
     justify-content: center;
 }
 
-table {
+.create-table{
     width: 100%;
     border-collapse: collapse;
     background-color: #E3EBFC;

@@ -3,7 +3,8 @@ import beforeEachGuard from './beforeEach';
 import checkAuthentication from '@/router/checkAuthentication';
 
 import HomeView from "@/views/HomeView.vue";
-import YoutubeView from "@/views/YoutubeView.vue";
+import IndoorYoutubeView from "@/views/IndoorYoutubeView.vue";
+import OutdoorYoutubeView from "@/views/OutdoorYoutubeView.vue";
 import BoardView from "@/views/BoardView.vue";
 import KakaoView from "@/views/KakaoView.vue";
 import FriendView from "@/views/FriendView.vue";
@@ -67,9 +68,14 @@ const router = createRouter({
       component: MapSlide,
     },
     {
-      path: "/youtube",
-      name: "youtube",
-      component: YoutubeView,
+      path: "/iyoutube",
+      name: "IndoorYoutube",
+      component: IndoorYoutubeView,
+    },
+    {
+      path: "/oyoutube",
+      name: "OutdoorYoutube",
+      component: OutdoorYoutubeView,
     },
     {
       path: "/friend",

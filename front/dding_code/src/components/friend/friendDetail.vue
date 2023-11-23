@@ -1,32 +1,30 @@
 <template>
-    <div>
-        <div class="friend-list-header">
-            <div class="friend-list-header-d">
-                <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
-                <div class="friend-list-header-d-d">아이디</div>
-                <div class="friend-list-header-d-d">이름</div>
-                <div class="friend-list-header-d-d">현재 계란 개수</div>
-            </div>
-            <div class="friend-list-container">
-                <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
-                    <div>
-                        <img class="friend-icon" src="@/assets/병프.png" alt="친구병아리">
-                    </div>
-                    <div>
-                        {{ friendId }}
-                    </div>
-                    <!-- 추출된 friendId 출력 -->
-                    <div v-if="friendInfo[index]">
-                        {{ friendInfo[index].name }}
-                    </div>
-                    <div v-if="friendInfo[index]">
-                        {{ friendInfo[index].egg_count }}
-                    </div>
-                    <div>
-                        <button @click="deleteFriend(friendId)">친구 삭제</button>
-                    </div>
-                </div>
-            </div>
+    <div class="friend-detail-container">
+        <div class="friend-list" style="margin-left: 4vw; background-color: rgba(255, 255, 255, 0.9); width: 10%; text-align: center; border-radius: 30px;">
+            친구목록
+        </div>
+        <div class="friend-list-container">
+            <table class="friend-table">
+                <thead id="friend-table">
+                    <tr>
+                        <th></th>
+                        <th>아이디</th>
+                        <th>닉네임</th>
+                        <th>모은 계란 개수</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table">
+                    <tr v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
+                        <td><img src="@/assets/병프.png" class="friend-icon" alt="친구병아리"></td>
+                        <td>{{ friendId }}</td>
+                        <td v-if="friendInfo[index]">{{ friendInfo[index].name }}</td>
+                        <td v-if="friendInfo[index]">{{ friendInfo[index].egg_count }}</td>
+                        <td>
+                            <button @click="deleteFriend(friendId)" class="f-deletebtn">친구 삭제</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -66,47 +64,67 @@ const deleteFriend = function (friend_id) {
 };
 
 // 각 친구의 이름을 가져오는 함수
-const friendInfo = reactive({});
-
 const getFriendInfo = async (friendId) => {
     try {
-        const response = await Fstore.getfrienduser(friendId);
-        console.log(response);
-        return response.data; // API 응답에서 예상되는 데이터 구조로 가정합니다.
+        await Fstore.getfrienduser(friendId);
+        console.log(Fstore.getFuser);
+        return Fstore.getFuser ? Fstore.getFuser : { friend_id: null, name: '이름 없음', egg_count: 0 };
     } catch (error) {
         console.error('친구 정보 가져오기 실패', error);
-        return { name: '이름 없음', egg_count: null }; // 데이터를 사용할 수 없는 경우 기본값을 지정합니다.
+        return { friend_id: null, name: '이름 없음', egg_count: 0 };
     }
 };
 
+
+
+const friendInfo = ref({})
+
 onMounted(async () => {
-    store.getUser(route.params.id);
+    store.getUser(route.params.id)
     await Fstore.getFriendList(store.LoginUser.id);
-    const friendInfoData = await Promise.all(extractedFriendIds.value.map(getFriendInfo));
-    friendInfo.value = friendInfoData;
+    friendInfo.value = await Promise.all(extractedFriendIds.value.map(getFriendInfo));
 });
+
+
 </script>
 
 <style scoped>
-.friend-list-header {
-    display: grid;
-    margin-top: 3vh;
-}
-
-.friend-list-header-d {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    /* margin-left: 10px; */
-}
-
-.friend-detail {
-    display: flex;
-    justify-content: space-around;
+.friend-detail-container {
+    /* display: flex; */
+    /* flex-direction: column; */
+    margin-top: 5vh;
+    /* background-color: #b1c7fc; */
 }
 
 .friend-icon {
     width: 71px;
     height: 67px;
+}
+
+.friend-table {
+    border-spacing: 50px 50px;
+    text-align: center;
+    width: 100%;
+}
+
+.friend-list-container {
+    display: flex;
+    margin-top: 3vh;
+    padding-bottom: 8vh;
+}
+
+.f-deletebtn{
+    border: none;
+    transition:0.2s;
+    padding: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #fefefe;
+    border-radius: 30px;
+}
+
+.f-deletebtn:hover{
+    transform: scale(1.12);
+    background-color: #ffdada;
 }
 </style>

@@ -3,74 +3,80 @@
         <!-- <Mypage /> -->
         <!-- <div style="padding-left: 20px;">친구</div> -->
         <div style="margin-top: 3vh; margin-left: 2vw;">
-            <FriendSearchInput />
+            <FriendSearchInput @search-results-updated="updateSearchResults" :showSearchResults="showSearchResults" />
         </div>
         <div>
             <FriendDetail />
         </div>
         <hr>
-        <div class="user-grid-container">
-            <div class="user-card" v-for="user in store.userList" :key="user.id">
-                <div v-if="store.LoginUser.id" class="user-card-inner">
-                    <div class="user-img">
-                        <img src="@/assets/병아리.png" id="user-icon">
-                    </div>
-                        <div class="user-itw">
-                            <div class="user-id">
-                                {{ user.id }}
-                            </div>
-                            <div class="user-tw" style="padding-top: 3px; padding-bottom: 3px;">
-                                <div style="font-weight: bold;">{{ user.name }}
-                                </div>
-                            </div>
-                            <div>
-                                <button @click="addFriend(user.id)">친구추가</button>
-                            </div>
-                        </div>
-                        <div>
-                        </div>
-                </div>
-            </div>
+        <div class="user-grid-container" v-show="showSearchResults">
+            <table class="user-table">
+                <thead id="user-table">
+                    <tr>
+                        <th></th>
+                        <th>아이디</th>
+                        <th>닉네임</th>
+                        <th>모은 계란 개수</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table">
+                    <tr v-for="user in store.userList" :key="user.id">
+                        <td><img src="@/assets/병아리.png" id="user-icon"></td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.egg_count }}</td>
+                        <td>
+                            <button @click="addFriend(user.id)" class="f-addbtn">친구 추가</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <!-- <RouterView /> -->
     </div>
 </template>
   
 <script setup>
-// import friendDetail from '../components/friend/friendDetail.vue';
-import Mypage from '@/components/friend/Mypage.vue';
-import { useUserStore } from '@/stores/user';
-
 import { onMounted, ref } from 'vue';
-import axios from 'axios'
+import axios from 'axios';
 import FriendSearchInput from '@/components/friend/FriendSearchInput.vue';
 import FriendDetail from '../components/friend/friendDetail.vue';
+import { useUserStore } from '@/stores/user';
 import { useFriendStore } from '../stores/friend';
 
-const store = useUserStore()
-const Fstore = useFriendStore()
+const store = useUserStore();
+const Fstore = useFriendStore();
 const friend = ref({
     friend_id: '',
     user_id: store.LoginUser.id
-})
+});
 
 const addFriend = async (userId) => {
     try {
-        friend.value.friend_id = userId; // Set friend_id to userId
+        friend.value.friend_id = userId;
         const response = await axios.post('http://localhost:8080/friendapi/insert', friend.value);
         alert('친구 추가 완료');
         console.log(response.data);
     } catch (error) {
         console.log(error);
     }
-}
+};
+
+const showSearchResults = ref(false);
+
+const updateSearchResults = (value) => {
+    showSearchResults.value = value;
+};
+
 onMounted(() => {
-    store.getUserList()
-})
+    store.getUserList();
+});
 
-
-
-
+const searchUserList = async () => {
+    console.log('Searching users with:', searchUser.value);
+    await store.searchUserList(searchUser.value);
+    updateSearchResults(store.userList.length > 0);
+};
 </script>
   
 <style scoped>
@@ -91,28 +97,44 @@ onMounted(() => {
     height: 67px;
 }
 
-/* .user-grid-container{
+.user-grid-conatiner{
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-} */
-
-.user-card{
-    /* display: flex; */
-    margin-bottom: 10px;
     
 }
-.user-card-inner {
-  display: flex;
-  justify-content: space-around;
+
+.user-description {
+    display: flex;
+    justify-content: space-around;
 }
 
-.user-description{
+.user-itw {
     display: flex;
     justify-content: space-around;
+
 }
-.user-itw{
-    display: flex;
-    justify-content: space-around;
+
+.user-table{
+    border-spacing: 30px 30px;
+    text-align: center;
+    width: 100%;
+
 }
+
+.f-addbtn{
+    border: none;
+    transition:0.2s;
+    padding: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #fefefe;
+    border-radius: 30px;
+}
+
+.f-addbtn:hover{
+    transform: scale(1.12);
+    background-color: #9db9fa;
+}
+
+
+
 </style>

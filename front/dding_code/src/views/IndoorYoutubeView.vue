@@ -7,17 +7,23 @@
             무슨 운동을 하고 싶으신가요?
           </div>
         </div>
+        <div class="카테고리안내문구" style="margin: 0.2vh  2vw;">하고 싶은 운동을 골라보세요!</div>
+        <div class="ym-img-container">
+          <div> <img src="@/assets/yoga-pose-m.png" id="indoor-icon"></div>
+          <div> <img src="@/assets/yoga-pose-w.png" id="indoor-icon"></div>
+          <div> <img src="@/assets/yoga-pose.png" id="indoor-icon"></div>
+          <div> <img src="@/assets/weight-lifting.png" id="indoor-icon"></div>
+        </div>
       </div>
       <div class="ym-content">
-        <div class="ym-leftbox">
-          <div class="카테고리안내문구" style="margin: 0.2vh  2vw;">하고 싶은 운동을 골라보세요!</div>
+        <div class="ym-search">
           <YoutubeVideoSearch class="ym-카테고리안내문구" />
-          <div class="ym-listcategory">
-            <YoutubeVideoList />
-          </div>
         </div>
         <div class="ym-rightbox">
           <YoutubeVideoDetail />
+        </div>
+        <div class="ym-listcategory">
+          <YoutubeVideoList />
         </div>
       </div>
     </div>
@@ -25,9 +31,9 @@
 </template>
 
 <script setup>
-import YoutubeVideoSearch from '@/components/youtube/YoutubeVideoSearch.vue';
-import YoutubeVideoList from '@/components/youtube/YoutubeVideoList.vue';
-import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
+import YoutubeVideoSearch from '@/components/IndoorYoutube/YoutubeVideoSearch.vue';
+import YoutubeVideoList from '@/components/IndoorYoutube/YoutubeVideoList.vue';
+import YoutubeVideoDetail from '../components/IndoorYoutube/YoutubeVideoDetail.vue';
 </script>
 
 <style scoped>
@@ -45,6 +51,8 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .ym-title {
@@ -83,24 +91,25 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
 
 .ym-content {
   display: flex;
-  flex-direction: row;
-  margin: 2vh 2vw;
-  justify-content: space-around;
+  flex-direction: column;
+  margin: 0 2vw;
+  /* justify-content: space-around; */
   /* background-color: rgba(255, 255, 255, 0.3);  */
 }
 
 .ym-leftbox {
-  width: 50%;
+  /* width: 50%; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .ym-rightbox{
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   margin-left: 4vw;
   justify-content: center;
 }
+
 
 .ym-카테고리안내문구 {
   color: #000;
@@ -132,5 +141,13 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
   /* margin-left: 5%;
   margin-right: 5%; */
 /* } */
+#indoor-icon{
+  width: 40px;
+  height: 40px;
+}
 
+.ym-img-container{
+  display: flex;
+  justify-content: space-around;
+}
 </style>
