@@ -1,3 +1,4 @@
+<!-- kakaomap.vue -->
 <template>
   <div class="ym-container">
     <div class="ym-backbox">
@@ -12,13 +13,13 @@
         <div class="ym-leftbox">
           <div class="카테고리안내문구">운동하고 싶은 장소를 골라보세요!</div>
           <div class="장소카테고리세부">
-            <button class="장소카테고리세부">공원</button>
-            <button class="장소카테고리세부">산책로</button>
-            <button class="장소카테고리세부">운동장</button>
+            <button @click="searchPlacesByCategory ('공원')" class="장소카테고리세부">공원</button>
+            <button @click="searchPlacesByCategory ('산책로')" class="장소카테고리세부">산책로</button>
+            <button @click="searchPlacesByCategory ('운동장')" class="장소카테고리세부">운동장</button>
           </div>
         </div>
         <div class="ym-rightbox">
-          <Map />
+          <Map v-model="selectedCategory" />
         </div>
       </div>
      
@@ -27,7 +28,16 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch } from 'vue';
 import Map from './Map.vue';
+
+
+
+const selectedCategory = ref('');
+
+const searchPlacesByCategory =   (category) => {
+   selectedCategory.value = category;
+};
 
 </script>
 

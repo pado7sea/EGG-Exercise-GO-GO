@@ -18,13 +18,13 @@
             <span>{{ place.address_name }}</span>
             <span class="tel">{{ place.phone }}</span>
           </div>
+          <!-- Path 컴포넌트 추가 -->
+          <!-- :origin과 :destinations를 currentLocation과 placeCoordinates로 전달 -->
+          <Path :customKey="generateCustomKey(index)" :origin="currentLocation" :destinations="placeCoordinates"
+            @updateRoutes="updateRoutes" />
         </div>
       </div>
 
-      <!-- Path 컴포넌트 추가 -->
-      <!-- :origin과 :destinations를 currentLocation과 placeCoordinates로 전달 -->
-      <Path :customKey="generateCustomKey(index)" :origin="currentLocation" :destinations="placeCoordinates"
-        @updateRoutes="updateRoutes" />
 
       <!-- 경로 정보 표시 -->
       <div v-if="mapRoutes && mapRoutes.length > 0">
@@ -58,6 +58,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import Path from './Path.vue';
+
+import { useMapStore } from '@/stores/map';
+const { selectedCategory } = defineProps(['selectedCategory']);
+
+const { categoryKeyword } = useMapStore();
 
 let map = null;
 let infowindow = null;
@@ -106,7 +111,7 @@ const combinedList = computed(() => {
 const currentLocation = ref(null); // 현재 위치 좌표
 const placeCoordinates = ref([]); // 장소 리스트 좌표
 
-// Path.vue로부터 받은 경로 데이터
+// // Path.vue로부터 받은 경로 데이터
 let mapRoutes = [];
 
 const initMap = () => {
@@ -169,7 +174,7 @@ const getPlaceCoordinates = (placesData) => {
     // 데이터가 갱신되면 Path.vue로 routes를 업데이트
     updateRoutes();
   } else {
-    console.error("placesData is undefined");
+    console.log("placesData is undefined");
   }
 };
 
@@ -387,9 +392,25 @@ onMounted(async () => {
         getPlaceCoordinates();
       });
     };
+    // watch 함수를 사용하여 selectedCategory의 변경을 감시
+    watch(selectedCategory, (newCategory, oldCategory) => {
+      // 변경된 카테고리에 대한 로직 실행
+      searchPlacesByCategory(newCategory);
+    });
   }
+
 });
 
+
+// searchByCategory 함수 정의
+const searchPlacesByCategory = async (category) => {
+  // 해당 카테고리에 대한 검색 로직 수행
+  const keyword = category;
+  removeMarkers();
+  await ps.keywordSearch(keyword, placesSearchCB, { useMapBounds: true });
+  console.log('검색할 카테고리:', category);
+
+};
 </script>
 
 <style scoped>
