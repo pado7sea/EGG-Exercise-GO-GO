@@ -4,8 +4,8 @@
   <div v-if="store.selectedVideo">
     <h4>영상상세보기</h4>
     <iframe
-      width="560"
-      height="315"
+      width="600px"
+      height="400px"
       :src="videoURL"
       title="YouTube video player"
       frameborder="0"

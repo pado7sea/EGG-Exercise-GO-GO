@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2>KakaoView</h2>
-    <hr>
     <KakaoMap/>
   </div>
 </template>

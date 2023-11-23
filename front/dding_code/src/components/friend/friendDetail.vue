@@ -1,34 +1,33 @@
 <template>
     <div>
         <div class="friend-list-header">
-                <div class="friend-list-header-d">
-                    <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
-                    <div class="friend-list-header-d-d">아이디</div>
-                    <div class="friend-list-header-d-d">이름</div>
-                    <div class="friend-list-header-d-d">현재 계란 개수</div>
-                </div>
-                <div class="friend-list-container">
-                    <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
-                        <div>
-                            <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
-                        </div>
-                        <div>
-                            {{ friendId }}
-                        </div>
-                        <!-- 추출된 friendId 출력 -->
-                        <div>
-                            <!-- 친구의 정보를 가져와서 표시 -->
-                            {{ friendInfo[index].name }}
-                        </div>
-                        <div>
-                            {{ friendInfo[index].egg_count }}
-                        </div>
-                        <div>
-                            <button @click="deleteFriend(friendId)">친구 삭제</button>
-                        </div>
+            <div class="friend-list-header-d">
+                <div style="width: 71px; height: 67px;" class="friend-list-header-d-d"></div>
+                <div class="friend-list-header-d-d">아이디</div>
+                <div class="friend-list-header-d-d">이름</div>
+                <div class="friend-list-header-d-d">현재 계란 개수</div>
+            </div>
+            <div class="friend-list-container">
+                <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
+                    <div>
+                        <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
+                    </div>
+                    <div>
+                        {{ friendId }}
+                    </div>
+                    <!-- 추출된 friendId 출력 -->
+                    <div v-if="friendInfo[index]">
+                        {{ friendInfo[index].name }}
+                    </div>
+                    <div v-if="friendInfo[index]">
+                        {{ friendInfo[index].egg_count }}
+                    </div>
+                    <div>
+                        <button @click="deleteFriend(friendId)">친구 삭제</button>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
@@ -36,7 +35,7 @@
 import { useUserStore } from '@/stores/user';
 import { useFriendStore } from '@/stores/friend';
 import { useRoute, useRouter } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, reactive } from 'vue';
 import axios from 'axios'
 
 const store = useUserStore()
@@ -52,7 +51,7 @@ const extractedFriendIds = computed(() => {
 
 const deleteFriend = function (friend_id) {
     const isDelete = confirm('정말 삭제하시겠습니까?');
-    
+
     if (isDelete) {
         axios.delete(`http://localhost:8080/friendapi/friends/${store.LoginUser.id}/${friend_id}`)
             .then(() => {
@@ -94,7 +93,8 @@ const getFriendInfo = async (friendId) => {
     }
 }
 
-const friendInfo = ref({})
+const friendInfo = reactive({});
+
 
 onMounted(async () => {
     store.getUser(route.params.id)
@@ -110,7 +110,7 @@ onMounted(async () => {
     margin-top: 3vh;
 }
 
-.friend-list-header-d{
+.friend-list-header-d {
     display: flex;
     justify-content: space-around;
     text-align: center;
@@ -121,9 +121,9 @@ onMounted(async () => {
     display: flex;
     justify-content: space-around;
 }
+
 .friend-icon {
     width: 71px;
     height: 67px;
 }
-
 </style>

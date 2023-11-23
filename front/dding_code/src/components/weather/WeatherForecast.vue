@@ -17,12 +17,12 @@
           <div class="egg-weather-img-front" id="front"> <!-- 얘가 앞 이미지 -->
             <img src="@/assets/weatheregg.png" alt="날씨 알려주는 게란" style="position: relative;">
             <div class="egg-weather-text" style="font-size: xxx-large;">{{ tmp }}℃</div>
+            <div v-if="sky && sky.value === '흐림'" class="egg-weather-text"><img src="@/assets.cloudy.png"></div>
           </div>
           <div class="egg-weather-img-back" id="back">
             <img src="@/assets/eggweather.png" alt="상세 정보 알려주는 계란">
             <div class="egg-weather-text">
               <div>하늘상태 : {{ sky }}</div>
-              <div v-if="sky === '1'"><img src="@/assets.cloudy.png"></div>
               <div>{{ptyDescription}}</div>
               <div>강수확률 : {{ pop }}%</div>
             </div>
@@ -191,9 +191,10 @@ const tmpDescription = computed(() => {
 
 <style scoped>
 .home-container {
-  margin-top: 10vh;
+  margin: 10vh 10vw;
   display: flex;
   justify-content: space-around;
+  background-color: #b1c7fc;
 }
 
 .weather-container {
@@ -226,7 +227,7 @@ const tmpDescription = computed(() => {
 }
 
 #wrap{
-  perspective: 500px;
+  perspective: 1000px;
   cursor: pointer;
   position: relative;
 }

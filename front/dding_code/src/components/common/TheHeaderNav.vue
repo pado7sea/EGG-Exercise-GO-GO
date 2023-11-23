@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!store.LoginUser.id" class="nav-top-before-login">
+        <div v-if="!store.LoginUser.id" class="nav-top">
             <router-link to="/">로그인</router-link>/
             <router-link to="/sign">회원가입</router-link>
         </div>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="title">
-            EGG
+            <router-link to="/home"><img src="@/assets/egglogo_all.png" alt="mainlogo" style="width: 240px; height: 154px;"></router-link>
         </div>
         <header class="nav-container">
             <RouterLink to="/home" class="nv">Home</RouterLink>
@@ -34,7 +34,7 @@ const confirmLogout = () => {
   if (confirm('정말 로그아웃 하시겠습니까?')) {
     store.logoutUser();
     console.log("로그아웃 완료");
-    router.go(0)
+    // router.go(0);
   }
 }
 
@@ -53,21 +53,20 @@ const confirmLogout = () => {
 .nav-container {
     margin: 0 10vw;
     text-align: center;
-    border: 2px solid gray;
+    background-color: #fcc87e;
+    border: 2px solid #e9cc7b;
     display: flex;
     justify-content: space-around;
     padding: 10px;
 }
 
 .nav-top-before-login{
-    margin-top: 2.5vh;
-    margin: 2.5vh 10vw;
+    margin: 0 10vw;
     display: flex;
     justify-content: flex-end;
 }
 .nav-top{
-    margin-top: 2.5vh;
-    margin: 2.5vh 10vw;
+    margin: 3vh 10vw;
     display: flex;
     justify-content: space-between;
 }
@@ -91,7 +90,7 @@ const confirmLogout = () => {
 }
 
 .nav-container a.router-link-exact-active {
-    color: rgb(255, 174, 0);
+    color: #6572fc;
 }
 
 a{

@@ -8,7 +8,7 @@
             <div class="inpt">
                 <form @submit.prevent>
                     <input v-model.trim="user.id" type="text" name="id" placeholder="아이디">
-                    <div class="password-input">
+                    <div class="password-input" style="width: 100%;">
                         <input v-model.trim="user.password" :type="showPassword ? 'text' : 'password'" placeholder="비밀번호">
                         <span class="show-password" @click="togglePasswordVisibility">{{ showPassword ? '숨기기' : '보이기' }}</span>
                     </div>
@@ -65,6 +65,7 @@ input {
     width: 100%;
     display: flex;
     margin-top: 5vh;
+    justify-content: space-around;
 }
 
 .login-img-container {
@@ -73,11 +74,12 @@ input {
     justify-content: center;
     margin-top: 3vh;
     margin-left: 10vw;
+    border-radius: 50%;
 }
 
 img {
-    width: 50%;
     min-width: 300px;
+    border-radius: 50%;
 }
 
 .login-input-container {
@@ -112,7 +114,6 @@ img {
 }
 
 form {
-    background-color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
