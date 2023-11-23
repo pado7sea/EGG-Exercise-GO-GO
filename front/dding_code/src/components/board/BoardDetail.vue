@@ -24,21 +24,35 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useBoardStore } from "@/stores/board";
+import { useUserStore } from '../../stores/user';
 import { onMounted } from "vue";
 import axios from 'axios'
 
 const store = useBoardStore()
-
+const uStore = useUserStore()
 const route = useRoute();
 const router = useRouter();
+
+
+
 onMounted(() => {
     store.getBoard(route.params.id)
 })
 const deleteBoard = function () {
-    axios.delete(`http://localhost:8080/api/board/${route.params.id}`)
-        .then(() => {
-            router.push({ name: 'boardList' })
-        })
+    // 현재 로그인한 사용자 닉넴 
+    const loggedUserName = uStore.LoginUser.name;
+    // 게시글 작성자 닉넴 
+const boardWriterName = store.board.writer;
+    // 같으면 삭제 ㄱㄱ
+    if(loggedUserName === boardWriterName){
+        axios.delete(`http://localhost:8080/api/board/${route.params.id}`)
+            .then(() => {
+                router.push({ name: 'boardList' })
+            })
+    } else{
+        window.alert('삭제 권한이 없습니다!');
+    }
+
 }
 
 const updateBoard = function () {

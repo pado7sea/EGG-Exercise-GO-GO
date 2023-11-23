@@ -1,4 +1,5 @@
 <template>
+  <div style="padding-bottom: 10vh;">
   <div class="board-container">
     <div class="board-nav">
       <BoardSearchInput />
@@ -37,6 +38,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script setup>
@@ -64,6 +66,7 @@ console.log(store.board.img)
   display: flex;
   flex-direction: column;
   background-color: #b1c7fc;
+  /* padding-bottom: 5vh; */
 }
 
 .board-nav {

@@ -10,6 +10,9 @@
                     <div>
                         현재 알 개수는 <span class="user-info"> {{ store.LoginUser.egg_count }}</span>개 입니다.
                     </div>
+                    <div>
+                        최근 운동 인증 날짜: 
+                    </div>
                 </div>
             </div>
             </div>
@@ -17,16 +20,19 @@
 </template>
 
 <script setup>
-import { useUserStore } from '@/stores/user';
+import { useUserStore} from '@/stores/user';
 import { useRoute, useRouter } from 'vue-router'
 import { ref, onMounted, computed } from 'vue'
 
 const store = useUserStore()
+// const Bstore = useBoardStore()
 const route = useRoute()
 
 onMounted(async () => {
     store.getUser(route.params.id)
+    Bstore.getBoardList
 });
+
 </script>
 
 <style scoped>
