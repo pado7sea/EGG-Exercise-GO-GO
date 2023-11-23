@@ -85,7 +85,9 @@ a {
 
 .board-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: minmax(300px, auto); 최소 높이를 100px로 설정 */
   gap: 20px;
   padding: 30px; /* Adjust padding as needed */
 }
@@ -111,23 +113,28 @@ a {
 }
 
 .board-description {
-  /* padding: 20px; */
-  padding: 30px 50px 30px 50px;
+  display: flex;
+  justify-content: space-between;  /* padding: 30px 50px 30px 50px; */
+
 }
 .board-itw {
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+  /* height: 50px; */
 }
 
 .board-id {
+  display: flex;
   background-color: #f0f0f0;
-  padding: 8px 15px;
+  padding: 20px;
   border-radius: 20px;
 }
 
 .board-tw {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  margin-bottom: 30px;
+  padding: 10px;
   /* margin-left: 15px; */
 }
 
@@ -138,9 +145,11 @@ a {
 
 .board-view {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: fle; */
+  margin-right: 10px;
+  padding: 10px;
 }
 
 .view-count {
@@ -165,7 +174,7 @@ a {
 }
 
 /* img {
-  height: 260px;
+  height: 300px;
 } */
 
 .custom-btn {
@@ -173,7 +182,6 @@ a {
   height: 28px;
   padding: 10px 25px;
   border: 2px solid #FEE58D;
-  font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
   cursor: pointer;

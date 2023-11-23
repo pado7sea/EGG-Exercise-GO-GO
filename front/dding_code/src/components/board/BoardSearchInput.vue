@@ -66,7 +66,6 @@ const searchBoardList = function () {
     box-sizing: border-box;
     border-radius: 10px;
     padding: 5px;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -86,7 +85,6 @@ const searchBoardList = function () {
   height: 28px;
   padding: 10px 25px;
   border: 2px solid #FEE58D;
-  font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
   cursor: pointer;
