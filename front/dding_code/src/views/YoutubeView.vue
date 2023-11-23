@@ -3,7 +3,7 @@
     <div class="ym-backbox">
       <div class="ym-title">
         <div class="ym-whitecircle">
-          <div class="어디서운동하고싶으신가요">
+          <div class="ym-어디서운동하고싶으신가요">
             무슨 운동을 하고 싶으신가요?
           </div>
         </div>
