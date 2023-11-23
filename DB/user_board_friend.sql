@@ -1,3 +1,4 @@
+DROP DATABASE `egg`;
 CREATE DATABASE IF NOT EXISTS `egg`;
 
 USE `egg`;
@@ -21,12 +22,12 @@ CREATE TABLE IF NOT EXISTS `friends` (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8mb4;
 
 
+
 INSERT INTO users(id, password, name, birthday)
 VALUES
-("user1", "password1", "John Doe", "1990-05-15"),
-("user2", "password2", "Jane Smith", "1985-08-22"),
-("user3", "password3", "Bob Johnson", "1995-03-10"),
-("user4", "password4", "Alice Brown", "1982-11-28");
+("11", "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8", "일일", "1111-11-11"),
+("22", "785f3ec7eb32f30b90cd0fcf3657d388b5ff4297f2f9716ff66e9b69c05ddd09", "짱구", "2000-12-22"),
+("33", "c6f3ac57944a531490cd39902d0f777715fd005efac9a30622d5f5205e7f6894", "마카오", "1990-11-11");
 
 CREATE TABLE IF NOT EXISTS `board` (
 	id INT AUTO_INCREMENT,
@@ -41,11 +42,12 @@ CREATE TABLE IF NOT EXISTS `board` (
 );
 
 -- 데이터 추가 예시
-INSERT INTO `board` (writer, title, content, viewCnt, regDate) VALUES
-('JohnDoe', '첫 번째 글', '이 글은 첫 번째 글입니다. 환영합니다!', 10, '2023-01-01 12:00:00'),
-('AliceSmith', '두 번째 글', '두 번째 글 내용입니다. 어떠세요?', 15, '2023-02-05 15:30:00'),
-('BobJohnson', '테스트 글', '테스트 글입니다. 데이터베이스 작동 확인 중...', 5, '2023-03-10 09:45:00'),
-('아오', '이미지 테스트', '이미지 테스트임....', 0, '2023-01-01 12:00:00');
+INSERT INTO `board` (writer, title, content, viewCnt, regDate, img, orgImg) VALUES
+('일일', '운동완', '오늘은 헬스를 했어요', 0, '2023-11-23 14:19:28', '1700716768926_KakaoTalk_Moim_4CkZHNUele2uqPIX26gdCG6z3O3aRH.jpg', 'KakaoTalk_Moim_4CkZHNUele2uqPIX26gdCG6z3O3aRH.jpg'),
+('짱구', '축구한판부리부리', '장미반 친구들과 부리부리부립뤼부리부리뷔ㅜ', 2, '2023-11-23 14:21:34', '1700716880405_KakaoTalk_20180627_025945944.jpg.png', 'KakaoTalk_20180627_025945944.jpg.png' ),
+('짱구', '흰둥이랑 산책', '부리부리부리ㅜ비ㅜ리불', 0, '2023-11-23 14:23:15', '1700716995038_제목-없음-17.gif', '제목-없음-17.gif' ), -- 이미지가 없을 경우 imagePath를 null로 설정
+('마카오', '아라베스크', '발레', 0, '2023-11-23 14:25:03', '1700717103123_20200906_105938.gif', '20200906_105938.gif'); -- imagePath를 적절히 수정
+
 -- 추가된 데이터 확인
 SELECT * FROM board;
 
@@ -54,12 +56,11 @@ SELECT * FROM users;
 
 -- 샘플 친구 추가
 INSERT INTO friends (user_id, friend_id)
-VALUES ("user1", "user2");
+VALUES ("11", "11");
 
 -- 'friends' 테이블 확인
 SELECT * FROM friends;
 
 commit;
-
 
 
