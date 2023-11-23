@@ -47,6 +47,7 @@ div{
     justify-content: center;
     margin-top: 7vh;
     margin-right: 5vw;
+    
 }
 
 .backbox {
@@ -102,7 +103,7 @@ div{
     height: 599px;
     flex-shrink: 0;
     border-radius: 20px;
-    background: #FFFCF0;
+    background: #Fcf2e3;
 
     display: flex;
     flex-direction: column;
@@ -115,7 +116,7 @@ div{
     width: 648px;
     height: 50px;
     flex-shrink: 0;
-    background: #FFF5D3;
+    background: #Fcddb1;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
 

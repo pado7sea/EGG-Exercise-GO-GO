@@ -1,27 +1,22 @@
 <template>
-  <div class="container">
-    <div class="backbox">
-      <div class="title">
-        <div class="whitecircle">
+  <div class="ym-container">
+    <div class="ym-backbox">
+      <div class="ym-title">
+        <div class="ym-whitecircle">
           <div class="어디서운동하고싶으신가요">
             무슨 운동을 하고 싶으신가요?
           </div>
         </div>
       </div>
-      <div class="content">
-        <div class="leftbox">
-          <div class="카테고리안내문구">하고 싶은 운동을 골라보세요!</div>
-          <YoutubeVideoSearch class="카테고리안내문구" />
-          <div class="장소카테고리">
-
-            <!-- <button class="장소카테고리세부">#실내운동</button>
-            <button class="장소카테고리세부">#홈트</button>
-            <button class="장소카테고리세부">#맨몸운동</button> -->
-
+      <div class="ym-content">
+        <div class="ym-leftbox">
+          <div class="카테고리안내문구" style="margin: 0.2vh  2vw;">하고 싶은 운동을 골라보세요!</div>
+          <YoutubeVideoSearch class="ym-카테고리안내문구" />
+          <div class="ym-listcategory">
+            <YoutubeVideoList />
           </div>
-          <YoutubeVideoList class="장소카테고리" />
         </div>
-        <div class="rightbox">
+        <div class="ym-rightbox">
           <YoutubeVideoDetail />
         </div>
       </div>
@@ -36,88 +31,87 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
+.ym-container {
+  margin: 0 10vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 5vh;
 }
 
-.backbox {
-  background: #FFFCF0;
+.ym-backbox {
+  width: 100%;
+  background: #b1c7fc;
   border-radius: 20px;
-  width: 1167px;
-  height: 599px;
-  flex-shrink: 0;
   display: flex;
-  float: left;
   flex-direction: column;
   justify-content: center;
-
 }
 
-.title {
-  width: 1067px;
-  height: 50px;
-  flex-shrink: 0;
+.ym-title {
+  /* margin: 0 10vw; */
+  /* flex-shrink: 0; */
   background: #FEE58D;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
-
   display: flex;
-  justify-content: left;
-  padding-left: 1%;
+  justify-content: flex-start;
+  padding: 1vh 1vw;
   align-items: center;
-  margin: 3% auto 0;
+  margin: 2vh 2vw;
 }
 
-.whitecircle {
-  width: 254px;
-  height: 33px;
-  flex-shrink: 0;
+.ym-whitecircle {
+  /* flex-shrink: 0; */
   background: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
-
   display: flex;
   justify-content: center;
+  padding: 0 10px 0 10px;
   align-items: center;
 
 }
 
-.어디서운동하고싶으신가요 {
+.ym-어디서운동하고싶으신가요 {
   color: #000;
-  font-family: Inter;
+  /* font-family: Inter; */
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.content {
+.ym-content {
   display: flex;
   flex-direction: row;
-  margin: 5%;
+  margin: 2vh 2vw;
+  justify-content: space-around;
+  /* background-color: rgba(255, 255, 255, 0.3);  */
 }
 
-.leftbox {
+.ym-leftbox {
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: space-around;
 }
 
-.카테고리안내문구 {
+.ym-rightbox{
+  width: 50%;
+  display: flex;
+  margin-left: 4vw;
+  justify-content: center;
+}
+
+.ym-카테고리안내문구 {
   color: #000;
-  font-family: Inter;
+  /* font-family: Inter; */
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
-  margin-left: 5%;
-  margin-bottom: 5%;
+  /* margin-left: 5%;
+  margin-bottom: 5%; */
 }
 
 /* .장소카테고리 {
@@ -126,18 +120,18 @@ import YoutubeVideoDetail from '../components/youtube/YoutubeVideoDetail.vue';
   margin-right: 5%;
 } */
 
-.장소카테고리세부 {
-  background-color: #F8BD2A;
-  width: 60px;
-  height: 60px;
-  border-radius: 5em;
+/* .장소카테고리세부 {
+  background-color: #F8BD2A; */
+  /* width: 60px;
+  height: 60px; */
+  /* border-radius: 5em;
   border-style: none;
   color: #151515;
   font-weight: bold;
-  box-shadow: inset 4px 4px 4px 0px #FFF5D3;
+  box-shadow: inset 4px 4px 4px 0px #FFF5D3; */
 
-  margin-left: 5%;
-  margin-right: 5%;
-}
+  /* margin-left: 5%;
+  margin-right: 5%; */
+/* } */
 
 </style>

@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
   const loggedInUserId = ref(null); // 로그인한 사용자의 ID
 
   const router = useRouter();
-
+  const userList = ref([])
   const signupUser = async function (user) {
     // 비밀번호 해싱
     const hashedPassword = await hashPassword(user.password);
@@ -93,5 +93,27 @@ export const useUserStore = defineStore('user', () => {
     return hashedPassword;
   };
 
-  return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword };
+  const getUserList = function () {
+    axios({
+      url: REST_USER_API + '/users',
+      method: 'GET',
+    })
+      .then((response) => {
+        userList.value = response.data
+      })
+
+  }
+
+  const searchUserList = function (searchCondition) {
+    axios({
+      url: REST_USER_API + '/users',
+      method: 'GET',
+      params: searchCondition
+    })
+      .then((res) => {
+        userList.value = res.data
+      })
+  }
+
+  return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword, getUserList, searchUserList, userList };
 }, { persist: true });
