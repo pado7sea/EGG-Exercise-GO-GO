@@ -2,6 +2,8 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useRoute, useRouter } from 'vue-router'
+import CryptoJS from 'crypto-js';
+
 
 const REST_USER_API = `http://localhost:8080/userapi`
 
@@ -35,7 +37,6 @@ export const useUserStore = defineStore('user', () => {
   const loginUser = async function (user) {
     // 비밀번호 해싱
     const hashedPassword = await hashPassword(user.password);
-
       const response = await axios.post(`${REST_USER_API}/login`, {
         ...user,
         password: hashedPassword,
@@ -55,6 +56,7 @@ export const useUserStore = defineStore('user', () => {
         console.log('잘못된 로그인 정보입니다.');
       });
     }
+
   const getUser = async function () {
     if (!loggedInUserId.value) {
       console.error('로그인한 사용자의 ID가 없습니다.');
@@ -116,5 +118,5 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword, getUserList, searchUserList, userList };
-}, { persist: true });
+  return { signupUser, loginUser, logoutUser, LoginUser, getUser, createToken, hashPassword, getUserList, searchUserList, userList, loggedInUserId };
+}, { persist: true, persistOptions: { storage: 'sessionStorage' } });
