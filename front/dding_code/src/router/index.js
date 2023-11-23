@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import beforeEachGuard from './beforeEach';
+import checkAuthentication from '@/router/checkAuthentication';
+
 import HomeView from "@/views/HomeView.vue";
 import YoutubeView from "@/views/YoutubeView.vue";
 import BoardView from "@/views/BoardView.vue";
@@ -72,11 +75,15 @@ const router = createRouter({
       path: "/friend",
       name: "friend",
       component: FriendView,
-      chilcdren: [
+      meta: { requiresAuth: true }, // 인증이 필요한 페이지에는 이 메타 필드를 추가
+      beforeEnter: checkAuthentication,
+      children: [
         {
           path: "",
-          name: "frienDetail",
+          name: "friendDetail",
           component: FriendDetail,
+          // meta: { requiresAuth: true }, // 인증이 필요한 페이지에는 이 메타 필드를 추가
+          // beforeEnter: checkAuthentication,
         },
       ]
     },
@@ -94,6 +101,8 @@ const router = createRouter({
           path: "create",
           name: "boardCreate",
           component: BoardCreate,
+          meta: { requiresAuth: true }, // 인증이 필요한 페이지에는 이 메타 필드를 추가
+          beforeEnter: checkAuthentication,
         },
         {
           path: ":id",
@@ -147,4 +156,5 @@ const router = createRouter({
   ],
 });
 
+router.beforeEach(beforeEachGuard);
 export default router;
