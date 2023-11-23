@@ -5,7 +5,7 @@
       <BoardSearchInput />
       <div class="create-button">
         <router-link to="/board/create" class="router-create">
-          <button class="custom-btn btn-6"><span>글 등록</span></button>
+          <button class="custom-btn btn-6" style="margin-top: 2vh;"><span>글 등록</span></button>
         </router-link>
       </div>
     </div>

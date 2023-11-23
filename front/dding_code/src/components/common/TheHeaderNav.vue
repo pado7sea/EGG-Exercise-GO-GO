@@ -5,15 +5,17 @@
             <router-link to="/sign">회원가입</router-link>
         </div>
         <div v-if="store.LoginUser.id" class="nav-top">
-            <div>
-                현재 알 개수:
-                <span v-if="store.LoginUser.egg_count === null || store.LoginUser.egg_count === 0">
-                    0개
-                </span>
-                <span v-if="store.LoginUser.egg_count > 0">
-                    {{ store.LoginUser.egg_count }}개
-                </span>
-            </div>
+            <div style="font-weight: bold; font-size: x-large;" class="egg-count-container">
+      <span class="egg-count-span" @mouseover="showEggCount" @mouseleave="hideEggCount">양계장 상황</span>
+      <div v-if="store.LoginUser.egg_count === null || store.LoginUser.egg_count === 0" class="egg-count-box">
+        0개
+      </div>
+      <div v-if="store.LoginUser.egg_count > 0" class="egg-count-box">
+        <template v-for="eggIndex in store.LoginUser.egg_count">
+          🥚
+        </template>
+      </div>
+    </div>
             <div v-if="isMyPageVisible">
                 <div class="pop-up-mypage">
                     <UserMyPage />
@@ -21,7 +23,7 @@
             </div>
             <div>
                 <button type="button" class="toggle-page" @click="toggleMyPage">
-               <span style="font-weight: bold; font-size: x-large;">{{ store.LoginUser.name }}</span>
+                    <span style="font-weight: bold; font-size: x-large;">{{ store.LoginUser.name }}</span>
                 </button>
                 님 반갑습니다! <button @click="confirmLogout" class="logout-button">로그아웃 </button>
             </div>
@@ -32,7 +34,7 @@
         </div>
         <header class="nav-container">
             <RouterLink to="/home" class="nv">Home</RouterLink>
-            <RouterLink to="/board" class="nv">BoardList</RouterLink>
+            <RouterLink to="/board" class="nv">Board</RouterLink>
             <RouterLink to="/friend" class="nv">Friend</RouterLink>
             <RouterLink to="/youtube" class="nv">Youtube</RouterLink>
             <RouterLink :to="{ name: 'kakao' }" class="nv">Map</RouterLink>
@@ -60,10 +62,19 @@ const confirmLogout = () => {
     }
 }
 const isMyPageVisible = ref(false);
-const toggleMyPage =() => {
+const toggleMyPage = () => {
     isMyPageVisible.value = !isMyPageVisible.value;
 }
 
+const showEggCount = () => {
+  isEggCountVisible.value = true;
+};
+
+const hideEggCount = () => {
+  isEggCountVisible.value = false;
+};
+
+const isEggCountVisible = ref(false);
 
 
 
@@ -142,16 +153,50 @@ a {
 
 .pop-up-mypage {
     position: absolute;
-  right: 0;
-  top: 10%; /* Adjust this value based on your design */
-  right: 10vw;
-  z-index: 1000;
-  /* display: none; */
+    right: 0;
+    top: 10%;
+    /* Adjust this value based on your design */
+    right: 10vw;
+    z-index: 1000;
+    /* display: none; */
 }
 
-.toggle-page{
+.toggle-page {
     background-color: transparent;
     border: none;
 }
 
+.egg-count-container {
+  position: relative;
+  display: inline-block;
+}
+
+.egg-count-span {
+  display: flex;
+  cursor: pointer;
+}
+
+.egg-count-box {
+  display: none;
+  position: absolute;
+  left: 0;
+}
+
+.egg-count-box::after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-color: rgba(51, 51, 51, 0);
+  border-bottom-color: #333;
+  border-width: 10px;
+  pointer-events: none;
+}
+
+.egg-count-container:hover .egg-count-box {
+  display: block;
+}
 </style>

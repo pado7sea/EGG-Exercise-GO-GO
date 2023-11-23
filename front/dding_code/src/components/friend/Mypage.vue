@@ -32,7 +32,7 @@ onMounted(async () => {
 <style scoped>
 .friend-container {
     display: flex;
-    background-color: #FFFCF0;
+    background-color: #b1c7fc;
     justify-content: space-around;
     text-align: center;
 }

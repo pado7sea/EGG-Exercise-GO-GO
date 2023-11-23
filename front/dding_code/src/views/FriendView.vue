@@ -1,8 +1,8 @@
 <template>
     <div class="friend-container">
-        <Mypage />
-        <div style="padding-left: 20px;">친구</div>
-        <div>
+        <!-- <Mypage /> -->
+        <!-- <div style="padding-left: 20px;">친구</div> -->
+        <div style="margin-top: 3vh; margin-left: 2vw;">
             <FriendSearchInput />
         </div>
         <div>
@@ -11,11 +11,10 @@
         <hr>
         <div class="user-grid-container">
             <div class="user-card" v-for="user in store.userList" :key="user.id">
-                <div v-if="store.LoginUser.id">
+                <div v-if="store.LoginUser.id" class="user-card-inner">
                     <div class="user-img">
-                        <img src="@/assets/병아리.png">
+                        <img src="@/assets/병아리.png" id="user-icon">
                     </div>
-                    <div class="user-description">
                         <div class="user-itw">
                             <div class="user-id">
                                 {{ user.id }}
@@ -30,12 +29,10 @@
                         </div>
                         <div>
                         </div>
-
-                    </div>
                 </div>
             </div>
         </div>
-        <RouterView />
+        <!-- <RouterView /> -->
     </div>
 </template>
   
@@ -80,8 +77,8 @@ onMounted(() => {
 .friend-container {
     display: flex;
     flex-direction: column;
-    background-color: #FFFCF0;
-    margin: 5vh 30vw;
+    background-color: #b1c7fc;
+    margin: 3vh 20vw;
 }
 
 .friend-user-description {
@@ -89,8 +86,33 @@ onMounted(() => {
     padding-top: 6vh;
 }
 
-.friend-icon {
+#user-icon {
     width: 71px;
     height: 67px;
+}
+
+/* .user-grid-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+} */
+
+.user-card{
+    /* display: flex; */
+    margin-bottom: 10px;
+    
+}
+.user-card-inner {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user-description{
+    display: flex;
+    justify-content: space-around;
+}
+.user-itw{
+    display: flex;
+    justify-content: space-around;
 }
 </style>

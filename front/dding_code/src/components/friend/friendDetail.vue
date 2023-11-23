@@ -10,7 +10,7 @@
             <div class="friend-list-container">
                 <div v-for="(friendId, index) in extractedFriendIds" class="friend-detail" :key="friendId">
                     <div>
-                        <img class="friend-icon" src="@/assets/free-icon-chick.png" alt="친구병아리">
+                        <img class="friend-icon" src="@/assets/병프.png" alt="친구병아리">
                     </div>
                     <div>
                         {{ friendId }}
@@ -36,16 +36,16 @@ import { useUserStore } from '@/stores/user';
 import { useFriendStore } from '@/stores/friend';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, onMounted, computed, reactive } from 'vue';
-import axios from 'axios'
+import axios from 'axios';
 
-const store = useUserStore()
-const Fstore = useFriendStore()
-const route = useRoute()
-const router = useRouter()
+const store = useUserStore();
+const Fstore = useFriendStore();
+const route = useRoute();
+const router = useRouter();
 
 // 추출된 friend_id 목록을 계산하는 computed property
 const extractedFriendIds = computed(() => {
-    console.log(Fstore.friendList)
+    console.log(Fstore.friendList);
     return Fstore.friendList.map(friend => friend.friend_id);
 });
 
@@ -63,45 +63,28 @@ const deleteFriend = function (friend_id) {
     } else {
         console.log('Deletion canceled by the user');
     }
-}
-
-
-// //   // 각 친구의 이름을 가져오는 함수
-//   const getFriendName = (friendId) => {
-
-//     // const friend = Fstore.friendList.find(friend => friend.friend_id === friendId);
-//     console.log(Fstore.getfrienduser(friendId) )
-//     console.log(Fstore.getFuser)
-
-//     return Fstore.getFuser ? Fstore.getFuser.name : '이름 없음';
-//   };
-
-//   onMounted(() => {
-//     store.getUser(route.params.id)
-//     Fstore.getFriendList(store.LoginUser.id)
-//   });
+};
 
 // 각 친구의 이름을 가져오는 함수
-const getFriendInfo = async (friendId) => {
-    try {
-        await Fstore.getfrienduser(friendId);
-        console.log(Fstore.getFuser);
-        return Fstore.getFuser;
-    } catch (error) {
-        console.error('친구 정보 가져오기 실패', error);
-        return '이름 없음';
-    }
-}
-
 const friendInfo = reactive({});
 
+const getFriendInfo = async (friendId) => {
+    try {
+        const response = await Fstore.getfrienduser(friendId);
+        console.log(response);
+        return response.data; // API 응답에서 예상되는 데이터 구조로 가정합니다.
+    } catch (error) {
+        console.error('친구 정보 가져오기 실패', error);
+        return { name: '이름 없음', egg_count: null }; // 데이터를 사용할 수 없는 경우 기본값을 지정합니다.
+    }
+};
 
 onMounted(async () => {
-    store.getUser(route.params.id)
+    store.getUser(route.params.id);
     await Fstore.getFriendList(store.LoginUser.id);
-    friendInfo.value = await Promise.all(extractedFriendIds.value.map(getFriendInfo));
+    const friendInfoData = await Promise.all(extractedFriendIds.value.map(getFriendInfo));
+    friendInfo.value = friendInfoData;
 });
-
 </script>
 
 <style scoped>

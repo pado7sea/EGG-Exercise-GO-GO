@@ -54,6 +54,7 @@ const searchBoardList = function () {
 <style scoped>
 .search-container {
     display: flex;
+    margin-top: 2vh;
 }
 
 .search-div{
