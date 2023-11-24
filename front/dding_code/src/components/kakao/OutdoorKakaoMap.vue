@@ -4,18 +4,19 @@
     <div class="ym-backbox">
       <div class="ym-title">
         <div class="ym-whitecircle">
-          <div class="어디서운동하고싶으신가요">
-            어디서 운동하고 싶으신가요?
+          <div class="ym-어디서운동하고싶으신가요">
+            무슨 운동을 하고 싶으신가요?
           </div>
         </div>
+        <div class="카테고리안내문구" style="margin: 0.2vh  2vw;">운동하고 싶은 장소를 골라보세요!</div>
       </div>
       <div class="ym-content">
         <div class="ym-leftbox">
           <div class="카테고리안내문구">운동하고 싶은 장소를 골라보세요!</div>
           <div class="장소카테고리세부">
-            <button @click="searchPlacesByCategory ('공원')" class="장소카테고리세부">공원</button>
-            <button @click="searchPlacesByCategory ('산책로')" class="장소카테고리세부">산책로</button>
-            <button @click="searchPlacesByCategory ('운동장')" class="장소카테고리세부">운동장</button>
+            <button @click="searchPlacesByCategory ('공원')" class="map-hash-button">공원</button>
+            <button @click="searchPlacesByCategory ('산책로')" class="map-hash-button">산책로</button>
+            <button @click="searchPlacesByCategory ('운동장')" class="map-hash-button">운동장</button>
           </div>
         </div>
         <div class="ym-rightbox">
@@ -96,18 +97,18 @@ const searchPlacesByCategory =   (category) => {
   display: flex;
   flex-direction: row;
   margin: 2vh 2vw;
-  justify-content: space-around;
+  justify-content: center;
   /* background-color: rgba(255, 255, 255, 0.3);  */
 }
 
 .ym-leftbox {
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   flex-direction: column;
 }
 
 
-.카테고리안내문구 {
+.o-카테고리안내문구 {
   color: #000;
   font-size: 15px;
   font-style: normal;
@@ -117,22 +118,30 @@ const searchPlacesByCategory =   (category) => {
   margin-left: 5%;
   margin-bottom: 5%;
 }
+.ym-o-rightbo{
+  display: flex;
+  justify-content: center;
+  margin-left: 5vw;
+}
 
 
 .장소카테고리세부 {
-  background-color: #F8BD2A;
-  width: 60px;
-  height: 60px;
-  border-radius: 5em;
-  border-style: none;
-  color: #151515;
-  font-weight: bold;
-  box-shadow: inset 4px 4px 4px 0px #FFF5D3;
-
-  margin-left: 5%;
-  margin-right: 5%;
+  display: flex;
+  justify-content: space-around;
 }
-
+.map-hash-button{
+  background-color: #F8BD2A;
+width: 80px;
+height: 80px;
+border-radius: 5em;
+border-style: none;
+color: #151515;
+font-weight: bold;
+font-size: 12px;
+box-shadow: inset 4px 4px 4px 0px #FFF5D3;
+margin-left: 5%;
+margin-right: 5%;
+}
 .map {
   width: 800px;
   height: 400px;

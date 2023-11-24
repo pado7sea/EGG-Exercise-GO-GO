@@ -4,20 +4,20 @@
     <div class="ym-o-backbox">
       <div class="ym-o-title">
         <div class="ym-o-whitecircle">
-          <div class="어디서운동하고싶으신가요">
-            어디서 운동하고 싶으신가요?
+          <div class="ym-o-어디서운동하고싶으신가요">
+            무슨 운동을 하고 싶으신가요?
           </div>
-
         </div>
+        <div class="o-카테고리안내문구" style="margin: 0.2vh  2vw;">운동하고 싶은 장소를 골라보세요!</div>
       </div>
-      <SearchInput/>
+      <!-- <SearchInput/> -->
       <div class="ym-content">
         <div class="ym-o-leftbox">
-          <div class="o-카테고리안내문구">운동하고 싶은 장소를 골라보세요!</div>
+          <!-- <div class="o-카테고리안내문구">운동하고 싶은 장소를 골라보세요!</div> -->
           <div class="o-장소카테고리세부">
-              <button @click="searchPlacesByCategory ('공원')" class="장소카테고리세부">공원</button>
-              <button @click="searchPlacesByCategory ('산책로')" class="장소카테고리세부">산책로</button>
-              <button @click="searchPlacesByCategory ('운동장')" class="장소카테고리세부">운동장</button>
+              <button @click="searchPlacesByCategory ('공원')" class="map-hash-button">공원</button>
+              <button @click="searchPlacesByCategory ('산책로')" class="map-hash-button">산책로</button>
+              <button @click="searchPlacesByCategory ('운동장')" class="map-hash-button">운동장</button>
             </div>
         </div>
         </div>
@@ -104,7 +104,7 @@ const searchPlacesByCategory =   (category) => {
 }
 
 .ym-o-leftbox {
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   flex-direction: column;
 }
@@ -118,23 +118,26 @@ const searchPlacesByCategory =   (category) => {
   line-height: normal;
 
   margin-left: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 }
 
 
 .o-장소카테고리세부 {
     display: flex;
+  justify-content: space-around;
+}
+.map-hash-button{
   background-color: #F8BD2A;
-  width: 80px;
-  height: 80px;
-  border-radius: 5em;
-  border-style: none;
-  color: #151515;
-  font-weight: bold;
-  box-shadow: inset 4px 4px 4px 0px #FFF5D3;
-
-  margin-left: 5%;
-  margin-right: 5%;
+width: 80px;
+height: 80px;
+border-radius: 5em;
+border-style: none;
+color: #151515;
+font-weight: bold;
+font-size: 12px;
+box-shadow: inset 4px 4px 4px 0px #FFF5D3;
+margin-left: 5%;
+margin-right: 5%;
 }
 
 .map {

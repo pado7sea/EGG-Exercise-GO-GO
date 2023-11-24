@@ -2,12 +2,12 @@
 <template>
   <div>
     <div id="map"></div>
-    <!-- <div class="map-search-container">
+    <div class="map-search-container">
       <input @keyup.enter="searchPlaces" v-model="searchKeyword" placeholder="장소 검색어를 입력하세요" type="text" class="search-input">
-      <button @click="searchPlaces" class="map-search-button">
+      <button @click="searchPlaces" class="map-search-button" style="border-radius: 20px;">
         <img src="@/assets/돋보기.png" alt="Search Icon" style="width: 19px; height: 19ox;" />
       </button>
-    </div> -->
+    </div>
 
     <!-- 검색 결과 목록과 경로 정보 표시 -->
     <div>
@@ -417,9 +417,13 @@ const searchPlacesByCategory = async (category) => {
 
 <style scoped>
 #map {
-  width: 700px;
+  /* width: 700px; */
   height: 400px;
   margin:  0 2vw;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+  margin-top: 10px;
 }
 
 input {
@@ -479,6 +483,7 @@ button {
   border: 1px sold #ccc;
   border-radius: 20px;
   flex: 1;
+  text-align: center;
 }
 
 .search-input::placeholder{
@@ -487,7 +492,12 @@ button {
 
 .map-search-button{
   padding: 10px 15px;
-  background-color: #FCF2E3;
+  background-color: #F8BD2A;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
 
 }
 .map-input {
